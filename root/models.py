@@ -1,14 +1,25 @@
 from accounts.models import CustomUser
 from django.db import models
 # Create your models here.
-class Root(models.Model):
+class Facility(models.Model):
     name = models.ForeignKey(CustomUser, on_delete = models.PROTECT)
-    address = models.CharField(max_length = 100)
-    lat = models.FloatField()
-    lon = models.FloatField()
+    password = models.CharField(max_length = 20)
+    address = models.CharField(max_length = 200)
 
     class Meta:
-        verbose_name_plural = 'Root'
+        verbose_name_plural = 'Facility'
     
     def __str__(self):
-        return self.address
+        return self.name
+
+
+class User(models.Model):
+    name = models.CharField(max_length = 50)
+    address = models.CharField(max_length = 200)
+    facility = models.ForeignKey(Facility, to_field = 'id', on_delete = models.CASCADE)
+
+    class Meta:
+        verbose_name_plural = 'User'
+    
+    def __str__(self):
+        return self.name
