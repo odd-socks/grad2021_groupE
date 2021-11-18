@@ -1,10 +1,10 @@
-from diary.models import Facility, User
+from root.models import Facility, User
 from django import forms
 
-class CreateForm(forms.ModelForm):
+class MapCreateForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('name')
+        fields = ('name',)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
