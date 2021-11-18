@@ -8,5 +8,12 @@
 </head>
 <body>
     <h1>create</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table class="table">
+            {{ form.as_table}}
+        </table>
+        <button class="btn btn-primary" type="submit">作成</button>
+    </form>
 </body>
 </html>
