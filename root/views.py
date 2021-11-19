@@ -1,3 +1,5 @@
+import json
+from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.views import generic
 from django.urls import reverse_lazy
@@ -35,6 +37,15 @@ class MapCreateView(generic.ListView):
         else:
             object_list = User.objects.all()
         return object_list
+
+
+    def data_json(request):
+    # /data のURLで受け付けるview関数
+        root = {
+            'sample1': [1, 2, 3],
+            'sample2': [3, 6, 9],
+        } 
+        return JsonResponse(root)
 
     # def form_valid(self,form):
     #     user = form.save(commit=False)

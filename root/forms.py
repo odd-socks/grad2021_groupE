@@ -4,7 +4,7 @@ from django import forms
 class MapCreateForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('name',)
+        fields = ('name','facility',)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

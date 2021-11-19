@@ -10,7 +10,7 @@
     {% block contents %}
         {% for root in map_list %}
         <div class="post-preview">
-            <a href="{% url 'root:root_detail' user.pk %}">
+            <a href="{% url 'root:root_list' user.pk %}">
                 <h2 class="post-title">
                     {{ root.title }}
                 </h2>
