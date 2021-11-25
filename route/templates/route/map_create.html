@@ -1,0 +1,76 @@
+{% extends 'route/base.html' %}
+
+{% block content %}
+    <h2>利用者一覧</h2>
+    <div id="posts">
+        {% for user in map_create %}
+            <p>{{ user.name }}</p>
+            <p>{{ user.address }}</p>
+            <p>{{ user.facility }}</p>
+        {% endfor %}
+    </div>
+
+    <hr>
+
+    <h2>名前検索</h2>
+    <form id="ajax-search-post" action="{% url 'route:ajax_post_search' %}" method="GET">
+        <input type="text" id="id_title">
+        <button type="submit" >検索</button>
+    </form>
+
+{% endblock %}
+
+{% block extrajs %}
+    <script>
+        // 送信ボタンで呼ばれる
+        $('#ajax-search-post').on('submit', e => {
+            // デフォルトのイベントをキャンセルし、ページ遷移しないように!
+            e.preventDefault();
+
+            $.ajax({
+                'url': '{% url "route:ajax_post_search" %}',
+                'type': 'GET',
+                'data': {
+                    'title': $('#id_title').val(),  // 記事タイトル
+                },
+                'dataType': 'json'
+            }).done( response => {
+                // 記事欄を真っ白にする。
+                $('#posts').empty();
+
+                // タイトルの一覧を順に取り出す
+                for (const title of response.title_list) {
+                    // <p>タイトル</p>を作成し、記事一覧に追加していく。
+                    const p = $('<p>', {text: title});
+                    $('#posts').append(p);
+                }
+            });
+        });
+    </script>
+
+<script>
+    // 検索ボタンで呼ばれる
+    document.getElementById('ajax-search-post').addEventListener('submit', e => {
+        // デフォルトのイベントをキャンセルし、ページ遷移しないように!
+        e.preventDefault();
+
+        const title = encodeURIComponent(document.getElementById('id_name').value);
+        const url = `{% url "route:ajax_post_search" %}?name=${name}`;
+        const postArea = document.getElementById('posts');
+
+        fetch(url)
+            .then(response => {
+                return response.json();
+            }).then(response => {
+                postArea.innerHTML = '';
+                for(const title of response.title_list){
+                    const p = document.createElement('p');
+                    p.textContent = title;
+                    postArea.appendChild(p);
+                }
+        }).catch(error => {
+            console.log(error);
+        });
+    });
+</script>
+{% endblock %}
