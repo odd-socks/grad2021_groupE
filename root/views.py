@@ -1,7 +1,7 @@
 from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.views import generic
-from django.views.generic import ListView
+from django.views.generic import DetailView, ListView
 from django.urls import reverse_lazy
 from django_datatables_view.base_datatable_view import BaseDatatableView
 from .models import Facility, User
