@@ -5,5 +5,6 @@ app_name = 'map'
 urlpatterns = [
     path('', views.TopView.as_view(), name="top"),
     path('map_list/', views.MapListView.as_view(), name="map_list"),
-    path('map_create/', views.MapCreateView.as_view(), name="map_create"),
+    path('user_list/', views.MapCreateView.as_view(), name="user_list"),
+    path('ajax_post_search/', views.MapCreateView.as_view(), name="ajax_post_search"),
 ]

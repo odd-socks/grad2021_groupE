@@ -1,0 +1,59 @@
+{% extends 'map/base.html' %}
+
+{% block content %}
+    <h2>user_list</h2>
+    <div id="posts">
+    <table border="1">
+        <tr>
+            <th>名前</th>
+            <th>住所</th>
+            <th>所属施設</th>
+        </tr>
+        {% for user in user_list %}
+        <tr>
+            <td>{{ user.name }}</td>
+            <td>{{ user.address }}</td>
+            <td>{{ user.facility }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
+
+    <hr>
+
+    <h2>名前検索</h2>
+    <form id="ajax-search-post" action="{% url 'map:ajax_post_search' %}" method="GET">
+        <input type="text" id="id_title">
+        <button type="submit" >検索</button>
+    </form>
+
+{% endblock %}
+
+{% block extrajs %}
+    <script>
+        // 送信ボタンで呼ばれる
+        $('#ajax-search-post').on('submit', e => {
+            // デフォルトのイベントをキャンセルし、ページ遷移しないように!
+            e.preventDefault();
+
+            $.ajax({
+                'url': '{% url "map:ajax_post_search" %}',
+                'type': 'GET',
+                'data': {
+                    'title': $('#id_name').val(),
+                },
+                'dataType': 'json'
+            }).done( response => {
+                // 記事欄を真っ白にする。
+                $('#posts').empty();
+
+                // タイトルの一覧を順に取り出す
+                for (const title of response.name_list) {
+                    // <p>タイトル</p>を作成し、記事一覧に追加していく。
+                    const p = $('<p>', {text: name});
+                    $('#posts').append(p);
+                }
+            });
+        });
+    </script>
+{% endblock %}
