@@ -1,4 +1,4 @@
-from route.models import Facility, User
+from map.models import Facility, User
 from django import forms
 
 class MapCreateForm(forms.Form):

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <meta charset="utf-8" />
+    <title>ListViewサンプル</title>
+</head>
+ 
+<body>
+ 
+    <table border="1">
+        <tr>
+            <th>title</th>
+            <th>author</th>
+        </tr>
+        {% for user in object_list %}
+        <tr>
+            <td>{{ user.name }}</td>
+            <td>{{ user.address }}</td>
+            <td>{{ user.facility }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+ 
+</body>
+ 
+</html>
