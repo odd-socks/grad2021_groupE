@@ -26,10 +26,9 @@
     </form>
     
     <div id="posts"></div>
-
-    {% endblock %}
+{% endblock %}
     
-    {% block extrajs %}
+{% block extrajs %}
     <script>
         // 送信ボタンで呼ばれる
         $('#ajax-search-post').on('submit', e => {
@@ -51,6 +50,12 @@
                 for (const user_search of response.name_list) {
                     // <p>タイトル</p>を作成し、記事一覧に追加していく。
                     const p = $('<table>', {text: user_search});
+                    $('#posts').append(p);
+                }
+
+                for (const user_add of response.add_button) {
+                    // <p>タイトル</p>を作成し、記事一覧に追加していく。
+                    const p = $('<button>', {text: user_add});
                     $('#posts').append(p);
                 }
             });

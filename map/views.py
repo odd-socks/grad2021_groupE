@@ -3,7 +3,6 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.views import generic
 from django.urls import reverse_lazy
-from .forms import MapCreateForm
 from .models import Facility, User
 
 # Create your views here.
@@ -13,7 +12,7 @@ class TopView(generic.TemplateView):
 class MapListView(generic.ListView):
     template_name = 'map/map_list.html'
 
-class MapCreateView(generic.ListView):
+class UserList(generic.ListView):
     model = User
     
 def ajax_post_search(request):
@@ -23,9 +22,19 @@ def ajax_post_search(request):
     if keyword:
         name_list = [[column.name, column.address] for column in User.objects.filter(name__icontains=keyword)]  # nameにキーワードを含む。大文字小文字の区別なし
     else:
-        # name_list = [column.name for column in User.objects.all()]
-        name_list = ["一致する人物が見つかりませんでした。"]
+        name_list = ["名前を入力してください。"]
+
     d = {
-        'name_list': name_list,
+        'name_list': name_list
+    }
+    return JsonResponse(d)
+
+def ajax_map_create(request):
+    pick = request.Get.get('user')
+    if pick:
+        add_button = [[column.name, column.address] for column in User.objects.filter(name__icontains=keyword)]
+    
+    d = {
+        'name_list': name_list
     }
     return JsonResponse(d)
