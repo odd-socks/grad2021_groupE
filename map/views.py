@@ -21,20 +21,13 @@ def ajax_post_search(request):
     # JSONシリアライズするには、Querysetをリストにする必要あり
     if keyword:
         name_list = [[column.name, column.address] for column in User.objects.filter(name__icontains=keyword)]  # nameにキーワードを含む。大文字小文字の区別なし
+        d = {'name_list': name_list}
+    # elif :
+    #     name_list = [[column.name, column.address] for column in User.objects.filter(name__icontains=keyword)]  # nameにキーワードを含む。大文字小文字の区別なし
+    #     d = {'name_list': name_list}
     else:
-        name_list = ["名前を入力してください。"]
-
-    d = {
-        'name_list': name_list
-    }
+        error = "名前を入力してください"
+        d = {'error': error}
+        
     return JsonResponse(d)
 
-def ajax_map_create(request):
-    pick = request.Get.get('user')
-    if pick:
-        add_button = [[column.name, column.address] for column in User.objects.filter(name__icontains=keyword)]
-    
-    d = {
-        'name_list': name_list
-    }
-    return JsonResponse(d)

@@ -24,12 +24,18 @@
         <input type="text" id="id_name">
         <button type="submit" >検索</button>
     </form>
-    
+
     <div id="posts"></div>
 {% endblock %}
     
 {% block extrajs %}
     <script>
+        function addAddress(data){
+            console.log(data);
+        }
+        let rowGrobal = '';
+
+
         // 送信ボタンで呼ばれる
         $('#ajax-search-post').on('submit', e => {
             // デフォルトのイベントをキャンセルし、ページ遷移しないように!
@@ -47,18 +53,30 @@
                 $('#posts').empty();
 
                 // タイトルの一覧を順に取り出す
-                for (const user_search of response.name_list) {
+            if(response.error){
+                document.getElementById('posts').innerHTML = response.error;
+            } else {
+                let content = '<table border="1" id="posts">';
+                for (const row of response.name_list) {
                     // <p>タイトル</p>を作成し、記事一覧に追加していく。
-                    const p = $('<table>', {text: user_search});
-                    $('#posts').append(p);
-                }
+                    // const p = $('<table>', {text: user_search});
+                        // $('#posts').append(p);
 
-                for (const user_add of response.add_button) {
-                    // <p>タイトル</p>を作成し、記事一覧に追加していく。
-                    const p = $('<button>', {text: user_add});
-                    $('#posts').append(p);
-                }
+                        console.log(row);
+                        rowGrobal = row;
+                        content += `<tr><td>${row[0]}</td><td>${row[1]}</td><td><button onclick='addAddress(rowGrobal[1])'>追加</button></td></tr>`;
+                    }
+                    content += '</table>';
+                    document.getElementById('posts').innerHTML = content;
+            }
+
+                // for (const user_add of response.add_button) {
+                //     // <p>タイトル</p>を作成し、記事一覧に追加していく。
+                //     const p = $('<button>', {text: user_add});
+                //     $('#posts').append(p);
+                // }
             });
         });
+      
     </script>
 {% endblock %}
