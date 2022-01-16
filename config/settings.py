@@ -128,3 +128,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+SITE_ID = 1 #追記20210116
