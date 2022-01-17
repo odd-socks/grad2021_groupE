@@ -30,16 +30,16 @@
                         <a class="nav-link" href="{% url 'map:login' %}">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'map:sighup' %}">Sigh up</a>
+                        <a class="nav-link" href="{% url 'map:signup' %}">Sign up</a>
                     </li>
                     {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'map:my_page' user.pk %}">My page</a>
+                      </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'map:logout' %}">Logout</a>
                     </li>
                     {% endif %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">テキスト</a>
-                    </li>
                 </ul>
             </div>
         </div>
