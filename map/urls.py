@@ -18,5 +18,7 @@ from .import views
 
 app_name = 'map'
 urlpatterns = [
-    path('index', views.IndexView.as_view(), name="index"),
+    path('index/', views.IndexView.as_view(), name="index"),
+    path('login/', views.Login.as_view(), name='login'),#ログイン
+    path('logout/', views.Logout.as_view(), name='logout'),#ログアウト
 ]
