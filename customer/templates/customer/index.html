@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ユーザーリスト</title>
+</head>
+<body>
+    <h1>ユーザー-リスト</h1>
+    <ul>
+    {% for print_user in data %}
+        <li> 名前 : {{print_user.name}} 年齢 : {{print_user.age}}</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
