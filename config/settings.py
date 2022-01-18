@@ -34,6 +34,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'map.apps.MapConfig',#追加
+    'accounts.apps.AccountsConfig',#追加
 ]
 
 MIDDLEWARE = [
