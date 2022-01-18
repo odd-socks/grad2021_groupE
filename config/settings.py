@@ -36,12 +36,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'map.apps.MapConfig',
-    'accounts.apps.AccountsConfig',#ユーザー認証
+    #'accounts.apps.AccountsConfig',#ユーザー認証
 
 
-    'django.contrib.sites',#for djnago-allauth
-    'allauth',#for djnago-allauth
-    'allauth.account',#for djnago-allauth
+    #'django.contrib.sites',#for djnago-allauth
+    #'allauth',#for djnago-allauth
+    #'allauth.account',#for djnago-allauth
 ]
 
 MIDDLEWARE = [
@@ -59,7 +59,8 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [],
+        #os.path.join(BASE_DIR, 'templates')
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,9 +129,3 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
-
-SITE_ID = 1 #追記20210116
-
-# 追加
-LOGIN_URL = 'map:login' # ログインのURLの設定
-LOGIN_REDIRECT_URL = 'map:index' #ログインが完了した後に遷移するURL
