@@ -37,6 +37,10 @@ INSTALLED_APPS = [
 
     'map.apps.MapConfig',#追加
     'accounts.apps.AccountsConfig',#追加
+
+    'django.contrib.sites',#django-allauth
+    'allauth',#django-allauth
+    'allauth.account',#django-allauth
 ]
 
 MIDDLEWARE = [
@@ -54,7 +58,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],#追加
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,3 +122,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#staticの中身が反映
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+#django-allauthで利用するdjango.contrib.sitesを使うためにサイト用識別IDを設定
+SITE_ID = 1
+
+LOGIN_URL = 'map:login' # ログインのURLの設定
+LOGIN_REDIRECT_URL = 'map:index' #ログインが完了した後に遷移するURL

@@ -26,17 +26,17 @@
                     <!-- ログイン・ログアウト判定 -->
                     {% if not user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Login</a>
+                        <a class="nav-link" href="{% url 'map:facility_login' %}">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Sign up</a>
+                        <a class="nav-link" href="{% url 'map:facility_signup' %}">Sign up</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="#">My page</a>
                       </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Logout</a>
+                        <a class="nav-link" href="{% url 'map:facility_logout' %}">Logout</a>
                     </li>
                     {% endif %}
                 </ul>
