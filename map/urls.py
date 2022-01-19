@@ -1,8 +1,9 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 app_name = 'map'
 
 urlpatterns = [
-    path('', views.IndexView.as_view(), name="index"),
+    path('index/', views.IndexView.as_view(), name="index"),#トップページ
+    path('facility_login/', views.FacilityLogin.as_view(), name="facility_login"),#施設用ログインページ
 ]
