@@ -7,7 +7,8 @@ app_name = 'customer'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='toppage'),
+    path('', views.toppage, name='toppage'),
+    path('index/', views.index, name='index'),
     path("users/", user_list),
     path('new/', views.new, name='new'),
     path('list/', views.list, name='list'),

@@ -11,7 +11,8 @@ from django.shortcuts import render
 # def index(request):
 #     user_list = {'user': User.objects.all()}
 #     return render(request, 'customer/index.html', user_list)
-
+def toppage(request):
+    return render(request, 'customer/toppage.html')
 def index(request):
         """ ユーザー一覧を表示する """
         user_list = User.objects.all()

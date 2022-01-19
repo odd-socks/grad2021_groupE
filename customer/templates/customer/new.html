@@ -8,6 +8,8 @@
  
 <body>
     <h1>メンバー登録フォーム</h1>
+    <input type="button" onclick="location.href='http://127.0.0.1:8000/'" value="TOP画面">
+
     <form method="POST" novalidate>
         {% csrf_token %}
         {{ form.as_p }}
