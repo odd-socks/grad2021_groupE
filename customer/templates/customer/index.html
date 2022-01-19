@@ -10,7 +10,7 @@
     <h1>ユーザー-リスト</h1>
     <ul>
     {% for print_user in data %}
-        <li> 名前 : {{print_user.name}} 年齢 : {{print_user.age}}</li>
+        <li> 名前 : {{print_user.name}} | 年齢 : {{print_user.age}} | 性別 : {{print_user.gender}} | 住所 : {{print_user.address}} | 引き受け場所 : {{print_user.carry_address}}</li>
     {% endfor %}
     </ul>
 </body>

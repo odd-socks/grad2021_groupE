@@ -2,17 +2,43 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.handlers.wsgi import WSGIRequest
 from django.http.response import JsonResponse
+from django.shortcuts import render, redirect
 from .models import User
+from .forms import UserForm
 from django.shortcuts import render
 # Create your views here.
 
 # def index(request):
 #     user_list = {'user': User.objects.all()}
 #     return render(request, 'customer/index.html', user_list)
+
 def index(request):
+        """ ユーザー一覧を表示する """
         user_list = User.objects.all()
         params = {'message' : 'ユーザー一覧' , 'data' : user_list}
         return render(request, 'customer/index.html' ,params)
+
+def new(request):
+    params = {'message': '', 'form': None}
+    if request.method == 'POST':
+        form = UserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/list')
+        else:
+            params['message'] = '再入力して下さい'
+            params['form'] = form
+    else:
+        params['form'] = UserForm()
+    return render(request, 'customer/new.html', params)
+ 
+def list(request):
+    user_list = User.objects.all()
+    params = {'message': 'メンバーの一覧', 'data': user_list}
+    return render(request, 'customer/list.html', params)
+
+
+
 
 def user_list(request: WSGIRequest) -> JsonResponse:
     """ ユーザー一覧を表示する """
