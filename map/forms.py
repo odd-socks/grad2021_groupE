@@ -12,12 +12,19 @@ class FacilityLoginForm(forms.ModelForm):
             'facility_name':'施設名',
             'password':'パスワード',
         }
-    
-    # def __init__(self, *args, **kwargs):
+
+    # def __init__(self, request, *args, **kwargs):
+    #     self.request = kwargs.pop('request', None)
     #     super(FacilityLoginForm, self).__init__(*args, **kwargs)
-    #     #htmlの表示を変更可能にします
-    #     self.fields['facility_name'].widget.attrs['class'] = 'form-control'
-    #     self.fields['password'].widget.attrs['class'] = 'form-control'
+    
+   # def __init__(self, *args, **kwargs):
+    # super(FacilityLoginForm, self).__init__(*args, **kwargs)
+         #htmlの表示を変更可能にします
+         #self.fields['facility_name'].widget.attrs['class'] = 'form-control'
+         #self.fields['password'].widget.attrs['class'] = 'form-control'
+         #self.fields['facility_name'].required = False
+         #self.fields['password'].required = False
+
 
 
 

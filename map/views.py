@@ -6,21 +6,65 @@ from .forms import FacilityLoginForm, FacilitySignupForm, FacilityUpdateForm, My
 from django.contrib.auth.mixins import UserPassesTestMixin #追加
 from map.models import Facility #モデル情報
 from django.shortcuts import redirect, resolve_url #追加
+#from django.urls import reverse_lazy
+from django.contrib.auth import login, authenticate #ログイン関数用
+
 
 
 # Create your views here.
-#トップページ
+#トップページ表示
 class IndexView(generic.TemplateView):
     template_name = "map/index.html"
 
-#施設ログイン
+#施設用新規登録機能
+class FacilitySignup(generic.CreateView):
+    template_name = 'account/facility_form.html'
+    form_class = FacilitySignupForm
+
+    #データがポストされた時に呼ばれるメソッド
+    def form_valid(self, form):
+        facility = form.save() #facility変数にformの情報を保存
+        return redirect('map:facility_signup_done')
+
+    #データ送信
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["process_name"] = "施設登録"
+        return context
+
+#施設用新規登録完了表示
+class FacilitySignupDone(generic.TemplateView):
+    template_name = 'account/facility_signup_done.html'
+
+#----------------------------------------------------
+
+#施設ログイン機能
 class FacilityLogin(LoginView):
     form_class = FacilityLoginForm
     template_name = "account/facility_login.html"
+    #success_url = reverse_lazy('map:index')
+
+    # def post(self, request, *args, **kwargs):
+    #     form = FacilityLoginForm(data=request.POST)
+    #     #データがポストされた場合
+    #     if form.is_valid():
+    #         facility_name = form.cleaned_data.get('facility_name')
+    #         facility = Facility.objects.get(facility_name=facility_name)
+    #         login(request, facility)
+    #         return redirect('/')
+    #     return render(request, 'account/facility_login.html', {'form': form,})
+
+    # def get(self, request, *args, **kwargs):
+    #     form = FacilityLoginForm(request.POST)
+    #     return render(request, 'account/facility_login.html', {'form': form,})
+
+#---------------------------------------------------------------
 
 #施設ログアウト
 class FacilityLogout(LogoutView):
     template_name = "account/logout_done.html"
+
+#-----------------------------------------------------------------
 
 #自分しかアクセスできないようにするMixin(My Pageのため)
 class OnlyYouMixin(UserPassesTestMixin):
@@ -31,29 +75,12 @@ class OnlyYouMixin(UserPassesTestMixin):
         user = self.request.user
         return user.pk == self.kwargs['pk']
 
+
 #施設用マイページ
 class FacilityMyPage(OnlyYouMixin,generic.DetailView):
     model = Facility
     template_name = 'account/facility_my_page.html'
 
-#施設用サインアップ
-class FacilitySignup(generic.CreateView):
-    template_name = 'account/facility_form.html'
-    form_class = FacilitySignupForm
-
-    def form_valid(self, form):
-        user = form.save() # formの情報を保存
-        return redirect('map:facility_signup_done')
-
-    # データ送信
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["process_name"] = "Facility Sign up"
-        return context
-
-#サインアップ完了
-class FacilitySignupDone(generic.TemplateView):
-    template_name = 'account/facility_signup_done.html'
 
 #施設登録情報の更新
 class FacilityUpdate(OnlyYouMixin, generic.UpdateView):

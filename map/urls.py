@@ -1,6 +1,9 @@
 from unicodedata import name
+from urllib import request
 from django.urls import path, include
 from . import views
+from django.urls import reverse_lazy
+
 
 app_name = 'map'
 
