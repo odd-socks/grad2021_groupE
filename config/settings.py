@@ -133,5 +133,5 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 #django-allauthで利用するdjango.contrib.sitesを使うためにサイト用識別IDを設定
 SITE_ID = 1
 
-LOGIN_URL = 'map:login' # ログインのURLの設定
+LOGIN_URL = 'map:facility_login' # ログインのURLの設定
 LOGIN_REDIRECT_URL = 'map:index' #ログインが完了した後に遷移するURL

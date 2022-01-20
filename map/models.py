@@ -9,9 +9,6 @@ class Facility(models.Model):
 
     class Meta:
         verbose_name_plural = 'Facility'
-    
-    def __str__(self):
-        return self.name
 
 #引受人モデル
 # class Underwriter(models.Model):
