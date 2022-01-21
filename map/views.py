@@ -7,7 +7,7 @@ from django.contrib.auth.mixins import UserPassesTestMixin #追加
 from map.models import Facility #モデル情報
 from django.shortcuts import redirect, resolve_url #追加
 #from django.urls import reverse_lazy
-from django.contrib.auth import login, authenticate #ログイン関数用
+#from django.contrib.auth import login, authenticate #ログイン関数用
 
 
 
@@ -15,6 +15,7 @@ from django.contrib.auth import login, authenticate #ログイン関数用
 #トップページ表示
 class IndexView(generic.TemplateView):
     template_name = "map/index.html"
+#---------------------------------------------------------------
 
 #施設用新規登録機能
 class FacilitySignup(generic.CreateView):
@@ -42,22 +43,22 @@ class FacilitySignupDone(generic.TemplateView):
 class FacilityLogin(LoginView):
     form_class = FacilityLoginForm
     template_name = "account/facility_login.html"
-    #success_url = reverse_lazy('map:index')
 
-    # def post(self, request, *args, **kwargs):
-    #     form = FacilityLoginForm(data=request.POST)
-    #     #データがポストされた場合
-    #     if form.is_valid():
-    #         facility_name = form.cleaned_data.get('facility_name')
-    #         facility = Facility.objects.get(facility_name=facility_name)
-    #         login(request, facility)
-    #         return redirect('/')
-    #     return render(request, 'account/facility_login.html', {'form': form,})
+    #カスタムログイン関数
 
-    # def get(self, request, *args, **kwargs):
-    #     form = FacilityLoginForm(request.POST)
-    #     return render(request, 'account/facility_login.html', {'form': form,})
+    def post(self, request, *arg, **kwargs):
+        form = FacilityLoginForm(data=request.POST)
+        #データがポストされた場合
+        if form.is_valid():
+            facility_name = form.cleaned_data.get('facility_name')
+            facility = Facility.objects.get(facility_name=facility_name)
+            #login(request, facility)#エラー原因-->カスタムログイン関数を使用する
+            return redirect('map:index')
+        return render(request, 'account/facility_login.html', {'form': form,})
 
+    def get(self, request, *arg, **kwargs):
+        form = FacilityLoginForm(request.POST)
+        return render(request, 'account/facility_login.html', {'form': form,})
 #---------------------------------------------------------------
 
 #施設ログアウト
