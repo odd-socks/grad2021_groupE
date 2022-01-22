@@ -1,0 +1,23 @@
+<div>
+    <a href="{% url 'customer:detail' data.id %}"><input type="button" value="戻る"></a>
+  </div>
+  <table border="1">
+  <form action="{% url 'customer:update' data.id %}" method="POST">{% csrf_token %}
+    {{ form.as_p }}
+    <tr>
+        <th>名前</th>
+        <th>年齢</th>
+        <th>性別</th>
+        <th>住所</th>
+        <th>送り先住所</th>
+    </tr>
+    <tr>
+        <td>{{ data.name }}</td>
+        <td>{{ data.age }}</td>
+        <td>{{ data.gender }}</td>
+        <td>{{ data.address }}</td>
+        <td>{{ data.carry_address }}</td>
+    </tr>
+    <button class="btn" type="submit">保存</button>
+  </form>
+  </table>

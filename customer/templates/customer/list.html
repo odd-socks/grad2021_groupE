@@ -17,6 +17,7 @@
             <th>address</th>
             <th>carry_address</th>
             <th>detail</th>
+            <th>update</th>
         </tr>
         {% for print_user in data %}
         <tr>
@@ -26,6 +27,7 @@
             <td>{{ print_user.address }}</td>
             <td>{{ print_user.carry_address }}</td>
             <td><a href="{% url 'customer:detail' print_user.pk %}">詳細</a></td>
+            <td><a href="{% url 'customer:update' print_user.pk %}">編集</a></td>
         </tr>
         {% endfor %}
     </table>

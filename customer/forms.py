@@ -14,9 +14,9 @@ class UserForm(forms.ModelForm):
             'carry_address' : '引き受け場所',
         }
         help_texts = {
-            'name': '名前を入力',
-            'age': '年齢を入力',
-            'gender': '性別を選択',
-            'address': '住所を入力',
-            'carry_address': '送り先住所を入力'
+            # 'name': '名前を入力',
+            # 'age': '年齢を入力',
+            # 'gender': '性別を選択',
+            # 'address': '住所を入力',
+            # 'carry_address': '送り先住所を入力'
         }

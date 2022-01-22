@@ -3,6 +3,7 @@
   <div>
     <table border="1">
         <input type="button" onclick="location.href='http://127.0.0.1:8000/'" value="TOP画面">
+        <a href="{% url 'customer:update' data.pk %}"><input type="button" value="編集画面"></a>
         <tr>
             <th>名前</th>
             <th>年齢</th>
