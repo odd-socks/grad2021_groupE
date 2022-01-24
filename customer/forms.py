@@ -1,22 +1,35 @@
 from django import forms
 from .models import User
- 
- 
+from .models import GENDER_CHOICES
+
+
+GENDER_CHOICES = GENDER_CHOICES + [('', '---------')] 
+
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('name', 'age' , 'gender' , 'address' , 'carry_address')
+        fields = ('name', 'age' , 'gender' , 'email' , 'address' , 'carry_address','is_carryed',)
+        widgets = {'is_carryed': forms.HiddenInput()}
         labels = {
             'name': '名前',
             'age': '年齢',
             'gender' : '性別',
+            'email': 'メールアドレス',
             'address' : '住所',
             'carry_address' : '引き受け場所',
+            'is_carryed' : '送迎中判定'
         }
-        help_texts = {
-            # 'name': '名前を入力',
-            # 'age': '年齢を入力',
-            # 'gender': '性別を選択',
-            # 'address': '住所を入力',
-            # 'carry_address': '送り先住所を入力'
+
+class SubUserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('name', 'age' , 'gender' , 'email' , 'address' , 'carry_address','is_carryed',)
+        labels = {
+            'name': '名前',
+            'age': '年齢',
+            'gender' : '性別',
+            'email': 'メールアドレス',
+            'address' : '住所',
+            'carry_address' : '引き受け場所',
+            'is_carryed' : '送迎中判定'
         }

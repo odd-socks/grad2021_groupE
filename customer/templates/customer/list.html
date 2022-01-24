@@ -14,20 +14,24 @@
             <th>name</th>
             <th>age</th>
             <th>gender</th>
+            <th>mail-address</th>
             <th>address</th>
-            <th>carry_address</th>
+            <th>carry-address</th>
             <th>detail</th>
             <th>update</th>
+            <th>is_carryed</th>
         </tr>
         {% for print_user in data %}
         <tr>
             <td>{{ print_user.name }}</td>
             <td>{{ print_user.age }}</td>
             <td>{{ print_user.gender }}</td>
+            <td>{{ print_user.email }}</td>
             <td>{{ print_user.address }}</td>
             <td>{{ print_user.carry_address }}</td>
             <td><a href="{% url 'customer:detail' print_user.pk %}">詳細</a></td>
             <td><a href="{% url 'customer:update' print_user.pk %}">編集</a></td>
+            <td>{{ print_user.is_carryed}}</td>
         </tr>
         {% endfor %}
     </table>

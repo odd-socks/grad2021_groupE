@@ -5,7 +5,7 @@ from django.http.response import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from .models import User
-from .forms import UserForm
+from .forms import UserForm,SubUserForm
 from django.shortcuts import render
 from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404
@@ -57,10 +57,10 @@ def update(request, customer_id):
     """ ユーザーを編集 """
     customer_id = get_object_or_404(User, id=customer_id)
     if request.method == "POST":
-        form = UserForm(request.POST, instance=customer_id)
+        form = SubUserForm(request.POST, instance=customer_id)
         if form.is_valid():
             form.save()
             return redirect('customer:toppage')
     else:
-        form = UserForm
+        form = SubUserForm(instance=customer_id)
     return render(request, 'customer/update.html', {'form': form, 'data':customer_id })
