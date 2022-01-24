@@ -37,6 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'certification.apps.CertificationConfig',
+    'accounts.apps.AccountsConfig',
+
+    'django.contrib.sites',#for djnago-allauth
+    'allauth',#for djnago-allauth
+    'allauth.account',#for djnago-allauth
+    'allauth.socialaccount',#for djnago-allauth
 ]
 
 MIDDLEWARE = [
@@ -54,7 +62,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,3 +126,44 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#staticのcssが反映される
+STATICFILES_DIRS =(
+    os.path.join(BASE_DIR, 'static'),
+)
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+#追加
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+# 認証方式を「メールアドレスとパスワード」に変更
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+# ユーザー名を使用する
+ACCOUNT_USERNAME_REQUIRED = True
+
+# ユーザー登録確認メールは送信しない
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+# メールアドレスを必須項目にする
+ACCOUNT_EMAIL_REQUIRED = True
+
+#ユーザーモデルの拡張(customuser)
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+SITE_ID = 1 #django-allauthがsitesフレームワークを使っているため
+
+LOGIN_REDIRECT_URL = 'certification/index'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/account/login/'
+ACCOUNT_LOGOUT_ON_GET = True
+
+#signupformを指定
+ACCOUNT_FORMS = {
+    'signup' : 'certification.forms.CustomSignupForm',
+}
+#signupformからの情報をcustomusermodelに保存するのに必要
+ACCOUNT_ADAPTER = 'certification.adapter.AccountAdapter'
+#passwordの入力を一回に
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
