@@ -1,0 +1,22 @@
+{% extends 'qrfunction/base.html' %}
+
+{% block content %}
+
+    <h1>一覧</h1>
+    <br>
+    {% for d in data %}
+        {{d.name}}
+        {{d.email}}
+        {{d.age}}
+    {% endfor%}
+    <!-- {% for customer_id in customer_id %}
+        <ul>
+            <li>
+                {{ customer_id.name }}
+                {{ customer_id.email }}
+                <a href="{% url 'qrfunction:detail' customer_id.pk %}">詳細</a>
+            </li>
+        </ul>
+    {% endfor %} -->
+
+{% endblock %}
