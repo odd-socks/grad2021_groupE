@@ -8,15 +8,12 @@
         {{d.name}}
         {{d.email}}
         {{d.age}}
-    {% endfor%}
-    <!-- {% for customer_id in customer_id %}
-        <ul>
-            <li>
-                {{ customer_id.name }}
-                {{ customer_id.email }}
-                <a href="{% url 'qrfunction:detail' customer_id.pk %}">詳細</a>
-            </li>
-        </ul>
-    {% endfor %} -->
+        {{d.add}}
 
+        <form method="GET" action="{% url 'qrfunction:registration' %}">
+            <input type="hidden" name="name" value="{{d.name}}">
+            <input type="hidden" name="email" value="{{d.email}}">
+            <button type="submit">完了登録</button>
+        </form>
+    {% endfor%}
 {% endblock %}

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <title>利用者</title>
+</head>
+
+<body>
+    <div>
+        <form method="GET" action="{% url 'qrfunction:index' %}">
+            <input type="text" name="name">
+            <input type="text" name="email">
+            <button type="submit">検索</button>
+        </form>
+    </div>
+</body>
+</html>

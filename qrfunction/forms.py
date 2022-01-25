@@ -1,7 +1,6 @@
 from dataclasses import field
 from django import forms
 from .models import User
-from .models import GENDER_CHOICES
 
 class UserForm(forms.ModelForm):
     class Meta:
@@ -18,11 +17,12 @@ class UserForm(forms.ModelForm):
             'is_carryed' : '送迎中判定'
         }
 
-class QrFuncForm(forms.ModelForm):
+class QrFuncForm(forms.Form):
     class Meta:
         model = User
-        field = ('name', 'email')
-        lavels = {
-            'name': '名前',
-            'email': 'メールアドレス',
-        }
+        # lavels = {
+        #     'name': '名前',
+        #     'email': 'メールアドレス',
+        # }
+        input_name = forms.CharField()
+        input_email = forms.CharField()
