@@ -140,15 +140,15 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-# 認証方式を「メールアドレスとパスワード」に変更
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
+# 認証方式を「ユーザーネーム（施設名）」に変更
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
 # ユーザー名を使用する
 ACCOUNT_USERNAME_REQUIRED = True
 
 # ユーザー登録確認メールは送信しない
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 # メールアドレスを必須項目にする
-ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_REQUIRED = False
 
 #ユーザーモデルの拡張(customuser)
 AUTH_USER_MODEL = 'accounts.CustomUser'
@@ -156,7 +156,7 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 SITE_ID = 1 #django-allauthがsitesフレームワークを使っているため
 
 LOGIN_REDIRECT_URL = 'certification:index'
-ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'certification:index'
 ACCOUNT_LOGOUT_ON_GET = True
 
 #signupformを指定
