@@ -22,9 +22,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('certification.urls')),
     path('accounts/', include('allauth.urls')),
+
     #下記にaccountsのtemplatesファイルパス記述
-    # path('account/login/', TemplateView.as_view(template_name = 'login.html'), name='login'),
-    # path('logout/', TemplateView.as_view(template_name = 'logout.html'), name='logout'),
-    # path('signup/', TemplateView.as_view(template_name = 'signup.html'), name='signup'),
-    # path('signup/', TemplateView.as_view(template_name = 'signup.html'), name='signup'),
+    path('accounts/login/', TemplateView.as_view(template_name = 'login.html'), name='login'),
+    path('accounts/logout/', TemplateView.as_view(template_name = 'logout.html'), name='logout'),
+    path('accounts/signup/', TemplateView.as_view(template_name = 'signup.html'), name='signup'),
 ]

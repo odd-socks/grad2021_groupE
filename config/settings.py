@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'certification.apps.CertificationConfig',
-    'accounts.apps.AccountsConfig',
+    'accounts.apps.AccountsConfig',#ユーザー認証
 
     'django.contrib.sites',#for djnago-allauth
     'allauth',#for djnago-allauth
@@ -155,15 +155,16 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 
 SITE_ID = 1 #django-allauthがsitesフレームワークを使っているため
 
-LOGIN_REDIRECT_URL = 'certification/index'
-ACCOUNT_LOGOUT_REDIRECT_URL = '/account/login/'
+LOGIN_REDIRECT_URL = 'certification:index'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login'
 ACCOUNT_LOGOUT_ON_GET = True
 
 #signupformを指定
 ACCOUNT_FORMS = {
-    'signup' : 'certification.forms.CustomSignupForm',
+    'signup' : 'accounts.forms.CustomSignupForm',
 }
 #signupformからの情報をcustomusermodelに保存するのに必要
-ACCOUNT_ADAPTER = 'certification.adapter.AccountAdapter'
+ACCOUNT_ADAPTER = 'accounts.adapter.AccountAdapter'
+
 #passwordの入力を一回に
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
