@@ -22,7 +22,7 @@
                         <a class="nav-link" href="#">引受人ページ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">施設ページ</a>
+                        <a class="nav-link" href="{% url 'certification:facility' %}">施設ページ</a>
                     </li>
                     <!-- ログイン・ログアウト判定 -->
                     {% if not user.is_authenticated %}

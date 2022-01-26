@@ -7,3 +7,7 @@ from django.views import generic
 #トップページ
 class IndexView(generic.TemplateView):
      template_name = 'certification/index.html'
+
+#施設トップページ
+class FacilityView(generic.TemplateView):
+     template_name = 'certification/facility.html'
