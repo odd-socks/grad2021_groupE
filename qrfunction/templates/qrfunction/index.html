@@ -7,7 +7,8 @@
             {{d.email}}
             {{d.age}}
             {{d.add}}
-            <form method="GET" action="{% url 'qrfunction:registration' %}">
+            <form method="POST" action="{% url 'qrfunction:registration' %}">
+                {% csrf_token %}
                 <input type="hidden" name="name" value="{{d.name}}">
                 <input type="hidden" name="email" value="{{d.email}}">
                 <button type="submit">完了登録</button>

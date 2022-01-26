@@ -22,8 +22,8 @@ def search(request):
 
 def registration(request):
     """送迎完了"""
-    input_name = request.GET.get('name')
-    input_email= request.GET.get('email')
+    input_name = request.POST.get('name')
+    input_email= request.POST.get('email')
 
 #----------------------------------------------------------------------------------------------------
     #送迎中判定欄の反転処理
@@ -45,8 +45,8 @@ def registration(request):
 
 def index(request):
     """ユーザー判定"""
-    input_name = request.GET.get('name')
-    input_email= request.GET.get('email')
+    input_name = request.POST.get('name')
+    input_email= request.POST.get('email')
 
     results = User.objects.filter(name=input_name, email=input_email)  # Userテーブルから複数条件で検索
     print(results)  # ターミナルに結果を出力

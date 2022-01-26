@@ -9,7 +9,8 @@
 <body>
     <div>
         {{error}}
-        <form method="GET" action="{% url 'qrfunction:index' %}">
+        <form method="POST" action="{% url 'qrfunction:index' %}">
+            {% csrf_token %}
             名前 : <input type="text" name="name"><br>
             メールアドレス : <input type="text" name="email"><br>
             <button type="submit">検索</button>
