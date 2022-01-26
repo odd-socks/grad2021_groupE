@@ -1,13 +1,24 @@
 <!-- 施設ログイン -->
-<!doctype html>
+{% extends 'certification/base.html' %}
 
-<!-- {% block title %}施設ログイン{% endblock %} -->
-
+<!-- コンテンツ -->
 {% block content %}
-<h2>施設ログイン</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">ログイン</button>
-</form>
+<div class="container">
+    <div class="col-md-6 offset-md-3">
+      <div class="card mt-3 mb-3 bg-light">
+        <!-- カードヘッダー -->
+        <div class="card-header bg-primary text-light">
+          <h2>Log in</h2>
+        </div>
+        <!-- カードボディー -->
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">ログイン</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
