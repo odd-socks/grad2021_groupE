@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <meta charset="utf-8" />
+    <title>Facility表</title>
+</head>
+ 
+<body>
+    <p>{{ message }}</p>
+    <table border="1">
+        <tr>
+            <th>facilisty_name</th>
+            <th>address</th>
+            <th>password</th>
+        </tr>
+        {% for print_user in data %}
+        <tr>
+            <td>{{ print_user.facility_name }}</td>
+            <td>{{ print_user.address }}</td>
+            <td>{{ print_user.password }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+ 
+</html>
