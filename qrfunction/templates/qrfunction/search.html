@@ -8,9 +8,10 @@
 
 <body>
     <div>
+        {{error}}
         <form method="GET" action="{% url 'qrfunction:index' %}">
-            <input type="text" name="name">
-            <input type="text" name="email">
+            名前 : <input type="text" name="name"><br>
+            メールアドレス : <input type="text" name="email"><br>
             <button type="submit">検索</button>
         </form>
     </div>

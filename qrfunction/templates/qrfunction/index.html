@@ -1,19 +1,16 @@
 {% extends 'qrfunction/base.html' %}
 
 {% block content %}
-
-    <h1>一覧</h1>
     <br>
-    {% for d in data %}
-        {{d.name}}
-        {{d.email}}
-        {{d.age}}
-        {{d.add}}
-
-        <form method="GET" action="{% url 'qrfunction:registration' %}">
-            <input type="hidden" name="name" value="{{d.name}}">
-            <input type="hidden" name="email" value="{{d.email}}">
-            <button type="submit">完了登録</button>
-        </form>
-    {% endfor%}
+        {% for d in data %}
+            {{d.name}}
+            {{d.email}}
+            {{d.age}}
+            {{d.add}}
+            <form method="GET" action="{% url 'qrfunction:registration' %}">
+                <input type="hidden" name="name" value="{{d.name}}">
+                <input type="hidden" name="email" value="{{d.email}}">
+                <button type="submit">完了登録</button>
+            </form>
+        {% endfor%}
 {% endblock %}

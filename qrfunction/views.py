@@ -1,6 +1,9 @@
 # Create your views here.
 
-from django.shortcuts import render, get_object_or_404
+from distutils.core import run_setup
+from tkinter.messagebox import NO
+from unittest import result
+from django.shortcuts import render, get_object_or_404, redirect
 from customer.models import User
 from .models import CarryLog
 from .forms import QrFuncForm
@@ -10,6 +13,7 @@ from django import forms
 from django.contrib import messages
 
 def search(request):
+    """ただの検索"""
     form = QrFuncForm()
 
     return render(request, 'qrfunction/search.html')
@@ -17,6 +21,7 @@ def search(request):
 
 
 def registration(request):
+    """送迎完了"""
     input_name = request.GET.get('name')
     input_email= request.GET.get('email')
 
@@ -24,7 +29,7 @@ def registration(request):
     #送迎中判定欄の反転処理
     results = User.objects.filter(name=input_name, email=input_email)  # Userテーブルから複数条件で検索
     for result in results:
-        result.is_carryed = True
+        result.is_carryed = False
         result.save()
         print(result.is_carryed)
 #----------------------------------------------------------------------------------------------------
@@ -39,14 +44,20 @@ def registration(request):
 
 
 def index(request):
+    """ユーザー判定"""
     input_name = request.GET.get('name')
     input_email= request.GET.get('email')
 
     results = User.objects.filter(name=input_name, email=input_email)  # Userテーブルから複数条件で検索
     print(results)  # ターミナルに結果を出力
-
-    return render(request, 'qrfunction/index.html', {'data':results})
-
+    if not results:
+        return render(request,'qrfunction/search.html',{'error':'名前もしくはメールアドレスが間違っています'})
+    else:
+        for result in results:
+            if result.is_carryed == False:
+                return render(request,'qrfunction/search.html', {'error':'送迎中ではありません'})
+            elif result.is_carryed == True:
+                return render(request, 'qrfunction/index.html', {'data':results})
 
 
 
