@@ -13,6 +13,9 @@ urlpatterns = [
     path('accounts/signup/', TemplateView.as_view(template_name = 'signup.html'), name='signup'),
 
     # 水口設定
-    path('customer', include('customer.urls')),  #customer
+    path('customer/', include('customer.urls')),  #customer
     path('qrfunction/', include('qrfunction.urls')), #qrfunction
-    ]
+
+    #古川設定
+    path('map/', include('map.urls')),
+]

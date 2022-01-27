@@ -1,0 +1,40 @@
+{% extends 'map/base.html' %}
+
+<script>
+    function goMap(points){
+        let url = 'https://www.google.com/maps/dir/' + points;
+        location.href = url;
+    }
+    function test(){
+        console.log('hello');
+    }
+</script>
+
+
+{% block content %}
+    <h2>map_list</h2>
+    <table border="1">
+        <tr>
+            <th>ルート名</th>
+            <th>ルート</th>
+            <th>waypoints</th>
+            <th>destination</th>
+            <th>url</th>
+        </tr>
+
+    {% for map in map_list %}
+    
+        <tr>
+            <td>{{ map.name }}</td>
+            <td>{{ map.route }}</td>
+            <td>{{ map.waypoints }}</td>
+            <td>{{ map.destination }}</td>
+            <td><a href="{{ waypoints|add:map.route|add:destination|add:map.destination }}"><button>ナビ開始</button></a></td>
+        </tr>
+    {% endfor %}
+
+    </table>
+    
+    <hr>
+    <a href="{% url 'map:user_list'%}">ルート新規作成画面へ</a>
+{% endblock %}

@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount',#for djnago-allauth
     'customer.apps.CustomerConfig',
     'qrfunction.apps.QrfunctionConfig',
+
+    'map.apps.MapConfig',
+
 ]
 
 MIDDLEWARE = [

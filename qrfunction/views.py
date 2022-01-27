@@ -31,7 +31,7 @@ def registration(request):
     for result in results:
         result.is_carryed = False
         result.save()
-        print(result.is_carryed)
+        # print(result.is_carryed)
 #----------------------------------------------------------------------------------------------------
 
 #----------------------------------------------------------------------------------------------------
@@ -49,7 +49,7 @@ def index(request):
     input_email= request.POST.get('email')
 
     results = User.objects.filter(name=input_name, email=input_email)  # Userテーブルから複数条件で検索
-    print(results)  # ターミナルに結果を出力
+    # print(results)  # ターミナルに結果を出力
     if not results:
         return render(request,'qrfunction/search.html',{'error':'名前もしくはメールアドレスが間違っています'})
     else:
