@@ -11,7 +11,6 @@ class CustomSignupForm(SignupForm):
 
     class Meta:
         model = CustomUser
-        #fields = ("username","email","address")
 
 
     def signup(self, request,user):
