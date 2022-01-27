@@ -1,0 +1,17 @@
+{% extends 'qrfunction/base.html' %}
+
+{% block content %}
+    <br>
+        {% for d in data %}
+            {{d.name}}
+            {{d.email}}
+            {{d.age}}
+            {{d.add}}
+            <form method="POST" action="{% url 'qrfunction:registration' %}">
+                {% csrf_token %}
+                <input type="hidden" name="name" value="{{d.name}}">
+                <input type="hidden" name="email" value="{{d.email}}">
+                <button type="submit">完了登録</button>
+            </form>
+        {% endfor%}
+{% endblock %}

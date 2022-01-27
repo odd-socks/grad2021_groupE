@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <title>利用者</title>
+</head>
+
+<body>
+    <div>
+        {{error}}
+        <form method="POST" action="{% url 'qrfunction:index' %}">
+            {% csrf_token %}
+            名前 : <input type="text" name="name"><br>
+            メールアドレス : <input type="text" name="email"><br>
+            <button type="submit">検索</button>
+        </form>
+    </div>
+</body>
+</html>

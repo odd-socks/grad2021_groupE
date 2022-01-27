@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TopPage</title>
+</head>
+<body>
+    <h1>TOPページ</h1>
+    <!-- <input type="button" onclick="location.href='http://127.0.0.1:8000/'" value="TOP画面"> -->
+    <a href="http://127.0.0.1:8000/admin"><input type="button" value="admin画面"></a>
+    <a href="{% url 'customer:new' %}"><input type="button" value="ユーザー新規作成"></a>
+    <a href="{% url 'customer:list' %}"><input type="button" value="ユーザーリスト画面"></a>
+</body>
+</html>
