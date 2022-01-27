@@ -13,7 +13,7 @@
     <form method="POST" novalidate>
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">送信</button>
+        <button type="submit" onclick='return confirm("この内容で登録しますか？");'>送信</button>
     </form>
     <p>{{ message }}</p>
 </body>
