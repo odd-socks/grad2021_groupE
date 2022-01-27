@@ -19,6 +19,7 @@ class User(models.Model):
     address = models.CharField(verbose_name="住所", max_length=150)
     carry_address = models.CharField(verbose_name="送り先住所", max_length=150)
     is_carryed = models.BooleanField(verbose_name="送迎中判定",default=False,)
+    facility_id = models.IntegerField()
 
     def __str__(self):
         return self.name
