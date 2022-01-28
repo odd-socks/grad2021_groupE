@@ -2,6 +2,11 @@
 
 
 {% block content %}
+<!-- <style>
+    li{
+        list-style: none;
+    }
+</style> -->
     <h2>ルート作成画面</h2>
     <!-- <table border="1">
         <tr>
@@ -38,7 +43,7 @@
         <button type="submit">検索</button>
     </form>
     <div id="posts" style="margin-top: 5px;"></div>
-
+    <div id="points-list"></div>
 
     <!-- 経路表示ウィンドウ -->
     <hr>
@@ -89,13 +94,28 @@
             }
             points.push(data);
             pointsStringScreen.value = points.join("|");
-            console.log(pointsStringScreen.value);
+            // console.log(pointsStringScreen.value);
 
             setData(data);
             searchRoute();
+            // showList();
         }
+        
+        // 目的地をリスト形式で表示する処理
+        // function showList(){
+        //     let content = '<ul>';
+        //     for (let point of points) {
+        //         console.log(point)
+        //         content += `
+        //         <li>${point}</li>
+        //         <li>↓</li>
+        //     `
+        //     }
+        //     content += '</ul>';
+        //     document.getElementById('points-list').innerHTML = content;
+        // }
 
-
+        
         // 確定ボタンを押した時の処理
         function submit() {
             let subArr = [];
@@ -126,23 +146,19 @@
 
 
         function setData(data){
-            // pointsString = pointsStringScreen.value.split('/');
             pointsString = points;
 
+            // Directions APIに渡すための経由地点配列
             waypoints = [];
-            // waypointsString = [];
             for (let i = 0; i < pointsString.length - 1; i++) {
                 waypoints.push({
                     location: pointsString[i],
                     stopover: true,  // 途中下車(true) or 通過(false)
                 });
-                // waypointsString.push(pointsString[i]);
             }
 
             // destination = data;
             console.log(pointsString);
-            console.log(waypointsString);
-            console.log(destination);
             console.log('------------------------------------------------------------')
         }
 
