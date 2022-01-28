@@ -21,4 +21,6 @@ app_name = 'certification'
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),#トップページ
     path('facility/', views.FacilityView.as_view(), name='facility'),#施設ページ
+    path('qr/', views.qrView, name='qr'),#QRコード
+
 ]
