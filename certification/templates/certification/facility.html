@@ -50,46 +50,46 @@
             <h2 class="text-center mt-0">施設サービス一覧</h2>
             <hr class="divider" />
             <div class="row gx-4 gx-lg-5">
-                <!-- ドライバー -->
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="mt-5">
-                        <div class="mb-2"><a href="#"><i class="bi-blockquote-left fs-1 text-primary"></i></a></div>
-                            <h3 class="h4 mb-2">
-                                <a href="#">QRコード</a>
-                            </h3>
-                            <p class="text-muted mb-0">QRコードを利用できます</p>
+                <!-- QRコード -->
+                    <div class="col-lg-3 col-md-6 text-center">
+                            <div class="mt-5">
+                                <div class="mb-2"><a href="{% url 'certification:qr' %}"><i class="bi-blockquote-left fs-1 text-primary"></i></a></div>
+                                    <h3 class="h4 mb-2">
+                                        <a href="{% url 'certification:qr' %}">QRコード</a>
+                                    </h3>
+                                    <p class="text-muted mb-0">説明が入ります</p>
+                            </div>
                     </div>
-                </div>
-                <!-- 利用者 -->
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="mt-5">
-                        <div class="mb-2"><a href="#"><i class="bi-people fs-1 text-primary"></i></a></div>
-                            <h3 class="h4 mb-2">
-                                <a href="http://127.0.0.1:8000/customer">利用者</a>
-                            </h3>
-                            <p class="text-muted mb-0">利用者を選択できます</p>
+                <!-- 選択 -->
+                    <div class="col-lg-3 col-md-6 text-center">
+                        <div class="mt-5">
+                            <div class="mb-2"><a href="http://127.0.0.1:8000/map/map_list/"><i class="bi-check fs-1 text-primary"></i></a></div>
+                                <h3 class="h4 mb-2">
+                                    <a href="http://127.0.0.1:8000/map/map_list">選択</a>
+                                </h3>
+                                <p class="text-muted mb-0">説明が入ります</p>
+                        </div>
                     </div>
-                </div>
                 <!-- ルート作成 -->
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="mt-5">
-                        <div class="mb-2"><a href="#"><i class="bi-globe fs-1 text-primary"></i></a></div>
-                            <h3 class="h4 mb-2">
-                                <a href="http://127.0.0.1:8000/map/user_list">作成</a>
-                            </h3>
-                            <p class="text-muted mb-0">ルートを作成します</p>
+                    <div class="col-lg-3 col-md-6 text-center">
+                        <div class="mt-5">
+                            <div class="mb-2"><a href="http://127.0.0.1:8000/map/user_list"><i class="bi-globe fs-1 text-primary"></i></a></div>
+                                <h3 class="h4 mb-2">
+                                    <a href="http://127.0.0.1:8000/map/user_list">作成</a>
+                                </h3>
+                                <p class="text-muted mb-0">説明が入ります</p>
+                        </div>
                     </div>
-                </div>
-                <!-- ルート選択 -->
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="mt-5">
-                        <div class="mb-2"><a href="#"><i class="bi-check fs-1 text-primary"></i></a></div>
-                            <h3 class="h4 mb-2">
-                                <a href="http://127.0.0.1:8000/map">選択</a>
-                            </h3>
-                            <p class="text-muted mb-0">ルートを選択します</p>
+                <!-- 利用者 -->
+                    <div class="col-lg-3 col-md-6 text-center">
+                        <div class="mt-5">
+                            <div class="mb-2"><a href="http://127.0.0.1:8000/customer"><i class="bi-people fs-1 text-primary"></i></a></div>
+                                <h3 class="h4 mb-2">
+                                    <a href="http://127.0.0.1:8000/customer">利用者</a>
+                                </h3>
+                                <p class="text-muted mb-0">説明が入ります</p>
+                        </div>
                     </div>
-                </div>
             </div>
         </div>
     </section>

@@ -13,7 +13,7 @@ from accounts.models import CustomUser
 
 # Create your views here.
 class TopView(generic.TemplateView):
-    template_name = 'map/top.html'
+     template_name = 'map/top.html'
 
 
 

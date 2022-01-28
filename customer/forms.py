@@ -9,7 +9,7 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('name', 'age' , 'gender' , 'email' , 'address' , 'carry_address','is_carryed','facility_id')
-        widgets = {'is_carryed': forms.HiddenInput()}
+        widgets = {'is_carryed': forms.HiddenInput(),'facility_id': forms.HiddenInput()}
         labels = {
             'name': '名前',
             'age': '年齢',
@@ -25,6 +25,7 @@ class SubUserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('name', 'age' , 'gender' , 'email' , 'address' , 'carry_address','is_carryed','facility_id')
+        widgets = {'facility_id': forms.HiddenInput()}
         labels = {
             'name': '名前',
             'age': '年齢',
@@ -33,5 +34,5 @@ class SubUserForm(forms.ModelForm):
             'address' : '住所',
             'carry_address' : '引き受け場所',
             'is_carryed' : '送迎中判定',
-             'facility_id': '施設_id'
+            'facility_id': '施設_id'
         }
