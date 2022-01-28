@@ -4,7 +4,7 @@ from io import BytesIO
 from django.shortcuts import render
 
 
-def IndexView(request):
+def show_qrcorde(request):
   template_name = 'make_qrcode/index.html'
   user_id = 1  # 施設_id
   
