@@ -12,8 +12,8 @@ from accounts.models import CustomUser
 
 
 # Create your views here.
-# class TopView(generic.TemplateView):
-#     template_name = 'map/top.html'
+class TopView(generic.TemplateView):
+     template_name = 'map/top.html'
 
 
 
