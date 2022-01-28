@@ -29,7 +29,7 @@
             <td>{{ map.route }}</td>
             <td>{{ map.waypoints }}</td>
             <td>{{ map.destination }}</td>
-            <td><a href="{{ waypoints|add:map.route|add:destination|add:map.destination }}"><button>ナビ開始</button></a></td>
+            <td><a href="{{ waypoints|add:map.waypoints|add:destination|add:map.destination }}"><button>ナビ開始</button></a></td>
         </tr>
     {% endfor %}
 

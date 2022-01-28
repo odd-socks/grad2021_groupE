@@ -29,14 +29,14 @@ class TopView(generic.TemplateView):
 
 @login_required
 def user_list(request):
-  user = request.user
-  template_name = 'map/user_list.html'
-  user_list = User.objects.filter(facility_id=user.id)
-  context = {
+    user = request.user
+    template_name = 'map/user_list.html'
+    user_list = User.objects.filter(facility_id=user.id)
+    context = {
     'user': user,
     'user_list': user_list,
-  }
-  return render(request, template_name, context)
+    }
+    return render(request, template_name, context)
 
 
 

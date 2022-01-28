@@ -2,252 +2,277 @@
 
 
 {% block content %}
-<!-- 利用者一覧 -->
-<h2>ルート作成画面</h2>
-<table border="1">
-    <tr>
-        <th>名前</th>
-        <th>年齢</th>
-        <th>性別</th>
-        <th>住所</th>
-    </tr>
-    {% for row in user_list %}
-    <tr>
-        <td>{{ row.name }}</td>
-        <td>{{ row.age }}歳</td>
-        <td>{{ row.gender }}</td>
-        <td>{{ row.address }}</td>
-    </tr>
-    {% endfor %}
-</table>
+    <h2>ルート作成画面</h2>
+    <!-- <table border="1">
+        <tr>
+            <th>名前</th>
+            <th>年齢</th>
+            <th>性別</th>
+            <th>住所</th>
+        </tr>
+        {% for row in user_list %}
+        <tr>
+            <td>{{ row.name }}</td>
+            <td>{{ row.age }}歳</td>
+            <td>{{ row.gender }}</td>
+            <td>{{ row.address }}</td>
+        </tr>
+        {% endfor %}
+    </table> -->
 
-<!-- ルート入力ウィンドウ -->
-<hr>
-<p>ルート名</p>
-{% if message %}
-    <p style="color: red;">{{message}}</p>
-{% endif %}
-<input type="text" id="input_name" value="{{input_name}}">
 
-<!-- 名前検索ウィンドウ -->
-<hr>
-<p>名前検索</p>
-<form id="user_search" action="{% url 'map:user_search' %}" method="GET">
-    <input type="text" id="user_name">
-    <button type="submit">検索</button>
-</form>
-<div id="posts" style="margin-top: 5px;"></div>
 
-<!-- 経路表示ウィンドウ -->
-<hr>
-<p>経路</p>
-<div id="map_canvas" style="width:80%;height:400px;margin-bottom:10px;"></div>
-<input type="text" id="pointsString" style="width: 80%;" value="{{pointsString}}">
-<button onclick="submit()">確定</button>
-<div style="height: 50px;"></div>
 
+    <!-- ルート名入力ウィンドウ -->
+    <hr>
+    ルート名：<input type="text" id="input_name" value="{{input_name}}">
+    {% if message %}
+        <p style="color: red;">{{message}}</p>
+    {% endif %}
+
+
+    <!-- 名前検索ウィンドウ -->
+    <hr>
+    <form id="user_search" action="{% url 'map:user_search' %}" method="GET">
+        名前検索：<input type="text" id="user_name">
+        <button type="submit">検索</button>
+    </form>
+    <div id="posts" style="margin-top: 5px;"></div>
+
+
+    <!-- 経路表示ウィンドウ -->
+    <hr>
+    <p>経路</p>
+    <div id="map_canvas" style="width:80%;height:400px;margin-bottom:10px;"></div>
+    <input type="text" id="pointsString" style="width: 80%;" value="{{pointsString}}">
+    <button onclick="submit()">確定</button>
+    <div style="height: 50px;"></div>
 {% endblock %}
 
 
 
 {% block extrajs %}
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNMXB2mTXfoOmmJTm1rIqCUgR_FnLjpmU"></script>
-<script>
-    //マップの初期化
-    var opts = {
-        zoom: 17,
-        center: {
-            lat: 35.863933470604785,
-            lng: 139.97187109927114
-        },
-        gestureHandling: "greedy",
-    };
-    var map = new google.maps.Map(document.getElementById("map_canvas"), opts);
-    
-    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNMXB2mTXfoOmmJTm1rIqCUgR_FnLjpmU"></script>
+    <script>
+        //マップの初期化
+        var opts = {
+            zoom: 17,
+            center: {
+                lat: 35.863933470604785,
+                lng: 139.97187109927114
+            },
+            gestureHandling: "greedy",
+        };
+        let map          = new google.maps.Map(document.getElementById("map_canvas"), opts);
+        let trafficLayer = new google.maps.TrafficLayer();
+        trafficLayer.setMap(map);  // 交通情報をマップに表示
+        
+        
 
-    let points       = [];
-    let waypoints    = [];
-    let destination  = [];
-    let pointsString = [];
-    let infowindowArr   = [];
-    let waypointsString = [];
-    let facilityAddress = '大原簿記法律専門学校柏校'
-    let directionsService  = new google.maps.DirectionsService();
-    let directionsRenderer = new google.maps.DirectionsRenderer();
-    let postsScreen        = document.getElementById('posts'); // 検索結果の表示エリア
-    let inputNameScreen    = document.getElementById('input_name'); // 送迎ルート名の入力エリア
-    let pointsStringScreen = document.getElementById('pointsString'); // 送迎ルートの住所の順番表示エリア
+        let points       = [];
+        let waypoints    = [];
+        let destination  = [];
+        let pointsString = [];
+        let infowindowArr   = [];
+        let waypointsString = [];
+        let facilityAddress = '大原簿記法律専門学校柏校'
+        let directionsService  = new google.maps.DirectionsService();
+        let directionsRenderer = new google.maps.DirectionsRenderer();
+        let postsScreen        = document.getElementById('posts'); // 検索結果の表示エリア
+        let inputNameScreen    = document.getElementById('input_name'); // 送迎ルート名の入力エリア
+        let pointsStringScreen = document.getElementById('pointsString'); // 送迎ルートの住所の順番表示エリア
 
 
-    function addPoint(data) {
-        if (pointsStringScreen.value != '') {
-            points = pointsStringScreen.value.split('|');
+        function addPoint(data) {
+            if (pointsStringScreen.value != '') {
+                points = pointsStringScreen.value.split('|');
+            }
+            points.push(data);
+            pointsStringScreen.value = points.join("|");
+            console.log(pointsStringScreen.value);
+
+            setData(data);
+            searchRoute();
         }
-        points.push(data);
-        pointsStringScreen.value = points.join("|");
-        console.log(pointsStringScreen.value);
 
 
-        setData(data);
-        searchRoute();
-    }
-
-    function submit() {
-        let url = '/map/map_confirm?pointsString=' + pointsStringScreen.value + '&input_name=' + inputNameScreen.value + '&waypoints=' + waypointsString.join('|') + '&destination=' + destination;
-        // let url = '/map_confirm?pointsString=' + pointsString + '&input_name=' + input_name.value;
-        location.href = url;
-    }
-
-    function resetRenderer(){
-        if (directionsRenderer){
-            directionsRenderer.setMap(null);
+        // 確定ボタンを押した時の処理
+        function submit() {
+            let subArr = [];
+            waypointsString = pointsStringScreen.value.split('|');
+            destination = waypointsString.pop();
+            
+            let url = '/map/map_confirm?pointsString=' + pointsStringScreen.value + '&input_name=' + inputNameScreen.value + '&waypoints=' + waypointsString.join('|') + '&destination=' + destination;
+            location.href = url;  // リダイレクト
         }
-    }
+        
 
-    function closeAllInfowindows(){
-        if (infowindowArr.length > 0) {
-            for (let i = 0; i < infowindowArr.length - 1; i++) {
-                infowindowArr[i].close();
+        // マップに表示されているルートを削除する処理
+        function resetRenderer(){
+            if (directionsRenderer){
+                directionsRenderer.setMap(null);
             }
         }
-    }
 
 
-    // 名前検索時の処理
-    $('#user_search').on('submit', e => {
-        e.preventDefault(); // submitタグに設定されたデフォルトの動作を削除
+        // マップに表示されているInfoWindowを全て削除する処理
+        function closeAllInfowindows(){
+            if (infowindowArr.length > 0) {
+                for (let i = 0; i < infowindowArr.length - 1; i++) {
+                    infowindowArr[i].close();
+                }
+            }
+        }
 
-        $.ajax({ // 非同期通信の設定
-            'url': '{% url "map:user_search" %}',
-            'type': 'GET',
-            'data': {
-                'user': $('#user_name').val(),
-            },
-            'dataType': 'json'
-        }).done(response => {
-            $('#posts').empty(); // 検索結果の表示エリアを空白にする
 
-            if (response.name_list.length == 0) { // 検索条件に一致するレコードがない場合
-                postsScreen.innerHTML = '※一致する結果がありません';
-            } else {
-                let content = '<table border="1" id="posts"><tr><td>氏名</td><td>年齢</td><td>性別</td><td>住所</td><td>送迎先住所</td><td>追加ボタン</td></tr>';
-                for (const record of response.name_list) {
-                    let name     = record[0]; // 名前
-                    let age      = record[1]; // 名前
-                    let gender   = record[2]; // 名前
-                    let address  = record[3]; // 住所
-                    let carry_address = record[4]; // 送迎先住所
-                    content += `
+        function setData(data){
+            // pointsString = pointsStringScreen.value.split('/');
+            pointsString = points;
+
+            waypoints = [];
+            // waypointsString = [];
+            for (let i = 0; i < pointsString.length - 1; i++) {
+                waypoints.push({
+                    location: pointsString[i],
+                    stopover: true,  // 途中下車(true) or 通過(false)
+                });
+                // waypointsString.push(pointsString[i]);
+            }
+
+            // destination = data;
+            console.log(pointsString);
+            console.log(waypointsString);
+            console.log(destination);
+            console.log('------------------------------------------------------------')
+        }
+
+
+
+        function searchRoute(){
+            closeAllInfowindows();
+
+            // ルートの出発地・目的地・検索設定を設定
+            var start   = facilityAddress;
+            var end     = pointsString[pointsString.length - 1];
+            var request = {
+                origin     : start,     //出発地点の緯度経度
+                destination: end,       //到着地点の緯度経度
+                waypoints  : waypoints, //経由地点
+                travelMode : 'DRIVING', //トラベルモード（車）
+                avoidHighways: true,    //高速道路を利用しない
+            };
+
+            directionsRenderer.setOptions({
+                draggable: true,            //ドラッグしてルートを変更可能にする
+                suppressInfoWindows: true,  // マーカーをクリックしてもデフォルトの吹き出しを出さない
+            });
+            directionsRenderer.setMap(map); // マップと紐付け
+
+            // ルートを表示
+            directionsService.route(request, function (result, status) {
+                if (status !== 'OK') {
+
+                    alert("取得できませんでした：" + status);
+                } else { //ステータスがOKの場合
+                    directionsRenderer.setDirections(result); // 取得したルート（結果：result）をセット
+                    // console.log(result.routes[0].legs)     // 各2地点間の情報が入っている
+
+                    // 引数が一桁の数の場合、十の位に'0'を表示する処理
+                    function putZero(num) {
+                        if (num < 10) {
+                            num = '0' + num;
+                        }
+                        return num;
+                    }
+
+                    // 各2地点間の情報を変数に格納
+                    let totalDuration = 0 // 所要時間の合計(秒)
+                    for (let i = 0; i < result.routes[0].legs.length; i++) {
+                        let eachInfo    = result.routes[0].legs[i]; //ルート情報
+                        let distance    = eachInfo.distance.text;
+                        let duration    = eachInfo.duration.value;  // 所要時間(秒)
+                        let destsLatlng = eachInfo.end_location;
+                        // console.log(eachInfo);
+
+                        // 所要時間・到着時間を計算
+                        totalDuration  += duration;    // 所要時間の合計(秒)
+                        totalDurMinutes = Math.round(totalDuration / 60);
+                        let arriveAt    = new Date();  // 現在時刻
+                        arriveAt.setMinutes(arriveAt.getMinutes() + totalDurMinutes);
+                        arriveAt = putZero(arriveAt.getHours()) + ':' + putZero(arriveAt.getMinutes());
+                        // console.log(arriveAt);
+
+                        let content = `所要時間：${totalDurMinutes}分`
+
+                        //情報ウィンドウの設定
+                        infowindowArr[infowindowArr.length] = new google.maps.InfoWindow({
+                            content  : content,
+                            position : destsLatlng,
+                            pixelOffset: new google.maps.Size(0, -40), //第1引数->正の値で右方向、負の値で左方向。第2引数->正の値で下方向、負の値で上方向
+                        });
+                        infowindowArr[infowindowArr.length - 1].open(map);
+                    }
+                }
+            });
+        }
+        
+        
+        // 名前検索時の処理
+        $('#user_search').on('submit', e => {
+            e.preventDefault(); // submitタグに設定されたデフォルトの動作を削除
+            
+            $.ajax({            // 非同期通信の設定
+                'url': '{% url "map:user_search" %}',
+                'type': 'GET',
+                'data': {
+                    'user': $('#user_name').val(),
+                },
+                'dataType': 'json'
+            }).done(response => {
+                $('#posts').empty();                   // 検索結果の表示エリアを空白にする
+
+                if (response.name_list.length == 0) {  // 検索条件に一致するレコードがない場合
+                    postsScreen.innerHTML = '<p style="color:red">※一致する結果がありません</p>';  // エラーメッセージを返す
+                } else {
+                    let content = `
+                    <table border="1" id="posts">
                         <tr>
-                            <td>${name}</td>
-                            <td>${age}歳</td>
-                            <td>${gender}</td>
-                            <td>${address}</td>
-                            <td>${carry_address}</td>
-                            <td><button onclick='addPoint("${carry_address}");'>追加</button></td>
+                            <td>氏名</td>
+                            <td>年齢</td>
+                            <td>性別</td>
+                            <td>住所</td>
+                            <td>送迎先住所</td>
+                            <td>追加ボタン</td>
                         </tr>
                     `;
-                }
-                content += '</table>';
-                postsScreen.innerHTML = content; // 検索
-            }
-        });
-    });
 
-
-
-
-    //------------------------------------------------------------マップエリア------------------------------------------------------------
-
-
-    function setData(data){
-        // pointsString = pointsStringScreen.value.split('/');
-        pointsString = points;
-
-        waypoints = [];
-        waypointsString = [];
-        for (let i = 0; i < pointsString.length - 1; i++) {
-            waypoints.push({
-                location: pointsString[i],
-                stopover: true,  // 途中下車(true) or 通過(false)
-            });
-            waypointsString.push(pointsString[i]);
-        }
-
-        destination = data;
-        console.log(pointsString);
-        console.log(waypointsString);
-        console.log(destination);
-        console.log('------------------------------------------------------------')
-    }
-
-    function searchRoute(){
-        closeAllInfowindows();
-        // resetRenderer();
-
-
-        // ルートの出発地・目的地・検索設定を設定
-        var start = facilityAddress;
-        var end   = pointsString[pointsString.length - 1];
-        var request = {
-            origin     : start,     //出発地点の緯度経度
-            destination: end,       //到着地点の緯度経度
-            waypoints  : waypoints, //経由地点
-            travelMode : 'DRIVING', //トラベルモード（車）
-        };
-
-
-        directionsRenderer.setOptions({
-            draggable: true,
-            suppressInfoWindows: true,  // マーカーをクリックしてもデフォルトの吹き出しを出さない
-        });
-        directionsRenderer.setMap(map); // マップと紐付け
-
-        // ルートを表示
-        directionsService.route(request, function (result, status) {
-            if (status !== 'OK') {
-                alert("取得できませんでした：" + status);
-            } else { //ステータスがOKの場合
-                directionsRenderer.setDirections(result); // 取得したルート（結果：result）をセット
-                // console.log(result.routes[0].legs)  // 各2地点間の情報が入っている
-
-
-                function putZero(num) { // 引数が一桁の際'0'を追加する
-                    if (num < 10) {
-                        num = '0' + num;
+                    for (const record of response.name_list) {
+                        let name     = record[0];
+                        let age      = record[1]; 
+                        let gender   = record[2];
+                        let address  = record[3];
+                        let carry_address = record[4]; // 送迎先住所
+                        content += `
+                            <tr>
+                                <td>${name}</td>
+                                <td>${age}歳</td>
+                                <td>${gender}</td>
+                                <td>${address}</td>
+                                <td>${carry_address}</td>
+                                <td><button onclick='addPoint("${carry_address}");'>追加</button></td>
+                            </tr>
+                        `;
                     }
-                    return num;
+                    content += '</table>';
+                    postsScreen.innerHTML = content;
                 }
-                let totalDuration = 0 // 所要時間の合計(秒)
-                for (let i = 0; i < result.routes[0].legs.length; i++) {
-                    let eachInfo    = result.routes[0].legs[i]; //各2地点間のルート情報
-                    let distance    = eachInfo.distance.text;
-                    let duration    = eachInfo.duration.value; // 所要時間(秒)
-                    let destsLatlng = eachInfo.end_location;
-                    // console.log(eachInfo);
-
-                    // 時間を計算
-                    totalDuration += duration; // 所要時間の合計(秒)
-                    totalDurMinutes = Math.round(totalDuration / 60);
-                    let arriveAt = new Date(); // 現在時刻
-                    arriveAt.setMinutes(arriveAt.getMinutes() + totalDurMinutes);
-                    arriveAt = putZero(arriveAt.getHours()) + ':' + putZero(arriveAt.getMinutes());
-                    // console.log(arriveAt);
-
-                    let content = `所要時間：${totalDurMinutes}分`
-
-                    //情報ウィンドウの設定
-                    infowindowArr[infowindowArr.length] = new google.maps.InfoWindow({
-                        content  : content,
-                        position : destsLatlng,
-                        pixelOffset: new google.maps.Size(0, -40), //第1引数->正の値で右方向、負の値で左方向。第2引数->正の値で下方向、負の値で上方向
-                    });
-                    infowindowArr[infowindowArr.length - 1].open(map);
-                }
-            }
+            });
         });
-    }
-    // }
-</script>
+
+
+
+
+
+        // }
+    </script>
 {% endblock %}
