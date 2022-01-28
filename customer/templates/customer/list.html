@@ -15,7 +15,6 @@
             <th>age</th>
             <th>gender</th>
             <th>detail</th>
-            <th>update</th>
         </tr>
         {% for print_user in data %}
         <tr>
@@ -23,7 +22,6 @@
             <td>{{ print_user.age }}</td>
             <td>{{ print_user.gender }}</td>
             <td><a href="{% url 'customer:detail' print_user.pk %}">詳細</a></td>
-            <td><a href="{% url 'customer:update' print_user.pk %}">編集</a></td>
         </tr>
         {% endfor %}
     </table>

@@ -19,7 +19,6 @@ def search(request):
     return render(request, 'qrfunction/search.html')
 
 
-
 def registration(request):
     """送迎完了"""
     input_name = request.POST.get('name')
@@ -42,7 +41,6 @@ def registration(request):
     return render(request, 'qrfunction/registration.html')
 
 
-
 def index(request):
     """ユーザー判定"""
     input_name = request.POST.get('name')
@@ -58,7 +56,6 @@ def index(request):
                 return render(request,'qrfunction/search.html', {'error':'送迎中ではありません'})
             elif result.is_carryed == True:
                 return render(request, 'qrfunction/index.html', {'data':results})
-
 
 
 def detail(request, customer_id):
