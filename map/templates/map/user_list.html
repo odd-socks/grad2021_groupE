@@ -1,55 +1,98 @@
-{% extends 'map/base.html' %}
+<!-- ルート作成画面 -->
 
-
-{% block content %}
-<!-- 利用者一覧 -->
-<h2>ルート作成画面</h2>
-<table border="1">
-    <tr>
-        <th>名前</th>
-        <th>年齢</th>
-        <th>性別</th>
-        <th>住所</th>
-    </tr>
-    {% for row in user_list %}
-    <tr>
-        <td>{{ row.name }}</td>
-        <td>{{ row.age }}歳</td>
-        <td>{{ row.gender }}</td>
-        <td>{{ row.address }}</td>
-    </tr>
-    {% endfor %}
-</table>
-
-<!-- ルート入力ウィンドウ -->
-<hr>
-<p>ルート名</p>
-{% if message %}
-    <p style="color: red;">{{message}}</p>
-{% endif %}
-<input type="text" id="input_name" value="{{input_name}}">
-
-<!-- 名前検索ウィンドウ -->
-<hr>
-<p>名前検索</p>
-<form id="user_search" action="{% url 'map:user_search' %}" method="GET">
-    <input type="text" id="user_name">
-    <button type="submit">検索</button>
-</form>
-<div id="posts" style="margin-top: 5px;"></div>
-
-<!-- 経路表示ウィンドウ -->
-<hr>
-<p>経路</p>
-<div id="map_canvas" style="width:80%;height:400px;margin-bottom:10px;"></div>
-<input type="text" id="pointsString" style="width: 80%;" value="{{pointsString}}">
-<button onclick="submit()">確定</button>
-<div style="height: 50px;"></div>
-
+<!-- Header -->
+{% block header %}
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="{% url 'certification:index' %}">Carry Now</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">引受人ページ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'certification:facility' %}">施設ページ</a>
+                    </li>
+                    <!-- ログイン・ログアウト判定 -->
+                    {% if not user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">ログイン</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'signup' %}">施設登録</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">ログアウト</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>  
 {% endblock %}
 
 
+<!-- contents -->
+{% block content %}
+    <!-- Services-->
+    <section>
+        <div>
+            <h2 class="text-center mt-0">ルート作成画面</h2>
+            <hr class="divider" />
+            <!-- 下記にリストが並ぶ -->
+            <div class="row gx-4 gx-lg-5">
+                <!-- 利用者一覧 -->
+                <table border="1">
+                    <tr>
+                        <th>名前</th>
+                        <th>年齢</th>
+                        <th>性別</th>
+                        <th>住所</th>
+                    </tr>
+                    {% for row in user_list %}
+                    <tr>
+                        <td>{{ row.name }}</td>
+                        <td>{{ row.age }}歳</td>
+                        <td>{{ row.gender }}</td>
+                        <td>{{ row.address }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
 
+                <!-- ルート入力ウィンドウ -->
+                <hr>
+                <p>ルート名</p>
+                {% if message %}
+                <p style="color: red;">{{message}}</p>
+                {% endif %}
+                <input type="text" id="input_name" value="{{input_name}}">
+
+                <!-- 名前検索ウィンドウ -->
+                <hr>
+                <p>名前検索</p>
+                <form id="user_search" action="{% url 'map:user_search' %}" method="GET">
+                    <input type="text" id="user_name">
+                    <button type="submit">検索</button>
+                </form>
+                <div id="posts" style="margin-top: 5px;"></div>
+
+                <!-- 経路表示ウィンドウ -->
+                <hr>
+                <p>経路</p>
+                <div id="map_canvas" style="width:80%;height:400px;margin-bottom:10px;"></div>
+                <input type="text" id="pointsString" style="width: 80%;" value="{{pointsString}}">
+                <button onclick="submit()">確定</button>
+                <div style="height: 50px;"></div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
+<!-- 下記にjavaScriptの記述 -->
 {% block extrajs %}
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNMXB2mTXfoOmmJTm1rIqCUgR_FnLjpmU"></script>
 <script>
