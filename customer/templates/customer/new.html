@@ -44,23 +44,34 @@
 {% block content%}
 <section class="page-section" id="services">
     <div class="container px-4 px-lg-5">
-        <h2 class="text-center mt-0">利用者ページ</h2>
+        <h2 class="text-center mt-0">利用者登録</h2>
         <hr class="divider" />
             <!-- 下記に利用者登録のコンテンツが入ります -->
             <section class="content-section" id="portfolio">
                 <div class="container px-4 px-lg-5">
-                    <div class="form-group">
-                        <form method="POST" novalidate>
-                            {% csrf_token %}
-                            {{ form.as_p }}
-                            <button type="submit">送信</button>
-                        </form>
-                    </div>
-                    <p>{{ message }}</p>
+                    <!-- 下記にフォームが入ります -->
+                    <!-- <form method="POST" novalidate>
+                        {% csrf_token %}
+                        {% for field in form %}
+                        <div class="form-group">
+                            <label for="{{field.id_for_label}}">
+                                <strong>{{fielld.label_tag}}</strong>
+                            </label>
+                            <input type="{{field}}" class="form-control">
+                        </div>
+                        {% endfor %}
+                    </form> -->
+
                 </div>
             </section>
-        </div>
+    </div>
 </section>
+<!-- <form method="POST" novalidate>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">登録</button>
+    </form> -->
+<!-- <p>{{ message }}</p>  -->
 
 
 <!-- 下記にjsの処理を記述 -->
