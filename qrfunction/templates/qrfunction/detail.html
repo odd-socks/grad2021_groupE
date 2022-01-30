@@ -1,0 +1,11 @@
+{% extends 'qrfunction/base.html' %}
+
+{% block content %}
+{{data}}
+    <h1>{{ customer_id.name }}</h1>
+    <p>{{ customer_id.email }}</p>
+    <!-- {{ data.text | safe | linebreaksbr }}<hr /> -->
+    </br>
+    <a href="{% url 'qrfunction:index' %}">トップページに戻る</a>
+
+{% endblock %}

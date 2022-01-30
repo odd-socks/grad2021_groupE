@@ -1,0 +1,133 @@
+<!-- トップ画面 -->
+
+{% extends 'certification/base.html' %}
+
+{% load static %}
+
+{% block title %}トップページ{% endblock %}
+
+
+<!-- Header -->
+{% block header %}
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="{% url 'certification:index' %}">Carry Now</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">引受人ページ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'certification:facility' %}">施設ページ</a>
+                    </li>
+                    <!-- ログイン・ログアウト判定 -->
+                    <!-- {% if not user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">ログイン</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'signup' %}">施設登録</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">ログアウト</a>
+                    </li>
+                    {% endif %} -->
+                </ul>
+            </div>
+        </div>
+    </nav>  
+
+<!-- Masthead-->
+    <header class="masthead">
+        <div class="container px-4 px-lg-5 h-100">
+            <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+                <div class="col-lg-8 align-self-end">
+                    <h1 class="text-white font-weight-bold">Carry Now</h1>
+                    <hr class="divider" />
+                </div>
+                 <div class="col-lg-8 align-self-baseline">
+                    <p class="text-white-75 mb-5">サービスを連想するコメントが入ります。サービスを連想するコメントが入ります。</p>
+                    <!-- ボタンを押すと施設側か引受人側の選択ができる -->
+                    <a class="btn btn-primary btn-xl" href="#services">サービス</a>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+        
+<!-- Content -->
+{% block content %}
+
+<!-- ログインできてるかログアウトしてるかの判定 -->
+<div class="pl-4 small" style="background-color: #e2e3e5 ; border-bottom: solid 1px #f3f3f3;">
+    {% if not user.is_authenticated %}
+      こんにちは。ゲスト さん
+    {% else %}
+      こんにちは。{{ user.username}} さん
+      <!-- あなたのIDは{{user.id}}です
+      あなたの住所は{{user.address}}です
+      あなたのメールアドレスは{{user.email}}です -->
+    {% endif %}
+  </div>
+  
+    <!-- Services-->
+    <section class="page-section" id="services">
+        <div class="container px-4 px-lg-5">
+            <h2 class="text-center mt-0">サービス利用者</h2>
+            <hr class="divider" />
+            <div class="row gx-4 gx-lg-5">
+                <!-- 引受人・サービス利用者 -->
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="mt-5">
+                        <div class="mb-2">
+                            <a href="#"><i class="bi-gem fs-1 text-primary"></i></a>
+                        </div>
+                            <h3 class="h4 mb-2">
+                                <a href="#">引受人</a>
+                            </h3>
+                            <p class="text-muted mb-0">引受人側が利用します</p>
+                    </div>
+                </div>
+                <!-- 施設側 -->
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="mt-5">
+                        <div class="mb-2">
+                            <a href="{% url 'certification:facility' %}"><i class="bi-laptop fs-1 text-primary"></i></a>
+                        </div>
+                            <h3 class="h4 mb-2">
+                                <a href="{% url 'certification:facility' %}">施設</a>
+                            </h3>
+                            <p class="text-muted mb-0">施設側が利用します</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+<!-- Footer-->
+{% block footer %}
+    <footer class="bg-light py-5">
+        <div class="container px-4 px-lg-5">
+            <div class="small text-center text-muted">Copyright &copy; 2022 - CarryNow</div>
+        </div>
+    </footer>
+{% endblock %}
+
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- SimpleLightbox plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    </body>
+</html>
