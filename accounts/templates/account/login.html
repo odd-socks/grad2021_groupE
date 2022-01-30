@@ -1,10 +1,48 @@
 <!-- 施設ログイン -->
 {% extends 'certification/base.html' %}
 
+{% load static %}
+
+{% block title %}ログインページ{% endblock %}
+
+<!-- Header -->
+{% block header %}
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="{% url 'certification:index' %}">Carry Now</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">引受人ページ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'certification:facility' %}">施設ページ</a>
+                    </li>
+                    <!-- ログイン・ログアウト判定 -->
+                    {% if not user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">ログイン</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'signup' %}">施設登録</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">ログアウト</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>  
+{% endblock %}
+
 <!-- コンテンツ -->
 {% block content %}
 <div class="container">
-    <div class="col-md-6 offset-md-3">
+    <div  class="sign col-md-6 offset-md-3">
       <div class="card mt-3 mb-3 bg-light">
         <!-- カードヘッダー -->
         <div class="card-header bg-primary text-light">
@@ -15,10 +53,64 @@
             <form method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button type="submit">ログイン</button>
+                <button class="btn btn--orange btn--radius" type="submit">ログイン</button>
             </form>
         </div>
       </div>
     </div>
   </div>
 {% endblock %}
+
+<!-- 下記にjsの処理を記述 -->
+<script>
+  window.addEventListener('DOMContentLoaded', event => {
+
+// Navbar shrink function
+var navbarShrink = function () {
+  const navbarCollapsible = document.body.querySelector('#mainNav');
+  if (!navbarCollapsible) {
+      return;
+  }
+  if (window.scrollY === 0) {
+      navbarCollapsible.classList.remove('navbar-shrink')
+  } else {
+      navbarCollapsible.classList.add('navbar-shrink')
+  }
+
+};
+
+// Shrink the navbar 
+navbarShrink();
+
+// Shrink the navbar when page is scrolled
+document.addEventListener('scroll', navbarShrink);
+
+// Activate Bootstrap scrollspy on the main nav element
+const mainNav = document.body.querySelector('#mainNav');
+if (mainNav) {
+  new bootstrap.ScrollSpy(document.body, {
+      target: '#mainNav',
+      offset: 74,
+  });
+};
+
+// Collapse responsive navbar when toggler is visible
+const navbarToggler = document.body.querySelector('.navbar-toggler');
+const responsiveNavItems = [].slice.call(
+  document.querySelectorAll('#navbarResponsive .nav-link')
+);
+responsiveNavItems.map(function (responsiveNavItem) {
+  responsiveNavItem.addEventListener('click', () => {
+      if (window.getComputedStyle(navbarToggler).display !== 'none') {
+          navbarToggler.click();
+      }
+  });
+});
+
+// Activate SimpleLightbox plugin for portfolio items
+new SimpleLightbox({
+  elements: '#portfolio a.portfolio-box'
+});
+
+});
+</script>

@@ -9,7 +9,6 @@
 
 <!-- Header -->
 {% block header %}
-
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
         <div class="container px-4 px-lg-5">
@@ -23,19 +22,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'certification:facility' %}">施設ページ</a>
                     </li>
-                    <!-- ログイン・ログアウト判定 -->
-                    <!-- {% if not user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">ログイン</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'signup' %}">施設登録</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">ログアウト</a>
-                    </li>
-                    {% endif %} -->
                 </ul>
             </div>
         </div>
@@ -52,7 +38,7 @@
                  <div class="col-lg-8 align-self-baseline">
                     <p class="text-white-75 mb-5">サービスを連想するコメントが入ります。サービスを連想するコメントが入ります。</p>
                     <!-- ボタンを押すと施設側か引受人側の選択ができる -->
-                    <a class="btn btn-primary btn-xl" href="#services">サービス</a>
+                    <a class="btn btn-primary btn-xl" href="#about">サービス</a>
                 </div>
             </div>
         </div>
@@ -61,20 +47,66 @@
         
 <!-- Content -->
 {% block content %}
+    <!-- サービス紹介（幼稚園orデイケア）-->
+    <section class="page-section bg-primary" id="about">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="text-white mt-0">サービス紹介</h2>
+                    <hr class="divider divider-light" />
 
-<!-- ログインできてるかログアウトしてるかの判定 -->
-<div class="pl-4 small" style="background-color: #e2e3e5 ; border-bottom: solid 1px #f3f3f3;">
-    {% if not user.is_authenticated %}
-      こんにちは。ゲスト さん
-    {% else %}
-      こんにちは。{{ user.username}} さん
-      <!-- あなたのIDは{{user.id}}です
-      あなたの住所は{{user.address}}です
-      あなたのメールアドレスは{{user.email}}です -->
-    {% endif %}
-  </div>
-  
-    <!-- Services-->
+                    <!-- 下記に幼稚園・デイケアのコンテンツが入ります -->
+                     <!-- デイケア-->
+                    <section id="scroll">
+                        <div class="container px-5">
+                            <div class="row gx-5 align-items-center">
+                                <div class="col-lg-6 order-lg-2">
+                                    <div class="p-5">
+                                        <a href="#"><img class="img-fluid rounded-circle" src="/static/assets/img/bus-g084b3cd12_1280.jpg" alt="..." /></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 order-lg-1">
+                                    <div class="p-5">
+                                        <a href="#">
+                                            <h2 class="text-white mt-0">幼稚園</h2>
+                                            <hr class="text-white">
+                                        </a>
+                                        <p class="text-white-75">コメントが入ります。以下にコメントが入ります。以下にコメントが入ります。以下にコメントが入ります。以下にコメントが入ります。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- 幼稚園-->
+                    <section>
+                        <div class="container px-5">
+                            <div class="row gx-5 align-items-center">
+                                <div class="col-lg-6">
+                                    <div class="p-5">
+                                        <a href="#"><img class="img-fluid rounded-circle" src="/static/assets/img/car-gc7ea5bfcc_1280.jpg" alt="..." /></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="p-5">
+                                        <a href="#">
+                                            <h2 class="text-white mt-0">デイケア</h2>
+                                            <hr class="text-white">
+                                        </a>
+                                        <p class="text-white-75">コメントが入ります。以下にコメントが入ります。以下にコメントが入ります。以下にコメントが入ります。以下にコメントが入ります。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- サービス利用者のコンテンツ-->
     <section class="page-section" id="services">
         <div class="container px-4 px-lg-5">
             <h2 class="text-center mt-0">サービス利用者</h2>
@@ -89,7 +121,7 @@
                             <h3 class="h4 mb-2">
                                 <a href="#">引受人</a>
                             </h3>
-                            <p class="text-muted mb-0">引受人側が利用します</p>
+                            <p class="text-muted mb-0">コメントが入ります</p>
                     </div>
                 </div>
                 <!-- 施設側 -->
@@ -101,7 +133,7 @@
                             <h3 class="h4 mb-2">
                                 <a href="{% url 'certification:facility' %}">施設</a>
                             </h3>
-                            <p class="text-muted mb-0">施設側が利用します</p>
+                            <p class="text-muted mb-0">コメントが入ります</p>
                     </div>
                 </div>
             </div>
@@ -129,5 +161,61 @@
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+
+
+<!-- 下記にjsの処理を記述 -->
+<script>
+    window.addEventListener('DOMContentLoaded', event => {
+
+// Navbar shrink function
+var navbarShrink = function () {
+    const navbarCollapsible = document.body.querySelector('#mainNav');
+    if (!navbarCollapsible) {
+        return;
+    }
+    if (window.scrollY === 0) {
+        navbarCollapsible.classList.remove('navbar-shrink')
+    } else {
+        navbarCollapsible.classList.add('navbar-shrink')
+    }
+
+};
+
+// Shrink the navbar 
+navbarShrink();
+
+// Shrink the navbar when page is scrolled
+document.addEventListener('scroll', navbarShrink);
+
+// Activate Bootstrap scrollspy on the main nav element
+const mainNav = document.body.querySelector('#mainNav');
+if (mainNav) {
+    new bootstrap.ScrollSpy(document.body, {
+        target: '#mainNav',
+        offset: 74,
+    });
+};
+
+// Collapse responsive navbar when toggler is visible
+const navbarToggler = document.body.querySelector('.navbar-toggler');
+const responsiveNavItems = [].slice.call(
+    document.querySelectorAll('#navbarResponsive .nav-link')
+);
+responsiveNavItems.map(function (responsiveNavItem) {
+    responsiveNavItem.addEventListener('click', () => {
+        if (window.getComputedStyle(navbarToggler).display !== 'none') {
+            navbarToggler.click();
+        }
+    });
+});
+
+// Activate SimpleLightbox plugin for portfolio items
+new SimpleLightbox({
+    elements: '#portfolio a.portfolio-box'
+});
+
+});
+</script>
     </body>
 </html>

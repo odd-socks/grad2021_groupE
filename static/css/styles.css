@@ -156,6 +156,7 @@ h6, .h6 {
 p {
   margin-top: 0;
   margin-bottom: 1rem;
+  /* color: white; */
 }
 
 abbr[title],
@@ -537,6 +538,8 @@ progress {
 @media (min-width: 1200px) {
   .display-4 {
     font-size: 3.5rem;
+    /* 追加 */
+    /* color: white; */
   }
 }
 
@@ -879,6 +882,8 @@ progress {
 .g-4,
 .gx-4 {
   --bs-gutter-x: 1.5rem;
+  /* 追加 */
+  /* height: auto; */
 }
 
 .g-4,
@@ -1182,6 +1187,17 @@ progress {
   .col-md-6 {
     flex: 0 0 auto;
     width: 50%;
+
+  }
+
+  /* 追加 */
+  .border-white{
+    border-bottom: 3px solid white ;
+  }
+
+  /* 認証機能->追加 */
+  .sign{
+    margin-top: 200px
   }
 
   .col-md-7 {
@@ -3216,11 +3232,12 @@ textarea.form-control-lg {
 
 .btn-light {
   color: #000;
+  /* color: #f4623a; */
   background-color: #f8f9fa;
   border-color: #f8f9fa;
 }
 .btn-light:hover {
-  color: #000;
+  color:#f4623a;
   background-color: #f9fafb;
   border-color: #f9fafb;
 }
@@ -11340,10 +11357,13 @@ hr.divider-light {
 #mainNav .navbar-brand {
   font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-weight: 700;
-  color: #212529;
+  /* color: #212529; */
+  color: #f4623a;
+
 }
 #mainNav .navbar-nav .nav-item .nav-link {
-  color: #6c757d;
+  /* color: #6c757d; */
+  color: #f4623a;
   font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-weight: 700;
   font-size: 0.9rem;
@@ -11358,23 +11378,19 @@ hr.divider-light {
 @media (min-width: 992px) {
   #mainNav {
     box-shadow: none;
-    background-color: transparent;
+    background-color: transparent; 
   }
   #mainNav .navbar-brand {
     color: #f4623a;
-    /* color: rgba(255, 255, 255, 0.7); */
   }
   #mainNav .navbar-brand:hover {
     color: orange;
-    /* color: #fff; */
   }
   #mainNav .navbar-nav .nav-item .nav-link {
-    /* color: rgba(255, 255, 255, 0.7); */
     color: #f4623a;
     padding: 0 1rem;
   }
   #mainNav .navbar-nav .nav-item .nav-link:hover {
-    /* color: #fff; */
     color: orange;
   }
   #mainNav .navbar-nav .nav-item:last-child .nav-link {
@@ -11385,23 +11401,26 @@ hr.divider-light {
     background-color: #fff;
   }
   #mainNav.navbar-shrink .navbar-brand {
-    color: #212529;
+    color: #f4623a;
+
   }
   #mainNav.navbar-shrink .navbar-brand:hover {
-    color: #f4623a;
+    color: orange;
   }
   #mainNav.navbar-shrink .navbar-nav .nav-item .nav-link {
-    color: #212529;
+    color: #f4623a;
+
   }
   #mainNav.navbar-shrink .navbar-nav .nav-item .nav-link:hover {
-    color: #f4623a;
+    color: orange;
   }
 }
 
 header.masthead {
   padding-top: 10rem;
   padding-bottom: calc(10rem - 4.5rem);
-  background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../assets/img/bg-masthead.jpg");
+  /* 画像の変更 */
+  background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../assets/img/drive-gcc638e733_1280.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
@@ -11464,4 +11483,269 @@ header.masthead h1, header.masthead .h1 {
 }
 #portfolio .container-fluid .portfolio-box:hover .portfolio-box-caption, #portfolio .container-sm .portfolio-box:hover .portfolio-box-caption, #portfolio .container-md .portfolio-box:hover .portfolio-box-caption, #portfolio .container-lg .portfolio-box:hover .portfolio-box-caption, #portfolio .container-xl .portfolio-box:hover .portfolio-box-caption, #portfolio .container-xxl .portfolio-box:hover .portfolio-box-caption {
   opacity: 1;
+}
+
+/* 追加 */
+/* ルート名 */
+#input_name{
+  width: 30%; /*親要素いっぱい広げる*/
+  padding: 5px 15px; /*ボックスを大きくする*/
+  font-size: 16px;
+  border-radius: 3px; /*ボックス角の丸み*/
+  border: 2px solid #ddd; /*枠線*/
+  box-sizing: border-box; /*横幅の解釈をpadding, borderまでとする*/
+}
+
+#input_name:focus{
+  border: 2px solid #f4623a; 
+  z-index: 10;
+  outline: 0;
+}
+
+/* 名前検索 */
+#user_name{
+  width: 30%; /*親要素いっぱい広げる*/
+  padding: 5px 15px; /*ボックスを大きくする*/
+  font-size: 16px;
+  border-radius: 3px; /*ボックス角の丸み*/
+  border: 2px solid #ddd; /*枠線*/
+  box-sizing: border-box; /*横幅の解釈をpadding, borderまでとする*/
+}
+
+#user_name:focus{
+  border: 2px solid #f4623a; 
+  z-index: 10;
+  outline: 0;
+}
+
+/* 経路一覧 */
+#pointsString{
+  width: 75%; /*親要素いっぱい広げる*/
+  padding: 5px 15px; /*ボックスを大きくする*/
+  font-size: 16px;
+  border-radius: 3px; /*ボックス角の丸み*/
+  border: 2px solid #ddd; /*枠線*/
+  box-sizing: border-box; /*横幅の解釈をpadding, borderまでとする*/
+}
+
+#pointsString:focus{
+  border: 2px solid #f4623a; 
+  z-index: 10;
+  outline: 0;
+}
+
+/* 検索ボタン */
+.btn--orange,
+a.btn--orange {
+  color: #fff;
+  background-color: #eb6100;
+}
+.btn--orange:hover,
+a.btn--orange:hover {
+  color: #fff;
+  background: #f56500;
+}
+
+a.btn--radius {
+   border-radius: 100vh;
+}
+/* ------------------------------------- */
+/* ルート選択テーブル */
+/* 親要素 */
+.root_list{
+  width: 100%;
+}
+/* 子要素 */
+.table_list{
+  margin: auto;
+}
+/* テーブルth,td */
+table th, table td{
+  border: 1px solid black;
+  text-align: center;
+}
+.new_page{
+  text-align: center;
+  margin-top: 40px;
+}
+
+
+/* 追加 */
+table{
+  width: 100%;
+  border-collapse:separate;
+  border-spacing: 0;
+}
+
+table th:first-child{
+  border-radius: 5px 0 0 0;
+}
+
+table th:last-child{
+  border-radius: 0 5px 0 0;
+  border-right: 1px solid #3c6690;
+}
+
+table th{
+  text-align: center;
+  color:white;
+  /* background: linear-gradient(#829ebc,#225588); */
+  background-color: #f4623a;
+  border-left: 1px solid #3c6690;
+  border-top: 1px solid #3c6690;
+  border-bottom: 1px solid #3c6690;
+  box-shadow: 0px 1px 1px rgba(255,255,255,0.3) inset;
+  width: 25%;
+  padding: 10px 0;
+}
+
+/* 名前検索時のテーブルカラム１列目 */
+.search_td{
+  text-align: center;
+  color:white;
+  background-color: #f4623a;
+}
+
+table td{
+  text-align: center;
+  border-left: 1px solid #a8b7c5;
+  border-bottom: 1px solid #a8b7c5;
+  border-top:none;
+  box-shadow: 0px -3px 5px 1px #eee inset;
+  /* 変更 */
+  width: 10%;
+  padding: 10px 0;
+}
+
+/* ルート名 */
+.root_name{
+  width: 15%;
+}
+/* ルート */
+.root{
+  width: 30%;
+}
+/* 経由地点 */
+.waypoints{
+  width: 30%;
+}
+/* 目的地 */
+.destination{
+  width: 15%;
+}
+/* ナビ開始ボタン */
+.url{
+  width: 5%;
+}
+
+table td:last-child{
+  border-right: 1px solid #a8b7c5;
+}
+
+table tr:last-child td:first-child {
+  border-radius: 0 0 0 5px;
+}
+
+table tr:last-child td:last-child {
+  border-radius: 0 0 5px 0;
+}
+/* ルート作成 */
+/* 名前検索時のテーブル */
+.name{
+  width: 5%;
+}
+
+
+/* -------------------------------------- */
+/* 利用者トップページ */
+/* .user_button{
+  background: blue;
+  text-align: center;
+} */
+
+/* -------------------------------------- */
+/* 施設ページ一覧 */
+.content-section {
+  padding-top: 7.5rem;
+  padding-bottom: 7.5rem;
+}
+
+.content-section-heading h2, .content-section-heading .h2 {
+  font-size: 3rem;
+}
+.content-section-heading h3, .content-section-heading .h3 {
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+/* 施設ページ各要素 */
+.portfolio-item {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  max-width: 530px;
+  margin: auto auto 1rem;
+}
+.portfolio-item .caption {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(33, 37, 41, 0.2);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+}
+.portfolio-item .caption .caption-content {
+  color: #fff;
+  margin: auto 2rem 2rem;
+}
+.portfolio-item .caption .caption-content h2, .portfolio-item .caption .caption-content .h2 {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+.portfolio-item .caption .caption-content p {
+  font-weight: 300;
+  font-size: 0.8rem;
+}
+@media (min-width: 992px) {
+  .portfolio-item {
+    max-width: none;
+    margin: 0;
+  }
+  .portfolio-item .caption {
+    transition: background-color 0.7s, -webkit-clip-path 0.25s ease-out;
+    transition: clip-path 0.25s ease-out, background-color 0.7s;
+    transition: clip-path 0.25s ease-out, background-color 0.7s, -webkit-clip-path 0.25s ease-out;
+    -webkit-clip-path: inset(0px);
+            clip-path: inset(0px);
+  }
+  .portfolio-item .caption .caption-content {
+    transition: opacity 0.25s;
+    margin-left: 5rem;
+    margin-right: 5rem;
+    margin-bottom: 5rem;
+  }
+  .portfolio-item img {
+    transition: -webkit-clip-path 0.25s ease-out;
+    transition: clip-path 0.25s ease-out;
+    transition: clip-path 0.25s ease-out, -webkit-clip-path 0.25s ease-out;
+    -webkit-clip-path: inset(-1px);
+            clip-path: inset(-1px);
+  }
+  .portfolio-item:hover img {
+    -webkit-clip-path: inset(2rem);
+            clip-path: inset(2rem);
+  }
+  .portfolio-item:hover .caption {
+    background-color: rgba(29, 128, 159, 0.9);
+    -webkit-clip-path: inset(2rem);
+            clip-path: inset(2rem);
+  }
+}
+
+/* ルート作成確認ページ */
+.confirm_container{
+  width: 100%;
+  text-align: center;
 }
