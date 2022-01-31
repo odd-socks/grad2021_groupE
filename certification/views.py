@@ -30,7 +30,7 @@ def qrView(request):
   user_id = 1  # 施設_id
   
   # url = 'https://qrcode/' + str(user_id)  # QRコードに保存したいサイトのURL
-  url = 'http://127.0.0.1:8000/qrfunction/'
+  url = 'http://3.231.231.189/qrfunction/'
   img = qrcode.make(url)  # QRコードを生成
 
   buffer = BytesIO()
