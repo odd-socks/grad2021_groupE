@@ -74,23 +74,24 @@
               <button class="btn btn--orange btn--radius">
                   <a class="text-white" href="{% url 'customer:update' data.pk %}">編集</a>
               </button>
-              <!-- トップページ -->
-              <button class="btn btn--orange btn--radius">
-                  <a class="text-white" href="{% url 'certification:facility' %}">戻る</a>
-              </button>
-              <!-- 削除 -->
-              <!-- <form method="post" action="{% url 'customer:delete' data.pk %}">
-                {% csrf_token %}
-                <button class="btn btn--orange btn--radius" type="submit" onclick='return confirm("本当に削除しますか？");'>
-                  <a class="text-white" href="{% url 'customer:delete' data.pk %}" onclick='return confirm("本当に削除しますか？");'>削除</a>
-                </button>
-              </form> -->
-          </div>
+
+
               
-          <!-- <input type="button" onclick="location.href='http://127.0.0.1:8000/'" value="TOP画面">
-          <a href="{% url 'customer:update' data.pk %}"><input type="button" value="編集画面"></a>
+              <!-- トップページに戻る -->
+              <button class="btn btn--orange btn--radius">
+                  <a class="text-white" href="{% url 'customer:list' %}">戻る</a>
+              </button>
+
+              <!-- 削除 -->
+                <!-- <form method="post" action="{% url 'customer:delete' data.pk %}">
+                    {% csrf_token %}
+                    <button class="btn btn--orange btn--radius">
+                        <a class="text-white" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</>
+                    </button>
+                </form> -->
+          </div>
   
-          <form method="post" action="{% url 'customer:delete' data.pk %}">{% csrf_token %}
+          <!-- <form method="post" action="{% url 'customer:delete' data.pk %}">{% csrf_token %}
             <button class="btn" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
           </form> -->
     </div>
@@ -150,15 +151,6 @@ new SimpleLightbox({
 
 });
 </script>
-{% endblock %}
-
-<!-- Footer-->
-{% block footer %}
-    <footer class="bg-light py-5">
-        <div class="container px-4 px-lg-5">
-            <div class="small text-center text-muted">Copyright &copy; 2022 - CarryNow</div>
-        </div>
-    </footer>
 {% endblock %}
 
 

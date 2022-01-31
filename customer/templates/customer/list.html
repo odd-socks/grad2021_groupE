@@ -58,10 +58,19 @@
                                 <td>{{ print_user.name }}</td>
                                 <td>{{ print_user.age }}歳</td>
                                 <td>{{ print_user.gender }}</td>
-                                <td><a href="{% url 'customer:detail' print_user.pk %}">詳細</a></td>
+                                <td><a class="detail" href="{% url 'customer:detail' print_user.pk %}">詳細</a></td>
                             </tr>
                             {% endfor %}
                         </table>
+                    </div>
+                    <!-- 利用者トップページ画面遷移ボタン -->
+                    <div class="new_page">
+                        <button class="btn btn--orange btn--radius">
+                            <a class="text-white" href="{% url 'customer:new' %}">登録</a>
+                        </button>
+                        <button class="btn btn--orange btn--radius">
+                            <a class="text-white" href="{% url 'customer:toppage' %}">戻る</a>
+                        </button>
                     </div>
                 </div>
             </section>
