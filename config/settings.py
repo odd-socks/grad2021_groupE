@@ -133,6 +133,8 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'ec2_static')
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 #staticのcssが反映される
 STATICFILES_DIRS =(

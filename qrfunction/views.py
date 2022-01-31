@@ -1,7 +1,7 @@
 # Create your views here.
 
 from distutils.core import run_setup
-from tkinter.messagebox import NO
+#from tkinter.messagebox import NO
 from unittest import result
 from django.shortcuts import render, get_object_or_404, redirect
 from customer.models import User
