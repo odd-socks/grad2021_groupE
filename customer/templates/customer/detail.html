@@ -1,31 +1,168 @@
-<div>
-  </div>  
-  <div>
-    <table border="1">
-      <tr>
-        <th>名前</th>
-        <th>年齢</th>
-        <th>性別</th>
-        <th>メールアドレス</th>
-        <th>住所</th>
-        <th>送り先住所</th>
-        <th>送迎中判定</th>
-      </tr>
-      <tr>
-        <td>{{ data.name }}</td>
-        <td>{{ data.age }}</td>
-        <td>{{ data.gender }}</td>
-        <td>{{ data.email }}</td>
-        <td>{{ data.address }}</td>
-        <td>{{ data.carry_address }}</td>
-        <td>{{ data.is_carryed}}</td>
-      </tr>
-    </table>
-  </div>
+{% extends 'certification/base.html' %}
+
+{% load static %}
+
+{% block title %}利用者詳細{% endblock %}
+
+<!-- Header -->
+{% block header %}
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="{% url 'certification:index' %}">Carry Now</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">引受人ページ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'certification:facility' %}">施設ページ</a>
+                    </li>
+                    <!-- ログイン・ログアウト判定 -->
+                    {% if not user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">ログイン</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'signup' %}">施設登録</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">ログアウト</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>  
+{% endblock %}
+
+{% block content%}
+<section class="page-section" id="services">
+    <div class="container px-4 px-lg-5">
+        <h2 class="text-center mt-0">利用者詳細</h2>
+        <hr class="divider" />
+            <!-- 下記に利用者詳細のコンテンツが入ります -->
+            <section class="content-section" id="portfolio">
+                <div class="container px-4 px-lg-5">
+                  <table>
+                    <tr>
+                      <th id="name">名前</th>
+                      <th id="age">年齢</th>
+                      <th id="gender">性別</th>
+                      <th id="email">メールアドレス</th>
+                      <th id="address">住所</th>
+                      <th id="a_address">送り先住所</th>
+                      <th id="judge">送迎中判定</th>
+                    </tr>
+                    <tr>
+                      <td id="name">{{ data.name }}</td>
+                      <td id="age">{{ data.age }}歳</td>
+                      <td id="gender">{{ data.gender }}</td>
+                      <td id="email">{{ data.email }}</td>
+                      <td id="address">{{ data.address }}</td>
+                      <td id="a_address">{{ data.carry_address }}</td>
+                      <td id="judge">{{ data.is_carryed}}</td>
+                    </tr>
+                  </table>
+                </div>
+            </section>
+
+            <div class="new_page">
+              <!-- 編集 -->
+              <button class="btn btn--orange btn--radius">
+                  <a class="text-white" href="{% url 'customer:update' data.pk %}">編集</a>
+              </button>
+              <!-- トップページ -->
+              <button class="btn btn--orange btn--radius">
+                  <a class="text-white" href="{% url 'certification:facility' %}">戻る</a>
+              </button>
+              <!-- 削除 -->
+              <!-- <form method="post" action="{% url 'customer:delete' data.pk %}">
+                {% csrf_token %}
+                <button class="btn btn--orange btn--radius" type="submit" onclick='return confirm("本当に削除しますか？");'>
+                  <a class="text-white" href="{% url 'customer:delete' data.pk %}" onclick='return confirm("本当に削除しますか？");'>削除</a>
+                </button>
+              </form> -->
+          </div>
+              
+          <!-- <input type="button" onclick="location.href='http://127.0.0.1:8000/'" value="TOP画面">
+          <a href="{% url 'customer:update' data.pk %}"><input type="button" value="編集画面"></a>
   
-  <input type="button" onclick="location.href='http://127.0.0.1:8000/'" value="TOP画面">
-  <a href="{% url 'customer:update' data.pk %}"><input type="button" value="編集画面"></a>
-  
-  <form method="post" action="{% url 'customer:delete' data.pk %}">{% csrf_token %}
-    <button class="btn" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
-  </form>
+          <form method="post" action="{% url 'customer:delete' data.pk %}">{% csrf_token %}
+            <button class="btn" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
+          </form> -->
+    </div>
+</section>
+
+
+<!-- 下記にjsの処理を記述 -->
+<script>
+    window.addEventListener('DOMContentLoaded', event => {
+
+// Navbar shrink function
+var navbarShrink = function () {
+    const navbarCollapsible = document.body.querySelector('#mainNav');
+    if (!navbarCollapsible) {
+        return;
+    }
+    if (window.scrollY === 0) {
+        navbarCollapsible.classList.remove('navbar-shrink')
+    } else {
+        navbarCollapsible.classList.add('navbar-shrink')
+    }
+
+};
+
+// Shrink the navbar 
+navbarShrink();
+
+// Shrink the navbar when page is scrolled
+document.addEventListener('scroll', navbarShrink);
+
+// Activate Bootstrap scrollspy on the main nav element
+const mainNav = document.body.querySelector('#mainNav');
+if (mainNav) {
+    new bootstrap.ScrollSpy(document.body, {
+        target: '#mainNav',
+        offset: 74,
+    });
+};
+
+// Collapse responsive navbar when toggler is visible
+const navbarToggler = document.body.querySelector('.navbar-toggler');
+const responsiveNavItems = [].slice.call(
+    document.querySelectorAll('#navbarResponsive .nav-link')
+);
+responsiveNavItems.map(function (responsiveNavItem) {
+    responsiveNavItem.addEventListener('click', () => {
+        if (window.getComputedStyle(navbarToggler).display !== 'none') {
+            navbarToggler.click();
+        }
+    });
+});
+
+// Activate SimpleLightbox plugin for portfolio items
+new SimpleLightbox({
+    elements: '#portfolio a.portfolio-box'
+});
+
+});
+</script>
+{% endblock %}
+
+<!-- Footer-->
+{% block footer %}
+    <footer class="bg-light py-5">
+        <div class="container px-4 px-lg-5">
+            <div class="small text-center text-muted">Copyright &copy; 2022 - CarryNow</div>
+        </div>
+    </footer>
+{% endblock %}
+
+
+
+
+
+

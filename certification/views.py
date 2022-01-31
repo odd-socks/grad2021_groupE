@@ -24,12 +24,13 @@ class FacilityView(generic.TemplateView):
      template_name = 'certification/facility.html'
 
 
+#QRコード
 def qrView(request):
   template_name = 'certification/qr.html'
   user_id = 1  # 施設_id
   
   # url = 'https://qrcode/' + str(user_id)  # QRコードに保存したいサイトのURL
-  url = 'http://google.com'
+  url = 'http://127.0.0.1:8000/qrfunction/'
   img = qrcode.make(url)  # QRコードを生成
 
   buffer = BytesIO()

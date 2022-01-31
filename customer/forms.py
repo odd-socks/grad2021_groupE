@@ -21,6 +21,12 @@ class UserForm(forms.ModelForm):
             'facility_id': '施設_id'
         }
 
+
+        # def __init__(self, *args, **kwargs):
+        #     for field in self.fields.values():
+        #         field.widget.attrs["class"] = "form-control"
+        #     super().__init__(*args,**kwargs)
+
 class SubUserForm(forms.ModelForm):
     class Meta:
         model = User

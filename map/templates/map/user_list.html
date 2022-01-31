@@ -1,3 +1,8 @@
+{% extends 'certification/base.html' %}
+
+{% load static %}
+
+{% block title %}ルート作成{% endblock %}
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 
 <!-- Optional JavaScript -->
@@ -48,7 +53,6 @@
         list-style: none;
     }
 </style> -->
-    <h2>ルート作成画面</h2>
     <!-- <table border="1">
         <tr>
             <th>名前</th>
@@ -66,12 +70,14 @@
         {% endfor %}
     </table> -->
 
-
-
+    <!-- 下記にルート作成のコンテンツが入ります -->
+    <section class="page-section">
+        <div class="container px-4 px-lg-5">
+            <h2 class="text-center mt-0">ルート作成</h2>
+            <hr class="divider" />
 
     <!-- ルート名入力ウィンドウ -->
-    <hr>
-    ルート名：<input type="text" id="input_name" value="{{input_name}}">
+    ルート名：<input type="text" id="input_name"  value="{{input_name}}">
     {% if message %}
         <p style="color: red;">{{message}}</p>
     {% endif %}
@@ -81,7 +87,7 @@
     <hr>
     <form id="user_search" action="{% url 'map:user_search' %}" method="GET">
         名前検索：<input type="text" id="user_name">
-        <button type="submit">検索</button>
+        <button type="submit" class="btn btn--orange btn--radius">検索</button>
     </form>
     <div id="posts" style="margin-top: 5px;"></div>
     <div id="points-list"></div>
@@ -90,9 +96,11 @@
     <hr>
     <p>経路</p>
     <div id="map_canvas" style="width:80%;height:400px;margin-bottom:10px;"></div>
-    <input type="text" id="pointsString" style="width: 80%;" value="{{pointsString}}">
-    <button onclick="submit()">確定</button>
+        <input type="text" id="pointsString"  value="{{pointsString}}">
+        <button class="btn btn--orange btn--radius" onclick="submit()">確定</button>
     <div style="height: 50px;"></div>
+        </div>
+    </section>
 {% endblock %}
 
 
@@ -316,7 +324,7 @@
                                 <td>${gender}</td>
                                 <td>${address}</td>
                                 <td>${carry_address}</td>
-                                <td><button onclick='addPoint("${carry_address}");'>追加</button></td>
+                                <td><button class="btn btn--orange btn--radius" onclick='addPoint("${carry_address}");'>追加</button></td>
                             </tr>
                         `;
                     }
@@ -332,4 +340,58 @@
 
         // }
     </script>
+
+<!-- 下記にデザイン用のjsの処理を記述 -->
+<script>
+    window.addEventListener('DOMContentLoaded', event => {
+
+// Navbar shrink function
+var navbarShrink = function () {
+    const navbarCollapsible = document.body.querySelector('#mainNav');
+    if (!navbarCollapsible) {
+        return;
+    }
+    if (window.scrollY === 0) {
+        navbarCollapsible.classList.remove('navbar-shrink')
+    } else {
+        navbarCollapsible.classList.add('navbar-shrink')
+    }
+
+};
+
+// Shrink the navbar 
+navbarShrink();
+
+// Shrink the navbar when page is scrolled
+document.addEventListener('scroll', navbarShrink);
+
+// Activate Bootstrap scrollspy on the main nav element
+const mainNav = document.body.querySelector('#mainNav');
+if (mainNav) {
+    new bootstrap.ScrollSpy(document.body, {
+        target: '#mainNav',
+        offset: 74,
+    });
+};
+
+// Collapse responsive navbar when toggler is visible
+const navbarToggler = document.body.querySelector('.navbar-toggler');
+const responsiveNavItems = [].slice.call(
+    document.querySelectorAll('#navbarResponsive .nav-link')
+);
+responsiveNavItems.map(function (responsiveNavItem) {
+    responsiveNavItem.addEventListener('click', () => {
+        if (window.getComputedStyle(navbarToggler).display !== 'none') {
+            navbarToggler.click();
+        }
+    });
+});
+
+// Activate SimpleLightbox plugin for portfolio items
+new SimpleLightbox({
+    elements: '#portfolio a.portfolio-box'
+});
+
+});
+        </script>
 {% endblock %}
