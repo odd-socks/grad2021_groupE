@@ -159,8 +159,8 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 
 SITE_ID = 1 #django-allauthがsitesフレームワークを使っているため
 
-LOGIN_REDIRECT_URL = 'certification:index'
-ACCOUNT_LOGOUT_REDIRECT_URL = 'certification:index'
+LOGIN_REDIRECT_URL = 'certification:facility'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'certification:facility'
 ACCOUNT_LOGOUT_ON_GET = True
 
 #signupformを指定
