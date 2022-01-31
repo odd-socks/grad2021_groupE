@@ -47,6 +47,14 @@
     <!--施設サービス紹介-->
     <section class="page-section" id="services">
         <div class="container px-4 px-lg-5">
+            <!-- フラッシュメッセージ -->
+            <!-- {% if message %}
+            <div id=“message” class=“message”>
+                {{message}}
+            </div>
+            {% endif %}
+            <div class=“header-blank”></div> -->
+
             <h2 class="text-center mt-0">施設サービス一覧</h2>
             <hr class="divider" />
 
@@ -60,7 +68,7 @@
                                 <div class="caption">
                                     <div class="caption-content">
                                         <div class="h2">QRコード</div>
-                                        <p class="mb-0">コメントが入ります。コメントが入ります。</p>
+                                        <p class="mb-0">送迎引受確認はこちら</p>
                                     </div>
                                 </div>
                                 <img class="img-fluid" src="/static/assets/img/figures-gc76722a04_1280.jpg" alt="..." />
@@ -68,11 +76,11 @@
                         </div>
                         <!-- ルート選択 -->
                         <div class="col-lg-6">
-                            <a class="portfolio-item" href="http://3.231.231.189/map/map_list/">
+                            <a class="portfolio-item" href="{% url 'map:map_list' %}">
                                 <div class="caption">
                                     <div class="caption-content">
                                         <div class="h2">ルート選択</div>
-                                        <p class="mb-0">コメントが入ります。コメントが入ります。</p>
+                                        <p class="mb-0">作成済みの送迎ルートでナビを開始します</p>
                                     </div>
                                 </div>
                                 <img class="img-fluid" src="/static/assets/img/businessman-gae2160402_1280.png" alt="..." />
@@ -80,11 +88,11 @@
                         </div>
                         <!-- ルート作成 -->
                         <div class="col-lg-6">
-                            <a class="portfolio-item" href="http://3.231.231.189/map/user_list">
+                            <a class="portfolio-item" href="{% url 'map:user_list' %}">
                                 <div class="caption">
                                     <div class="caption-content">
                                         <div class="h2">ルート作成</div>
-                                        <p class="mb-0">コメントが入ります。コメントが入ります。</p>
+                                        <p class="mb-0">利用者を選択することでルートが作成されます</p>
                                     </div>
                                 </div>
                                 <img class="img-fluid" src="/static/assets/img/create-g543538bd0_1280.jpg" alt="..." />
@@ -92,11 +100,12 @@
                         </div>
                         <!-- 利用者 -->
                         <div class="col-lg-6">
-                            <a class="portfolio-item" href="http://3.231.231.189/customer">
+                            <a class="portfolio-item" href="{% url 'customer:toppage' %}">
+                            <!-- <a class="portfolio-item" href="http://127.0.0.1:8000/customer"> -->
                                 <div class="caption">
                                     <div class="caption-content">
                                         <div class="h2">利用者</div>
-                                        <p class="mb-0">コメントが入ります。コメントが入ります。</p>
+                                        <p class="mb-0">施設利用者の登録・一覧はこちら</p>
                                     </div>
                                 </div>
                                 <img class="img-fluid" src="/static/assets/img/hands-g1a57fdc5c_1280.jpg" alt="..." />
@@ -186,6 +195,17 @@ new SimpleLightbox({
 });
 
 });
+
+
+// ---------------------------------------------------
+// フラッシュメッセージ
+"use strict";
+setTimeout(() => {
+  let flash = document.getElementById("message");
+  if (flash != null) {
+    flash.classList.add("none");
+  }
+}, 3.5 * 1000);
 </script>
     </body>
 </html>

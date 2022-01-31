@@ -11,6 +11,8 @@ import qrcode
 import base64
 from io import BytesIO
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+
 
 
 
@@ -25,6 +27,7 @@ class FacilityView(generic.TemplateView):
 
 
 #QRコード
+@login_required
 def qrView(request):
   template_name = 'certification/qr.html'
   user_id = 1  # 施設_id
