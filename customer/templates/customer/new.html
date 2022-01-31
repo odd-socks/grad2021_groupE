@@ -22,6 +22,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'certification:facility' %}">施設ページ</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'customer:toppage' %}">利用者ページ</a>
+                    </li>
                     <!-- ログイン・ログアウト判定 -->
                     {% if not user.is_authenticated %}
                     <li class="nav-item">
@@ -63,10 +66,6 @@
                     <!-- 利用者登録ボタン -->
                     <div class="new_page">
                         <button class="btn btn--orange btn--radius" type="submit">登録</button>
-                        <button class="btn btn--orange btn--radius">
-                            <a class="text-white" href="{% url 'customer:toppage' %}">戻る</a>
-                        </button>
-
                     </div>
                 </form>
         </div>

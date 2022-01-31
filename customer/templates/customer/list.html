@@ -58,7 +58,7 @@
                                 <td>{{ print_user.name }}</td>
                                 <td>{{ print_user.age }}歳</td>
                                 <td>{{ print_user.gender }}</td>
-                                <td><a href="{% url 'customer:detail' print_user.pk %}">詳細</a></td>
+                                <td><a class="detail" href="{% url 'customer:detail' print_user.pk %}">詳細</a></td>
                             </tr>
                             {% endfor %}
                         </table>
