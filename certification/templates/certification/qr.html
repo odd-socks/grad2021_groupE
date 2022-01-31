@@ -47,15 +47,23 @@
     <!--施設サービス紹介-->
     <section class="page-section" id="services">
         <div class="container px-4 px-lg-5">
-            <h2 class="text-center mt-0">QRコード</h2>
+            <h2 class="text-center mt-0">引受確認画面</h2>
             <hr class="divider" />
             <!-- QRコード -->
             <div style="text-align: center;">
-              <h1>施設名</h1>
-              <h2>受け取り登録</h2>
-              <img src="data:image/png;base64,{{ qr }}"/>
-              <br>
-              <button style="margin-top: 20px;" onclick="window.print();">印刷</button>
+              <h1>{{user.username}}</h1>
+                <!-- <h2>受け取り登録</h2> -->
+                <img src="data:image/png;base64,{{ qr }}"/>
+                <br>
+                <!-- 印刷・施設トップ遷移ボタン -->
+                <div class="new_page">
+                    <!-- 印刷 -->
+                    <button class="btn btn--orange btn--radius"  onclick="window.print();">印刷</button>
+                    <!-- 施設トップ -->
+                    <button class="btn btn--orange btn--radius">
+                        <a class="text-white" href="{% url 'certification:facility' %}">戻る</a>
+                    </button>
+                </div>
             </div>
         </div>
     </section>
