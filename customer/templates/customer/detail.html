@@ -69,26 +69,31 @@
                 </div>
             </section>
 
+            <!-- 削除フォーム -->
+            <form id="detail-form" method="post" action="{% url 'customer:delete' data.pk %}">
+                {% csrf_token %}
+            </form>
+
+            <!-- 編集・削除・戻るボタン -->
             <div class="new_page">
               <!-- 編集 -->
               <button class="btn btn--orange btn--radius">
                   <a class="text-white" href="{% url 'customer:update' data.pk %}">編集</a>
               </button>
 
-
-              
               <!-- トップページに戻る -->
               <button class="btn btn--orange btn--radius">
-                  <a class="text-white" href="{% url 'customer:list' %}">戻る</a>
+                <a class="text-white" href="{% url 'customer:list' %}">戻る</a>
               </button>
 
               <!-- 削除 -->
-                <!-- <form method="post" action="{% url 'customer:delete' data.pk %}">
-                    {% csrf_token %}
-                    <button class="btn btn--orange btn--radius">
-                        <a class="text-white" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</>
-                    </button>
-                </form> -->
+              <button form="detail-form" class="btn btn--orange btn--radius" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
+
+
+
+
+              
+
           </div>
   
           <!-- <form method="post" action="{% url 'customer:delete' data.pk %}">{% csrf_token %}
