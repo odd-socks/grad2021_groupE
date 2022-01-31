@@ -47,6 +47,14 @@
     <!--施設サービス紹介-->
     <section class="page-section" id="services">
         <div class="container px-4 px-lg-5">
+            <!-- フラッシュメッセージ -->
+            <!-- {% if message %}
+            <div id=“message” class=“message”>
+                {{message}}
+            </div>
+            {% endif %}
+            <div class=“header-blank”></div> -->
+
             <h2 class="text-center mt-0">施設サービス一覧</h2>
             <hr class="divider" />
 
@@ -186,6 +194,17 @@ new SimpleLightbox({
 });
 
 });
+
+
+// ---------------------------------------------------
+// フラッシュメッセージ
+"use strict";
+setTimeout(() => {
+  let flash = document.getElementById("message");
+  if (flash != null) {
+    flash.classList.add("none");
+  }
+}, 3.5 * 1000);
 </script>
     </body>
 </html>

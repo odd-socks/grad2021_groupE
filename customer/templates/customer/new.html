@@ -46,32 +46,41 @@
     <div class="container px-4 px-lg-5">
         <h2 class="text-center mt-0">利用者登録</h2>
         <hr class="divider" />
-            <!-- 下記に利用者登録のコンテンツが入ります -->
-            <section class="content-section" id="portfolio">
-                <div class="container px-4 px-lg-5">
-                    <!-- 下記にフォームが入ります -->
-                    <!-- <form method="POST" novalidate>
-                        {% csrf_token %}
-                        {% for field in form %}
-                        <div class="form-group">
-                            <label for="{{field.id_for_label}}">
-                                <strong>{{fielld.label_tag}}</strong>
-                            </label>
-                            <input type="{{field}}" class="form-control">
-                        </div>
-                        {% endfor %}
-                    </form> -->
 
-                </div>
-            </section>
+        <div class="form-content">
+                <!-- 下記に利用者登録のコンテンツが入ります -->
+                <form method="POST" novalidate>
+                    {% csrf_token %}
+                    <!-- 各フィールドの取り出し -->
+                    {% for field in form %}
+                    <div class="form-control">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {{ field.errors }}
+                    </div>
+                    {% endfor %}
+
+                    <!-- 利用者登録ボタン -->
+                    <div class="new_page">
+                        <button class="btn btn--orange btn--radius" type="submit">登録</button>
+                        <button class="btn btn--orange btn--radius">
+                            <a class="text-white" href="{% url 'customer:toppage' %}">戻る</a>
+                        </button>
+
+                    </div>
+                </form>
+        </div>
+
     </div>
 </section>
+
 <!-- <form method="POST" novalidate>
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">登録</button>
-    </form> -->
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">登録</button>
+</form> -->
 <!-- <p>{{ message }}</p>  -->
+{% endblock %}
 
 
 <!-- 下記にjsの処理を記述 -->
@@ -127,17 +136,6 @@ new SimpleLightbox({
 
 });
 </script>
-{% endblock %}
-
-<!-- Footer-->
-{% block footer %}
-    <footer class="bg-light py-5">
-        <div class="container px-4 px-lg-5">
-            <div class="small text-center text-muted">Copyright &copy; 2022 - CarryNow</div>
-        </div>
-    </footer>
-{% endblock %}
-
 
 
 
