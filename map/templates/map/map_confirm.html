@@ -76,15 +76,21 @@
             </div>
 
             <div class="new_page">
-                <form action="{% url 'map:map_create' %}" method="POST">
+                <form id="confirm-form" action="{% url 'map:map_create' %}" method="POST">
                     {%csrf_token%}
                     <input type="hidden" name="pointsString" value="{{pointsString}}">
                     <input type="hidden" name="input_name" value="{{input_name}}">
                     <input type="hidden" name="waypoints" value="{{waypoints}}">
                     <input type="hidden" name="destination" value="{{destination}}">
-                    <input class="btn btn--orange btn--radius" type="submit" value="確定">
-                    <input class="btn btn--orange btn--radius" type="submit" value="修正">
                 </form>
+                <!-- 確定・修正ボタン -->
+                <div form="confirm-form" class="new_page">
+                    <button form="confirm-form" class="btn btn--orange btn--radius" type="submit">確定</button>
+                    <button class="btn btn--orange btn--radius" type="submit">
+                        <a class="text-white" href="{% url 'map:user_list' %}">修正</a>
+                    </button>
+                </div>
+
             </div>
         </div>
     </section>
