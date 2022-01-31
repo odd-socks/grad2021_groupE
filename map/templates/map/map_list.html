@@ -1,3 +1,9 @@
+{% extends 'certification/base.html' %}
+
+{% load static %}
+
+{% block title %}ルート選択{% endblock %}
+
 <!--ルート選択画面 -->
 <script>
     function goMap(points){
@@ -53,29 +59,104 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <!-- Content -->
 {% block content %}
-    <h2>map_list</h2>
-    <table border="1">
-        <tr>
-            <th>ルート名</th>
-            <th>ルート</th>
-            <th>waypoints</th>
-            <th>destination</th>
-            <th>url</th>
-        </tr>
+    <section class="page-section">
+        <div class="container px-4 px-lg-5">
+            <h2 class="text-center mt-0">ルート選択</h2>
+            <hr class="divider">
+            <!-- ルート選択リストが入ります -->
+            <div class="root_list">
+                <table>
+                    <tr>
+                        <th class="root_name">ルート名</th>
+                        <th class="root">ルート</th>
+                        <th class="waypoints">経由地点</th>
+                        <th class="destination">目的地</th>
+                        <th class="url">ナビ</th>
+                    </tr>
+            
+                {% for map in map_list %}
+                
+                    <tr>
+                        <td class="root_name">{{ map.name }}</td>
+                        <td class="root">{{ map.route }}</td>
+                        <td class="waypoints">{{ map.waypoints }}</td>
+                        <td class="destination">{{ map.destination }}</td>
+                        <td>
+                            <a href="{{ waypoints|add:map.waypoints|add:destination|add:map.destination }}">
+                                <button class="btn btn--orange btn--radius">開始</button>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </table>
+            </div>
+            
+            <hr>
+            <!-- 新規作成画面遷移ボタン -->
+            <div class="new_page">
+                <button class="btn btn--orange btn--radius">
+                    <a class="text-white" href="{% url 'map:user_list'%}">作成</a>
+                </button>
+                <button class="btn btn--orange btn--radius">
+                    <a class="text-white" href="{% url 'certification:facility' %}">戻る</a>
+                </button>
+            </div>
+        </div>
+    </section>
 
-    {% for map in map_list %}
-    
-        <tr>
-            <td>{{ map.name }}</td>
-            <td>{{ map.route }}</td>
-            <td>{{ map.waypoints }}</td>
-            <td>{{ map.destination }}</td>
-            <td><a href="{{ waypoints|add:map.waypoints|add:destination|add:map.destination }}"><button>ナビ開始</button></a></td>
-        </tr>
-    {% endfor %}
 
-    </table>
-    
-    <hr>
-    <a href="{% url 'map:user_list'%}">ルート新規作成画面へ</a>
+
+<!-- 下記にデザイン用のjsの処理を記述 -->
+<script>
+    window.addEventListener('DOMContentLoaded', event => {
+
+// Navbar shrink function
+var navbarShrink = function () {
+    const navbarCollapsible = document.body.querySelector('#mainNav');
+    if (!navbarCollapsible) {
+        return;
+    }
+    if (window.scrollY === 0) {
+        navbarCollapsible.classList.remove('navbar-shrink')
+    } else {
+        navbarCollapsible.classList.add('navbar-shrink')
+    }
+
+};
+
+// Shrink the navbar 
+navbarShrink();
+
+// Shrink the navbar when page is scrolled
+document.addEventListener('scroll', navbarShrink);
+
+// Activate Bootstrap scrollspy on the main nav element
+const mainNav = document.body.querySelector('#mainNav');
+if (mainNav) {
+    new bootstrap.ScrollSpy(document.body, {
+        target: '#mainNav',
+        offset: 74,
+    });
+};
+
+// Collapse responsive navbar when toggler is visible
+const navbarToggler = document.body.querySelector('.navbar-toggler');
+const responsiveNavItems = [].slice.call(
+    document.querySelectorAll('#navbarResponsive .nav-link')
+);
+responsiveNavItems.map(function (responsiveNavItem) {
+    responsiveNavItem.addEventListener('click', () => {
+        if (window.getComputedStyle(navbarToggler).display !== 'none') {
+            navbarToggler.click();
+        }
+    });
+});
+
+// Activate SimpleLightbox plugin for portfolio items
+new SimpleLightbox({
+    elements: '#portfolio a.portfolio-box'
+});
+
+});
+        </script>
 {% endblock %}

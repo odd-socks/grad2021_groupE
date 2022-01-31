@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'qrfunction.apps.QrfunctionConfig',
 
     'map.apps.MapConfig',
+    'widget_tweaks',#django-form用
 
 ]
 

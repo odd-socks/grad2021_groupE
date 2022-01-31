@@ -49,51 +49,75 @@
         <div class="container px-4 px-lg-5">
             <h2 class="text-center mt-0">施設サービス一覧</h2>
             <hr class="divider" />
-            <div class="row gx-4 gx-lg-5">
-                <!-- QRコード -->
-                    <div class="col-lg-3 col-md-6 text-center">
-                            <div class="mt-5">
-                                <div class="mb-2"><a href="{% url 'certification:qr' %}"><i class="bi-blockquote-left fs-1 text-primary"></i></a></div>
-                                    <h3 class="h4 mb-2">
-                                        <a href="{% url 'certification:qr' %}">QRコード</a>
-                                    </h3>
-                                    <p class="text-muted mb-0">説明が入ります</p>
-                            </div>
-                    </div>
-                <!-- 選択 -->
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <div class="mt-5">
-                            <div class="mb-2"><a href="http://127.0.0.1:8000/map/map_list/"><i class="bi-check fs-1 text-primary"></i></a></div>
-                                <h3 class="h4 mb-2">
-                                    <a href="http://127.0.0.1:8000/map/map_list">選択</a>
-                                </h3>
-                                <p class="text-muted mb-0">説明が入ります</p>
+
+            <!-- 下記に施設ページのコンテンツが入ります -->
+            <section class="content-section" id="portfolio">
+                <div class="container px-4 px-lg-5">
+                    <div class="row gx-0">
+                        <!-- QRコード -->
+                        <div class="col-lg-6">
+                            <a class="portfolio-item" href="{% url 'certification:qr' %}">
+                                <div class="caption">
+                                    <div class="caption-content">
+                                        <div class="h2">QRコード</div>
+                                        <p class="mb-0">コメントが入ります。コメントが入ります。</p>
+                                    </div>
+                                </div>
+                                <img class="img-fluid" src="/static/assets/img/figures-gc76722a04_1280.jpg" alt="..." />
+                            </a>
+                        </div>
+                        <!-- ルート選択 -->
+                        <div class="col-lg-6">
+                            <a class="portfolio-item" href="http://127.0.0.1:8000/map/map_list/">
+                                <div class="caption">
+                                    <div class="caption-content">
+                                        <div class="h2">ルート選択</div>
+                                        <p class="mb-0">コメントが入ります。コメントが入ります。</p>
+                                    </div>
+                                </div>
+                                <img class="img-fluid" src="/static/assets/img/businessman-gae2160402_1280.png" alt="..." />
+                            </a>
+                        </div>
+                        <!-- ルート作成 -->
+                        <div class="col-lg-6">
+                            <a class="portfolio-item" href="http://127.0.0.1:8000/map/user_list">
+                                <div class="caption">
+                                    <div class="caption-content">
+                                        <div class="h2">ルート作成</div>
+                                        <p class="mb-0">コメントが入ります。コメントが入ります。</p>
+                                    </div>
+                                </div>
+                                <img class="img-fluid" src="/static/assets/img/create-g543538bd0_1280.jpg" alt="..." />
+                            </a>
+                        </div>
+                        <!-- 利用者 -->
+                        <div class="col-lg-6">
+                            <a class="portfolio-item" href="http://127.0.0.1:8000/customer">
+                                <div class="caption">
+                                    <div class="caption-content">
+                                        <div class="h2">利用者</div>
+                                        <p class="mb-0">コメントが入ります。コメントが入ります。</p>
+                                    </div>
+                                </div>
+                                <img class="img-fluid" src="/static/assets/img/hands-g1a57fdc5c_1280.jpg" alt="..." />
+                            </a>
                         </div>
                     </div>
-                <!-- ルート作成 -->
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <div class="mt-5">
-                            <div class="mb-2"><a href="http://127.0.0.1:8000/map/user_list"><i class="bi-globe fs-1 text-primary"></i></a></div>
-                                <h3 class="h4 mb-2">
-                                    <a href="http://127.0.0.1:8000/map/user_list">作成</a>
-                                </h3>
-                                <p class="text-muted mb-0">説明が入ります</p>
-                        </div>
-                    </div>
-                <!-- 利用者 -->
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <div class="mt-5">
-                            <div class="mb-2"><a href="http://127.0.0.1:8000/customer"><i class="bi-people fs-1 text-primary"></i></a></div>
-                                <h3 class="h4 mb-2">
-                                    <a href="http://127.0.0.1:8000/customer">利用者</a>
-                                </h3>
-                                <p class="text-muted mb-0">説明が入ります</p>
-                        </div>
-                    </div>
-            </div>
+                </div>
+            </section>
         </div>
     </section>
 {% endblock %}
+
+<!-- Footer-->
+{% block footer %}
+    <footer class="bg-light py-5">
+        <div class="container px-4 px-lg-5">
+            <div class="small text-center text-muted">Copyright &copy; 2022 - CarryNow</div>
+        </div>
+    </footer>
+{% endblock %}
+
 
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -106,5 +130,62 @@
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+
+
+
+<!-- 下記にjsの処理を記述 -->
+<script>
+    window.addEventListener('DOMContentLoaded', event => {
+
+// Navbar shrink function
+var navbarShrink = function () {
+    const navbarCollapsible = document.body.querySelector('#mainNav');
+    if (!navbarCollapsible) {
+        return;
+    }
+    if (window.scrollY === 0) {
+        navbarCollapsible.classList.remove('navbar-shrink')
+    } else {
+        navbarCollapsible.classList.add('navbar-shrink')
+    }
+
+};
+
+// Shrink the navbar 
+navbarShrink();
+
+// Shrink the navbar when page is scrolled
+document.addEventListener('scroll', navbarShrink);
+
+// Activate Bootstrap scrollspy on the main nav element
+const mainNav = document.body.querySelector('#mainNav');
+if (mainNav) {
+    new bootstrap.ScrollSpy(document.body, {
+        target: '#mainNav',
+        offset: 74,
+    });
+};
+
+// Collapse responsive navbar when toggler is visible
+const navbarToggler = document.body.querySelector('.navbar-toggler');
+const responsiveNavItems = [].slice.call(
+    document.querySelectorAll('#navbarResponsive .nav-link')
+);
+responsiveNavItems.map(function (responsiveNavItem) {
+    responsiveNavItem.addEventListener('click', () => {
+        if (window.getComputedStyle(navbarToggler).display !== 'none') {
+            navbarToggler.click();
+        }
+    });
+});
+
+// Activate SimpleLightbox plugin for portfolio items
+new SimpleLightbox({
+    elements: '#portfolio a.portfolio-box'
+});
+
+});
+</script>
     </body>
 </html>
