@@ -1,1 +1,15 @@
-<h1>送迎登録・送迎判定カラムの値逆転・removeシグナルの送信が完了しました</h1>
+<h1>送迎登録の登録が完了しました。</h1>
+<a href="{% url 'certification:facility' %}">topページへ</a>
+
+<script>
+  // websocket接続処理
+  let sock = new WebSocket('wss://3.231.231.189:8765');
+
+  // 接続時に呼ばれる
+  sock.addEventListener('open', function (e) {
+    console.log('remove signal 接続成功');
+    let data = 'remove';
+    sock.send(JSON.stringify(data));
+  });
+
+</script>

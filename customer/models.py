@@ -20,7 +20,7 @@ class User(models.Model):
     email = models.EmailField(verbose_name="メールアドレス")
     address = models.CharField(verbose_name="住所", max_length=150)
     carry_address = models.CharField(verbose_name="送り先住所", max_length=150)
-    is_carryed = models.BooleanField(verbose_name="送迎中判定",default=False,)
+    is_carryed = models.BooleanField(verbose_name="送迎中判定",default=True,)
     facility_id = models.IntegerField(null=True, blank=True)
     map_id = models.IntegerField(null=True,blank=True)
 

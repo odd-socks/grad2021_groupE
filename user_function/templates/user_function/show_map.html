@@ -29,11 +29,10 @@
 
     <script>
         var addresses = [];
-        // var furukawa = '北柏駅/我孫子駅/アリオ柏/三協フロンテア柏スタジアム';
-        var furukawa = '{{route}}';
+        var furukawa = '快活CLUB 柏駅西口店/オステリアカーロパパ/ファミリーマート マツマル柏店/大原簿記法律専門学校柏校';
         // var furukawa = '榎本歯科/ファミリーマート マツマル柏店/大原簿記法律専門学校柏校';
         var furukawa2;
-        furukawa2 = furukawa.split('|');
+        furukawa2 = furukawa.split('/');
         addresses = addresses.concat(furukawa2);
         // var addressesnum = 2;
         // for (i = 0; i < addressesnum; i++) {
@@ -140,9 +139,9 @@
                         }, // 出発地
                         destination: addresses[addresses.length - 1], // 目的地
                         waypoints: locations, // 経由地点(指定なしでも可)
-                        avoidHighways: true, // 高速は利用しない
-                        avoidTolls: true, //有料道路は利用しない
-                        travelMode: google.maps.DirectionsTravelMode.DRIVING, // 交通手段(歩行。DRIVINGの場合は車)
+                        // avoidHighways: true, // 高速は利用しない
+                        // avoidTolls: true, //有料道路は利用しない
+                        travelMode: google.maps.DirectionsTravelMode.WALKING, // 交通手段(歩行。DRIVINGの場合は車)
                         drivingOptions: {
                             departureTime: new Date(genzai.toLocaleString()),
                             trafficModel: google.maps.TrafficModel.BEST_GUESS,
