@@ -111,3 +111,7 @@ def map_create(request):
         record = Map(name=input_name,route=pointsString,waypoints=waypoints,destination=destination,facility_id=request.user.id)
         record.save()
         return render(request, 'map/map_create.html', {'message': '送迎ルートを登録しました。'})
+
+
+def send_gps(request):
+    return render(request, 'map/send_gps.html')

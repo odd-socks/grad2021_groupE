@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+  <html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>緯度経度送信ページ</title>
+  </head>
+  <body>
+    <h1>緯度送信ページ</h1>
+    <div id="status"></div>
+    <dl>
+      <dt>緯度</dt>
+      <dd id="latitude">-</dd>
+
+      <dt>経度</dt>
+      <dd id="longitude">-</dd>
+
+      <dt>緯度・経度の精度</dt>
+      <dd id="accuracy">-</dd>
+
+      <dt>GPS 高度</dt>
+      <dd id="altitude">-</dd>
+
+      <dt>GPS 高度の精度</dt>
+      <dd id="altitudeAccuracy">-</dd>
+
+      <dt>移動方向</dt>
+      <dd id="heading">-</dd>
+
+      <dt>移動速度</dt>
+      <dd id="speed">-</dd>
+    </dl>
+
+
+    <script>
+      // websocket接続処理
+      let sock = new WebSocket('wss://3.231.231.189:8765');
+
+      // 接続時に呼ばれる
+      sock.addEventListener('open', function (e) {
+      });
+
+      // データ受信時に呼ばれる
+      sock.addEventListener('message', message => {
+        console.log(message.data);
+      })
+
+
+      // ------------------------------------------------------------
+
+
+      document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+          var position_options = {     // 座標取得設定
+            enableHighAccuracy: true,  // 高精度を要求する
+            timeout: 60000,
+            maximumAge: 0,             // キャッシュ有効期間
+          };
+          // 現在位置情報を取得
+          navigator.geolocation.watchPosition(monitor, null, position_options);
+        },
+        false
+      );
+
+
+      // 位置情報取得完了時の処理
+      function monitor(event) {
+        document.getElementById('status').innerText = 'データ送信中・・・';
+
+        var longitude = event.coords.longitude;  // 経度
+        var latitude  = event.coords.latitude;   // 緯度
+        var accuracy  = event.coords.accuracy;   // 緯度・経度の精度
+        var altitude  = event.coords.altitude;   // GPS 高度
+        var heading   = event.coords.heading;    // 移動方向
+        var speed     = event.coords.speed;      // 移動速度
+        var date      = event.timestamp;         // タイムスタンプ
+        var altitudeAccuracy = event.coords.altitudeAccuracy;  // GPS 高度の精度
+      
+        document.querySelector("#longitude").textContent = longitude;
+        document.querySelector("#latitude").textContent  = latitude;
+        document.querySelector("#accuracy").textContent  = accuracy;
+        document.querySelector("#altitude").textContent  = altitude;
+        document.querySelector("#heading").textContent   = heading;
+        document.querySelector("#speed").textContent     = speed;
+        document.querySelector("#altitudeAccuracy").textContent = altitudeAccuracy;
+
+        //データ送信処理
+        let data = {
+          lat: latitude,
+          lng: longitude
+        }
+        sock.send(JSON.stringify(data));
+      }
+    </script>
+  </body>
+</html>
+
