@@ -60,7 +60,8 @@
                     <!-- 利用者登録ボタン -->
                     <div class="new_page">
                         <button class="btn btn--orange btn--radius" type="submit">保存</button>
-                        <a href="{% url 'customer:detail' data.id %}"><input class="btn btn--orange btn--radius" type="button" value="戻る"></a>
+                        <button href = "detail.html" class="btn btn--orange btn--radius" type="submit">戻る</button>
+                        <!-- <a href="{% url 'customer:detail' data.id %}"><input class="btn btn--orange btn--radius" type="button" value="戻る"></a> -->
                         <!-- <button class="btn btn--orange btn--radius" type="submit">削除</button> -->
 
                     </div>
@@ -68,6 +69,16 @@
         </div>
     </div>
 </section>
+
+            <!-- <section class="content-section" id="portfolio">
+                <div class="container px-4 px-lg-5">
+                    <form action="{% url 'customer:update' data.id %}" method="POST">{% csrf_token %}
+                      {{ form.as_p }}
+                      <button class="btn" type="submit">保存</button>
+                    </form>
+                </div>
+                <a href="{% url 'customer:detail' data.id %}"><input type="button" value="戻る"></a>
+            </section> -->
 
 <!-- 下記にjsの処理を記述 -->
 <script>
