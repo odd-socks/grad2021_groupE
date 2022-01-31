@@ -76,7 +76,7 @@
                         </div>
                         <!-- ルート選択 -->
                         <div class="col-lg-6">
-                            <a class="portfolio-item" href="http://127.0.0.1:8000/map/map_list/">
+                            <a class="portfolio-item" href="{% url 'map:map_list' %}">
                                 <div class="caption">
                                     <div class="caption-content">
                                         <div class="h2">ルート選択</div>
@@ -88,7 +88,7 @@
                         </div>
                         <!-- ルート作成 -->
                         <div class="col-lg-6">
-                            <a class="portfolio-item" href="http://127.0.0.1:8000/map/user_list">
+                            <a class="portfolio-item" href="{% url 'map:user_list' %}">
                                 <div class="caption">
                                     <div class="caption-content">
                                         <div class="h2">ルート作成</div>
@@ -100,7 +100,8 @@
                         </div>
                         <!-- 利用者 -->
                         <div class="col-lg-6">
-                            <a class="portfolio-item" href="http://127.0.0.1:8000/customer">
+                            <a class="portfolio-item" href="{% url 'customer:toppage' %}">
+                            <!-- <a class="portfolio-item" href="http://127.0.0.1:8000/customer"> -->
                                 <div class="caption">
                                     <div class="caption-content">
                                         <div class="h2">利用者</div>
