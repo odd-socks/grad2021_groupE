@@ -1,0 +1,7 @@
+{{error}}
+<form method="POST" action="{% url 'user_function:show_map' %}">
+  {% csrf_token %}
+  名前 : <input type="text" name="name"><br>
+  メールアドレス : <input type="text" name="email"><br>
+  <button type="submit">検索</button>
+</form>

@@ -18,4 +18,7 @@ urlpatterns = [
 
     #古川設定
     path('map/', include('map.urls')),
+
+    #松丸設定
+    path('user_function/', include('user_function.urls')),
 ]

@@ -16,7 +16,7 @@ SECRET_KEY = '$(tba4%d8_xev2=8&6)gs0#og3&q89q^))eg7kw6ulex96@!^$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['3.231.231.189']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -41,7 +41,7 @@ INSTALLED_APPS = [
 
     'map.apps.MapConfig',
     'widget_tweaks',#django-form用
-
+    'user_function.apps.UserFunctionConfig'  # 引受人のマップ用
 ]
 
 MIDDLEWARE = [
@@ -87,12 +87,8 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mydb',
-        'USER': 'admin',
-        'PASSWORD': 'adminpass',
-        'HOST': 'database-1.ccino1f2g8np.us-east-1.rds.amazonaws.com',
-        'PORT': '3306'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -134,8 +130,6 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'ec2_static')
-#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 #staticのcssが反映される
 STATICFILES_DIRS =(
