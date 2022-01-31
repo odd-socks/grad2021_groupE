@@ -52,7 +52,7 @@
 
         <div class="form-content">
                 <!-- 下記に利用者登録のコンテンツが入ります -->
-                <form method="POST" novalidate>
+                <form id="new-form" method="POST" novalidate>
                     {% csrf_token %}
                     <!-- 各フィールドの取り出し -->
                     {% for field in form %}
@@ -64,11 +64,16 @@
                     {% endfor %}
 
                     <!-- 利用者登録ボタン -->
-                    <div class="new_page">
+                    <!-- <div class="new_page">
                         <button class="btn btn--orange btn--radius" type="submit">登録</button>
-                    </div>
+                    </div> -->
                 </form>
-        </div>
+                    <div id="new-form" class="new_page">
+                        <button form="new-form" class="btn btn--orange btn--radius" type="submit">登録</button>
+                        <button class="btn btn--orange btn--radius" type="submit">
+                            <a class="text-white" href="{% url 'customer:toppage' %}">戻る</a>
+                        </button>
+                    </div>
 
     </div>
 </section>
