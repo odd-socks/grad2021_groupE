@@ -62,14 +62,10 @@
                         {{ field.errors }}
                     </div>
                     {% endfor %}
-
-                    <!-- 利用者登録ボタン -->
-                    <!-- <div class="new_page">
-                        <button class="btn btn--orange btn--radius" type="submit">登録</button>
-                    </div> -->
                 </form>
+                    <!-- 利用者登録ボタン -->
                     <div id="new-form" class="new_page">
-                        <button form="new-form" class="btn btn--orange btn--radius" type="submit">登録</button>
+                        <button form="new-form" class="btn btn--orange btn--radius" type="submit">確定</button>
                         <button class="btn btn--orange btn--radius" type="submit">
                             <a class="text-white" href="{% url 'customer:toppage' %}">戻る</a>
                         </button>

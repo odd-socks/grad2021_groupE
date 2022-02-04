@@ -614,6 +614,12 @@ progress {
   height: auto;
 }
 
+/* 施設ページ */
+.img-facility{
+  max-width: 100%;
+  height: 330px;
+}
+
 .img-thumbnail {
   padding: 0.25rem;
   background-color: #fff;
@@ -11652,6 +11658,9 @@ table td{
 
 table td:last-child{
   border-right: 1px solid #a8b7c5;
+  /* 追加 */
+  border-top: 1px solid #a8b7c5;
+
 }
 
 table tr:last-child td:first-child {
@@ -11787,3 +11796,19 @@ table tr:last-child td:last-child {
   height: 70px;
 }
 
+/* qrコード認証ページ */
+.search-form{
+  width: 70%;
+}
+
+.search-form th{
+  width: 30%;
+}
+
+.search-form td{
+  width: 70%;
+}
+
+.search-form input{
+  width: 60%;
+}
