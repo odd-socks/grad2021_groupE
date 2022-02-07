@@ -608,7 +608,7 @@ progress {
   color: #6c757d;
 }
 .blockquote-footer::before {
-  content: "— ";
+  content: "—";
 }
 
 .img-fluid {
@@ -11755,6 +11755,8 @@ table tr:last-child td:last-child {
     transition: clip-path 0.25s ease-out, -webkit-clip-path 0.25s ease-out;
     -webkit-clip-path: inset(-1px);
             clip-path: inset(-1px);
+            /* 追加 */
+            width: 100%;
   }
   .portfolio-item:hover img {
     -webkit-clip-path: inset(2rem);
