@@ -149,6 +149,13 @@
             searchRoute();
             // showList();
         }
+
+        function deletePoint(data) {
+            points.splice(data, 1);
+            pointsStringScreen.value = points.join("|");
+            setData(data);
+            searchRoute();
+        }
         
         // 目的地をリスト形式で表示する処理
         // function showList(){
@@ -302,12 +309,13 @@
                     let content = `
                     <table border="1" id="posts">
                         <tr>
-                            <td>氏名</td>
-                            <td>年齢</td>
-                            <td>性別</td>
-                            <td>住所</td>
-                            <td>送迎先住所</td>
-                            <td>追加ボタン</td>
+                            <th>氏名</th>
+                            <th>年齢</th>
+                            <th>性別</th>
+                            <th>住所</th>
+                            <th>送迎先住所</th>
+                            <th>追加ボタン</th>
+                            <th>削除ボタン</th>
                         </tr>
                     `;
 
@@ -325,6 +333,7 @@
                                 <td>${address}</td>
                                 <td>${carry_address}</td>
                                 <td><button class="btn btn--orange btn--radius" onclick='addPoint("${carry_address}");'>追加</button></td>
+                                <td><button class="btn btn--orange btn--radius" onclick='deletePoint("${carry_address}");'>削除</button></td>
                             </tr>
                         `;
                     }
