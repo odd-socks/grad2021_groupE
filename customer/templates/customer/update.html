@@ -43,30 +43,50 @@
     <div class="container px-4 px-lg-5">
         <h2 class="text-center mt-0">利用者編集</h2>
         <hr class="divider" />
+
             <!-- 下記に利用者編集のコンテンツが入ります -->
-            <div class="form-content">
+            <div class="form-control">
                 <!-- 下記に利用者登録のコンテンツが入ります -->
-                <form action="{% url 'customer:update' data.id %}" method="POST" novalidate>
+                <form id="update-form" action="{% url 'customer:update' data.id %}" method="POST" novalidate>
                     {% csrf_token %}
                     <!-- 各フィールドの取り出し -->
-                    {% for field in form %}
-                    <div class="form-control">
-                        {{ field.label_tag }}
-                        {{ field }}
-                        {{ field.errors }}
-                    </div>
-                    {% endfor %}
-
-                    <!-- 利用者登録ボタン -->
-                    <div class="new_page">
-                        <button class="btn btn--orange btn--radius" type="submit">保存</button>
-                        <button href = "detail.html" class="btn btn--orange btn--radius" type="submit">戻る</button>
-                        <!-- <a href="{% url 'customer:detail' data.id %}"><input class="btn btn--orange btn--radius" type="button" value="戻る"></a> -->
-                        <!-- <button class="btn btn--orange btn--radius" type="submit">削除</button> -->
-
-                    </div>
+                    <table class="user-form">
+                        <tr class="user-tr">
+                            <th class="user-th">{{ form.name.label_tag }}</th>
+                            <td class="user-td">{{ form.name }}</td>
+                        </tr>
+                        <tr class="user-tr">
+                            <th class="user-th">{{ form.age.label_tag }}</th>
+                            <td class="user-td">{{ form.age }}</td>
+                        </tr>
+                        <tr class="user-tr">
+                            <th class="user-th">{{ form.gender.label_tag }}</th>
+                            <td class="user-td">{{ form.gender }}</td>
+                        </tr>
+                        <tr class="user-tr">
+                            <th class="user-th">{{ form.email.label_tag }}</th>
+                            <td class="user-td">{{ form.email }}</td>
+                        </tr>
+                        <tr class="user-tr">
+                            <th class="user-th">{{ form.address.label_tag }}</th>
+                            <td class="user-td">{{ form.address }}</td>
+                        </tr>
+                        <tr class="user-tr">
+                            <th class="user-th">{{ form.carry_address.label_tag }}</th>
+                            <td class="user-td">{{ form.carry_address }}</td>
+                        </tr>
+                    </table>
                 </form>
-        </div>
+            </div>
+
+            <!-- 利用者登録ボタン -->
+            <div class="new_page">
+                <button form ="update-form" class="btn btn--orange btn--radius" type="submit">保存</button>
+                <button class="btn btn--orange btn--radius" type="submit">
+                    <a class="text-white" href="{% url 'customer:detail' data.pk %}">戻る</a>
+                </button>
+                <button form ="update-form" href = "{% url 'customer:detail' data.id %}" class="btn btn--orange btn--radius" type="submit">削除</button>
+            </div>
     </div>
 </section>
 
@@ -133,13 +153,4 @@ new SimpleLightbox({
 
 });
 </script>
-{% endblock %}
-
-<!-- Footer-->
-{% block footer %}
-    <footer class="bg-light py-5">
-        <div class="container px-4 px-lg-5">
-            <div class="small text-center text-muted">Copyright &copy; 2022 - CarryNow</div>
-        </div>
-    </footer>
 {% endblock %}

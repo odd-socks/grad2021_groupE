@@ -56,13 +56,30 @@
                     {% csrf_token %}
                     <!-- 各フィールドの取り出し -->
                     <table class="user-form">
-                    {% for field in form %}
-                    <tr class="user-tr">
-                        <th class="user-th">{{ field.label_tag }}</th>
-                        <td class="user-td">{{ field }}</td>
-                        <!-- {{ field.errors }} -->
-                    </tr>
-                    {% endfor %}
+                        <tr class="user-tr">
+                            <th class="user-th">{{ form.name.label_tag }}</th>
+                            <td class="user-td">{{ form.name }}</td>
+                        </tr>
+                        <tr class="user-tr">
+                            <th class="user-th">{{ form.age.label_tag }}</th>
+                            <td class="user-td">{{ form.age }}</td>
+                        </tr>
+                        <tr class="user-tr">
+                            <th class="user-th">{{ form.gender.label_tag }}</th>
+                            <td class="user-td">{{ form.gender }}</td>
+                        </tr>
+                        <tr class="user-tr">
+                            <th class="user-th">{{ form.email.label_tag }}</th>
+                            <td class="user-td">{{ form.email }}</td>
+                        </tr>
+                        <tr class="user-tr">
+                            <th class="user-th">{{ form.address.label_tag }}</th>
+                            <td class="user-td">{{ form.address }}</td>
+                        </tr>
+                        <tr class="user-tr">
+                            <th class="user-th">{{ form.carry_address.label_tag }}</th>
+                            <td class="user-td">{{ form.carry_address }}</td>
+                        </tr>
                      </table>
                 </form>
         </div>
