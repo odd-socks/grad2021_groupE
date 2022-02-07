@@ -69,8 +69,8 @@
                     <tr>
                         <th class="root_name">ルート名</th>
                         <th class="root">ルート</th>
-                        <th class="waypoints">経由地点</th>
-                        <th class="destination">目的地</th>
+                        <!-- <th class="waypoints">経由地点</th> -->
+                        <!-- <th class="destination">目的地</th> -->
                         <th class="url">ナビ</th>
                     </tr>
             
@@ -79,8 +79,8 @@
                     <tr>
                         <td class="root_name">{{ map.name }}</td>
                         <td class="root">{{ map.route }}</td>
-                        <td class="waypoints">{{ map.waypoints }}</td>
-                        <td class="destination">{{ map.destination }}</td>
+                        <!-- <td class="waypoints">{{ map.waypoints }}</td> -->
+                        <!-- <td class="destination">{{ map.destination }}</td> -->
                         <td>
                             <a href="{{ waypoints|add:map.waypoints|add:destination|add:map.destination }}">
                                 <button class="btn btn--orange btn--radius">開始</button>

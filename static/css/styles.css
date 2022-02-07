@@ -372,6 +372,8 @@ select {
 
 select {
   word-wrap: normal;
+  /* 追加 */
+  /* width: 50%; */
 }
 select:disabled {
   opacity: 1;
@@ -2228,7 +2230,7 @@ progress {
   color: #212529;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid #ced4da;
+  /* border: 1px solid #ced4da; */
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
@@ -11810,5 +11812,27 @@ table tr:last-child td:last-child {
 }
 
 .search-form input{
+  width: 60%;
+}
+
+
+/* top画面→幼稚園・デイケア画像サイズ */
+.img-top{
+  /* background-color: white; */
+  /* padding: 3rem !important; */
+  width: 100%;
+  height: 100%;
+}
+
+
+/* 利用者登録フォーム */
+.user-th{
+  width: 30%;
+}
+.user-td{
+  width: 70%;
+}
+
+.user-td input{
   width: 60%;
 }
