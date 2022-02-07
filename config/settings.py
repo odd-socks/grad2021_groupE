@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'customer.apps.CustomerConfig',
     'qrfunction.apps.QrfunctionConfig',
 
-    'map.apps.MapConfig',
+    'routing.apps.RoutingConfig',
     'widget_tweaks',#django-form用
 
 ]

@@ -85,7 +85,7 @@
 
     <!-- 名前検索ウィンドウ -->
     <hr>
-    <form id="user_search" action="{% url 'map:user_search' %}" method="GET">
+    <form id="user_search" action="{% url 'routing:user_search' %}" method="GET">
         名前検索：<input type="text" id="user_name">
         <button type="submit" class="btn btn--orange btn--radius">検索</button>
     </form>
@@ -171,7 +171,7 @@
             waypointsString = pointsStringScreen.value.split('|');
             destination = waypointsString.pop();
             
-            let url = '/map/map_confirm?pointsString=' + pointsStringScreen.value + '&input_name=' + inputNameScreen.value + '&waypoints=' + waypointsString.join('|') + '&destination=' + destination;
+            let url = '/routing/confirm?pointsString=' + pointsStringScreen.value + '&input_name=' + inputNameScreen.value + '&waypoints=' + waypointsString.join('|') + '&destination=' + destination;
             location.href = url;  // リダイレクト
         }
         
@@ -287,7 +287,7 @@
             e.preventDefault(); // submitタグに設定されたデフォルトの動作を削除
             
             $.ajax({            // 非同期通信の設定
-                'url': '{% url "map:user_search" %}',
+                'url': '{% url "routing:user_search" %}',
                 'type': 'GET',
                 'data': {
                     'user': $('#user_name').val(),

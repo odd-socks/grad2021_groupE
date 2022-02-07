@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from django.views import generic
 from django.urls import reverse
 from customer.models import User
-from .models import Map
+from .models import Routing
 from django.contrib.auth.decorators import login_required
 from accounts.models import CustomUser
 
@@ -13,13 +13,13 @@ from accounts.models import CustomUser
 
 # Create your views here.
 class TopView(generic.TemplateView):
-     template_name = 'map/top.html'
+     template_name = 'routing/top.html'
 
 
 
 # class UserList(generic.ListView):
 #     model = User
-#     template_name = 'map/user_list.html'
+#     template_name = 'routing/user_list.html'
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs) # はじめに継承元のメソッドを呼び出す
     #     context["message"] = self.request.GET.get('message')
@@ -30,7 +30,7 @@ class TopView(generic.TemplateView):
 @login_required
 def user_list(request):
     user = request.user
-    template_name = 'map/user_list.html'
+    template_name = 'routing/user_list.html'
     user_list = User.objects.filter(facility_id=user.id)
     context = {
     'user': user,
@@ -55,12 +55,12 @@ def user_search(request):
 
 
 @login_required
-def map_list(request):
-  template_name = 'map/map_list.html'
-  map_list = Map.objects.filter(facility_id=request.user.id)
+def routing_list(request):
+  template_name = 'routing/routing_list.html'
+  routing_list = Routing.objects.filter(facility_id=request.user.id)
 
   context = {
-    'map_list': map_list,
+    'routing_list': routing_list,
     'waypoints': 'https://www.google.com/maps/dir/?api=1&waypoints=',
     'destination': '&destination='
   }
@@ -69,7 +69,7 @@ def map_list(request):
 
 
 
-def map_confirm(request):
+def confirm(request):
     pointsString = request.GET.get('pointsString')
     input_name   = request.GET.get('input_name')
     waypoints    = request.GET.get('waypoints')
@@ -82,12 +82,12 @@ def map_confirm(request):
         'destination': destination
     }
 
-    return render(request, 'map/map_confirm.html', data)
+    return render(request, 'routing/confirm.html', data)
 
 
 
 @login_required
-def map_create(request):
+def create(request):
     pointsString = request.POST.get('pointsString')
     input_name   = request.POST.get('input_name')
     waypoints    = request.POST.get('waypoints')
@@ -97,8 +97,8 @@ def map_create(request):
     #     'pointsString': pointsString,
     #     'input_name'  : input_name
     # }
-    map_all = Map.objects.filter(name=input_name)
-    if map_all:
+    routing_all = Routing.objects.filter(name=input_name)
+    if routing_all:
         context = {
             'message'     : '※同じ名前のルートがすでに存在しています。',
             'input_name'  : input_name,
@@ -106,8 +106,8 @@ def map_create(request):
             'waypoints'   : waypoints,
             'destination' : destination
         }
-        return render(request, 'map/user_list.html', context)
+        return render(request, 'routing/user_list.html', context)
     else:
-        record = Map(name=input_name,route=pointsString,waypoints=waypoints,destination=destination,facility_id=request.user.id)
+        record = Routing(name=input_name,route=pointsString,waypoints=waypoints,destination=destination,facility_id=request.user.id)
         record.save()
-        return render(request, 'map/map_create.html', {'message': '送迎ルートを登録しました。'})
+        return render(request, 'routing/create.html', {'message': '送迎ルートを登録しました。'})
