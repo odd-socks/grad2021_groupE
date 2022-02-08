@@ -43,8 +43,8 @@ def registration(request):
 
 def index(request):
     """ユーザー判定"""
-    input_name = request.POST.get('name')
-    input_email= request.POST.get('email')
+    input_name = request.GET.get('name')
+    input_email= request.GET.get('email')
 
     results = User.objects.filter(name=input_name, email=input_email)  # Userテーブルから複数条件で検索
     # print(results)  # ターミナルに結果を出力
