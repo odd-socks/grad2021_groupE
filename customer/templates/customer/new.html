@@ -56,19 +56,54 @@
                 <form id="new-form" method="POST" novalidate>
                     {% csrf_token %}
                     <!-- 各フィールドの取り出し -->
-                    {% for field in form %}
+                    <table  class="user-table">
+                        <tr>
+                            <th class="user-th">{{form.name.label_tag}}</th>
+                            <td class="user-td">{{form.name}}</td>
+                        </tr>
+                        <tr>
+                            <th class="user-th">{{form.age.label_tag}}</th>
+                            <td class="user-td">{{form.age}}</td>
+                        </tr>
+                        <tr>
+                            <th class="user-th">{{form.gender.label_tag}}</th>
+                            <td class="user-td">{{form.gender}}</td>
+                        </tr>
+                        <tr>
+                            <th class="user-th">{{form.email.label_tag}}</th>
+                            <td class="user-td">{{form.email}}</td>
+                        </tr>
+                        <tr>
+                            <th class="user-th">{{form.address.label_tag}}</th>
+                            <td class="user-td">{{form.address}}</td>
+                        </tr>
+                        <tr>
+                            <th class="user-th">{{form.carry_address.label_tag}}</th>
+                            <td class="user-td">{{form.carry_address}}</td>
+                        </tr>
+                        <tr id="hoge">
+                            <th class="user-th">{{form.is_carryed.label_tag}}</th>
+                            <td class="user-td">{{form.is_carryed}}</td>
+                        </tr>
+                        <tr id="hoge">
+                            <th class="user-th">{{form.facility_id.label_tag}}</th>
+                            <td class="user-td">{{form.facility_id}}</td>
+                        </tr>
+                        <tr id="hoge">
+                            <th class="user-th">{{form.map_id.label_tag}}</th>
+                            <td class="user-td">{{form.map_id}}</td>
+                        </tr>
+                    </table>
+                    <!-- {% for field in form %}
                     <div class="form-control">
                         {{ field.label_tag }}
                         {{ field }}
                         {{ field.errors }}
                     </div>
-                    {% endfor %}
+                    {% endfor %} -->
+                </form>
 
                     <!-- 利用者登録ボタン -->
-                    <!-- <div class="new_page">
-                        <button class="btn btn--orange btn--radius" type="submit">登録</button>
-                    </div> -->
-                </form>
                     <div id="new-form" class="new_page">
                         <button form="new-form" class="btn btn--orange btn--radius" type="submit">登録</button>
                         <button class="btn btn--orange btn--radius" type="submit">

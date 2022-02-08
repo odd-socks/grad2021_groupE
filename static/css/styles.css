@@ -11838,3 +11838,7 @@ table tr:last-child td:last-child {
 .user-td input{
   width: 60%;
 }
+
+#hoge{
+  display: none;
+}
