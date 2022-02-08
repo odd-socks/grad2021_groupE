@@ -2222,7 +2222,7 @@ progress {
 /* フォーム */
 .form-control {
   display: block;
-  width: 50%;
+  width: 60%;
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
   font-weight: 400;
@@ -11835,8 +11835,8 @@ table tr:last-child td:last-child {
   width: 70%;
 }
 
-.user-td input{
-  width: 60%;
+.user-td select{
+  width: 30%;
 }
 
 #hoge{

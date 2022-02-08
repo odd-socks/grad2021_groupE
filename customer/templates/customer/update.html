@@ -43,9 +43,10 @@
     <div class="container px-4 px-lg-5">
         <h2 class="text-center mt-0">利用者編集</h2>
         <hr class="divider" />
+
+        <div class="form-control">
+            <!-- <div class="form-content"> -->
             <!-- 下記に利用者編集のコンテンツが入ります -->
-            <div class="form-content">
-                <!-- 下記に利用者登録のコンテンツが入ります -->
                 <form action="{% url 'customer:update' data.id %}" method="POST" novalidate>
                     {% csrf_token %}
                     <!-- 各フィールドの取り出し -->
@@ -98,13 +99,11 @@
                     <!-- 利用者登録ボタン -->
                     <div class="new_page">
                         <button class="btn btn--orange btn--radius" type="submit">保存</button>
-                        <button href = "detail.html" class="btn btn--orange btn--radius" type="submit">戻る</button>
-                        <!-- <a href="{% url 'customer:detail' data.id %}"><input class="btn btn--orange btn--radius" type="button" value="戻る"></a> -->
+                        <a href="{% url 'customer:detail' data.id %}"><input class="btn btn--orange btn--radius" type="button" value="戻る"></a>
                         <!-- <button class="btn btn--orange btn--radius" type="submit">削除</button> -->
-
                     </div>
                 </form>
-        </div>
+            </div>
     </div>
 </section>
 

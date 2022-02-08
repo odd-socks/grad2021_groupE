@@ -51,75 +51,68 @@
         <h2 class="text-center mt-0">利用者登録</h2>
         <hr class="divider" />
 
-        <div class="form-content">
-                <!-- 下記に利用者登録のコンテンツが入ります -->
-                <form id="new-form" method="POST" novalidate>
-                    {% csrf_token %}
-                    <!-- 各フィールドの取り出し -->
-                    <table  class="user-table">
-                        <tr>
-                            <th class="user-th">{{form.name.label_tag}}</th>
-                            <td class="user-td">{{form.name}}</td>
-                        </tr>
-                        <tr>
-                            <th class="user-th">{{form.age.label_tag}}</th>
-                            <td class="user-td">{{form.age}}</td>
-                        </tr>
-                        <tr>
-                            <th class="user-th">{{form.gender.label_tag}}</th>
-                            <td class="user-td">{{form.gender}}</td>
-                        </tr>
-                        <tr>
-                            <th class="user-th">{{form.email.label_tag}}</th>
-                            <td class="user-td">{{form.email}}</td>
-                        </tr>
-                        <tr>
-                            <th class="user-th">{{form.address.label_tag}}</th>
-                            <td class="user-td">{{form.address}}</td>
-                        </tr>
-                        <tr>
-                            <th class="user-th">{{form.carry_address.label_tag}}</th>
-                            <td class="user-td">{{form.carry_address}}</td>
-                        </tr>
-                        <tr id="hoge">
-                            <th class="user-th">{{form.is_carryed.label_tag}}</th>
-                            <td class="user-td">{{form.is_carryed}}</td>
-                        </tr>
-                        <tr id="hoge">
-                            <th class="user-th">{{form.facility_id.label_tag}}</th>
-                            <td class="user-td">{{form.facility_id}}</td>
-                        </tr>
-                        <tr id="hoge">
-                            <th class="user-th">{{form.map_id.label_tag}}</th>
-                            <td class="user-td">{{form.map_id}}</td>
-                        </tr>
-                    </table>
-                    <!-- {% for field in form %}
-                    <div class="form-control">
-                        {{ field.label_tag }}
-                        {{ field }}
-                        {{ field.errors }}
-                    </div>
-                    {% endfor %} -->
-                </form>
+        <div class="form-control">
+            <!-- <div class="form-content"> -->
+            <!-- 下記に利用者登録のコンテンツが入ります -->
+            <form id="new-form" method="POST" novalidate>
+                {% csrf_token %}
+                <!-- 各フィールドの取り出し -->
+                <table  class="user-table">
+                    <!-- nameフィールド -->
+                    <tr>
+                        <th class="user-th">{{form.name.label_tag}}</th>
+                        <td class="user-td">{{form.name}}{{form.name.errors}}</td>
+                    </tr>
+                    <!-- ageフィールド -->
+                    <tr>
+                        <th class="user-th">{{form.age.label_tag}}</th>
+                        <td class="user-td">{{form.age}}{{form.age.errors}}</td>
+                    </tr>
+                    <!-- 性別フィールド -->
+                    <tr>
+                        <th class="user-th">{{form.gender.label_tag}}</th>
+                        <td class="user-td">{{form.gender}}{{form.gender.errors}}</td>
+                    </tr>
+                    <!-- メールフィールド -->
+                    <tr>
+                        <th class="user-th">{{form.email.label_tag}}</th>
+                        <td class="user-td">{{form.email}}{{form.email.errors}}</td>
+                    </tr>
+                    <!-- 住所フィールド -->
+                    <tr>
+                        <th class="user-th">{{form.address.label_tag}}</th>
+                        <td class="user-td">{{form.address}}{{form.address.errors}}</td>
+                    </tr>
+                    <!-- 引受住所フィールド -->
+                    <tr>
+                        <th class="user-th">{{form.carry_address.label_tag}}</th>
+                        <td class="user-td">{{form.carry_address}}{{form.carry_address.errors}}</td>
+                    </tr>
+                    <!-- 下記が隠しフィールド -->
+                    <tr id="hoge">
+                        <th class="user-th">{{form.is_carryed.label_tag}}</th>
+                        <td class="user-td">{{form.is_carryed}}</td>
+                    </tr>
+                    <tr id="hoge">
+                        <th class="user-th">{{form.facility_id.label_tag}}</th>
+                        <td class="user-td">{{form.facility_id}}</td>
+                    </tr>
+                    <tr id="hoge">
+                        <th class="user-th">{{form.map_id.label_tag}}</th>
+                        <td class="user-td">{{form.map_id}}</td>
+                    </tr>
+                </table>
+            </form>
 
-                    <!-- 利用者登録ボタン -->
-                    <div id="new-form" class="new_page">
-                        <button form="new-form" class="btn btn--orange btn--radius" type="submit">登録</button>
-                        <button class="btn btn--orange btn--radius" type="submit">
-                            <a class="text-white" href="{% url 'customer:toppage' %}">戻る</a>
-                        </button>
-                    </div>
-
-    </div>
+            <!-- 利用者登録ボタン -->
+            <div id="new-form" class="new_page">
+                <button form="new-form" class="btn btn--orange btn--radius" type="submit">登録</button>
+                <button class="btn btn--orange btn--radius" type="submit">
+                    <a class="text-white" href="{% url 'customer:toppage' %}">戻る</a>
+                </button>
+            </div>
+        </div>
 </section>
-
-<!-- <form method="POST" novalidate>
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">登録</button>
-</form> -->
-<!-- <p>{{ message }}</p>  -->
 {% endblock %}
 
 
