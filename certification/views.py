@@ -23,6 +23,10 @@ class IndexView(generic.TemplateView):
 class FacilityView(generic.TemplateView):
      template_name = 'certification/facility.html'
 
+#引受人トップページ
+class Customer_mapView(generic.TemplateView):
+     template_name = 'certification/customer_map.html'
+
 
 #QRコード
 def qrView(request):
@@ -39,3 +43,19 @@ def qrView(request):
   context = {'qr': qr}
 
   return render(request, template_name, context)
+
+
+from map.models import *
+
+import json
+from django.shortcuts import render
+
+# def index_show(request):
+#     return render(request,'customer_map.html') 
+
+def customer_map_request(request):
+    data = {
+        'sample1': request.GET.get(map.waypoints),
+        'sample2': request.GET.get(map.destination),
+    }
+    return render(request, "customer_map.html", {'data_json': json.dumps(data)})

@@ -172,3 +172,13 @@ ACCOUNT_ADAPTER = 'accounts.adapter.AccountAdapter'
 
 #passwordの入力を一回に
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
+
+# # 実際にメールを送信
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# #メールサーバーへの接続設定
+# DEFAULT_FROM_EMAIL = 'e.ohno331@gmail.com' #送信元のアドレスを指定
+# EMAIL_HOST = 'smtp.gmail.com'                      #gmailの場合固定　　　
+# EMAIL_PORT = 587                                   #gmailの場合固定
+# EMAIL_HOST_USER = 'e.ohno331@gmail.com'    #あなたのgmailメールアドレス
+# EMAIL_HOST_PASSWORD = 'bixrojqhfysymkrv'           #あなたのgmailのパスワード又はアプリ用パスワード
+# EMAIL_USE_TLS = True

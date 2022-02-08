@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        html,
+        body,
+        /* #map {
+            width: 100%;
+            height: 100%;
+        } */
+    </style>
+
+</head>
+
+<body>
+    <table>
+        <tr id="tr1"></tr>
+        <tr id="tr2" style='text-align: center;'></tr>
+    </table>
+    <div id="saisyuutime" style="text-align: right;font-size: 30px;"></div>
+    <div id="map"></div>
+    <div id="result"></div>
+
+    <table>
+        <h1>test</h1>
+        <p>{{ sample1 }}</a>
+        <br>
+        <br>
+        <p>{{ sample2 }}</a>    
+    </table>
+
+    <!-- <script>
+        var addresses = [];
+        var furukawa = '北柏駅/我孫子駅/アリオ柏/三協フロンテア柏スタジアム';
+        // var furukawa = '榎本歯科/ファミリーマート マツマル柏店/大原簿記法律専門学校柏校';
+        var furukawa2;
+        furukawa2 = furukawa.split('/');
+        addresses = addresses.concat(furukawa2);
+        // var addressesnum = 2;
+        // for (i = 0; i < addressesnum; i++) {
+        //     addresses.shift();
+        // }
+        var sock = 0;
+        if (sock === 0){
+            document.getElementById('map').innerHTML = ('位置情報を取得できません');
+            console.log('Aaa');
+        }
+        function initMap() {
+            var data2;
+            var map;
+            var latLng;
+
+            function dataGet() {
+                return new Promise((resolve, reject) => {
+                    // websocketサーバとの通信設定
+                    sock = new WebSocket('wss://34.225.68.130:8765');
+                    // 接続
+                    sock.addEventListener('open', function (e) {});
+                    // サーバーからデータを受け取る
+                    sock.addEventListener('message', function (message) {
+                        let data = message.data;
+                        data = JSON.parse(data);
+                        // data2 = data;
+                        
+                        if (typeof (data) == 'object') { // 受け取ったデータが連想配列(=緯度経度のデータ)の場合
+                            data2 = data;
+                            let marker = new google.maps.Marker({
+                                position: data2,
+                                map: map,
+                                title: "ドライバー",
+                                // animation: google.maps.Animation.DROP,
+                                // icon: "https://maps.google.com/mapfiles/ms/micons/blue-dot.png"
+                                icon: {
+                                    url: "./icon1.png",
+                                    scaledSize: new google.maps.Size(50, 50),
+                                }
+                            });
+                            setTimeout(function () {
+                                marker.setMap(null);
+                            }, 1000);
+                            console.log(data);
+                            resolve(data);
+                        } else {
+                            addresses.shift();
+                            if (addresses == 0) {
+                                console.log('アドレスがなくなりました');
+
+                                map = null;
+                                document.write('送迎は完了されました。');
+                            }
+                            // arrayScreen.innerText = pointsString;
+                            // console.log(pointsString);
+                        }
+                    })
+                })
+            }
+            async function createMap() {
+                await dataGet();
+                latlng = new google.maps.LatLng(data2.lat, data2.lng);
+                map = new google.maps.Map(document.getElementById("map"), {
+                    center: latlng, // マップの中心
+                    zoom: 13, // ズームレベル
+                    zoomControl: false
+                });
+                let trafficLayer = new google.maps.TrafficLayer();
+                trafficLayer.setMap(map);
+                console.log(data2);
+            }
+            createRoute();
+            async function createRoute() {
+                await createMap();
+                createRoute2();
+
+
+                function createRoute2() {
+                    setTimeout(createRoute2, 60000);
+
+                    var mapLatLng;
+                    var start;
+                    console.log(data2);
+                    console.log(addresses[0]);
+                    // var furukawa = 'ジーユー越谷店/越谷市立大沢北小/北越谷駅/越谷市立北越谷小学校/文教大学/越谷市立しらこばと公園';
+                    // var furukawa = '北柏駅/我孫子駅/アリオ柏/柏駅';
+
+                    var points = []; //初期化
+                    var total = 0;
+                    console.log(addresses);
+
+                    locations = [];
+                    for (var i = 0; i < addresses.length - 1; i++) {
+                        locations.push({
+                            location: addresses[i]
+                        });
+                    }
+                    console.log(locations);
+
+                    var genzai = new Date();
+                    console.log(genzai); // Sat Feb 01 2020 20:49:28 GMT+0900 (日本標準時)
+                    console.log(genzai.toLocaleString()); // 2020/2/1 20:49:28
+
+                    var request = {
+                        origin: {
+                            lat: data2.lat,
+                            lng: data2.lng
+                        }, // 出発地
+                        destination: addresses[addresses.length - 1], // 目的地
+                        waypoints: locations, // 経由地点(指定なしでも可)
+                        avoidHighways: true, // 高速は利用しない
+                        avoidTolls: true, //有料道路は利用しない
+                        travelMode: google.maps.DirectionsTravelMode.DRIVING, // 交通手段(歩行。DRIVINGの場合は車)
+                        drivingOptions: {
+                            departureTime: new Date(genzai.toLocaleString()),
+                            trafficModel: google.maps.TrafficModel.BEST_GUESS,
+                        }
+                    };
+                    //マップの生成
+                    var d = new google.maps.DirectionsService(); // ルート検索オブジェクト
+                    var r = new google.maps.DirectionsRenderer({ // ルート描画オブジェクト
+                        map: map, // 描画先の地図
+                        preserveViewport: true, // 描画後に中心点をずらさない
+                        suppressInfoWindows: true,
+                        suppressMarkers: true,
+                    });
+
+                    setTimeout(function () {
+                        r.setMap(null);
+                        request = null;
+                        document.getElementById('map').style.display = 'inline-block';
+                        document.getElementById('map').style.pointerEvents = 'none';
+                        map.setZoom(null);
+                        document.getElementById('map').style.pointerEvents = 'auto';
+                        // var latlng = map.getCenter();
+                        // var lat = latlng.lat();
+                        // var lng = latlng.lng();
+                        // console.log(lat, lng);
+                        // map.setCenter(new google.maps.LatLng(lat, lng));
+                    }, 60000);
+                    //ルート検索
+                    d.route(request, function (result, status) {
+                        // OKの場合ルート描画
+                        if (status == google.maps.DirectionsStatus.OK) {
+                            var markernum = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
+                                "K"
+                            ];
+                            var distance = [];
+                            var duration = [];
+                            var keika = 0;
+                            var keika2 = [];
+                            r.setDirections(result);
+                            var directionsinfo;
+                            var now = new Date();
+                            var zikoku = [];
+                            var totalDuration = 0;
+                            var markerdirections = [];
+                            var directionsinfo = [];
+
+                            var toDoubleDigits = function (num) {
+                                num += "";
+                                if (num.length === 1) {
+                                    num = "0" + num;
+                                }
+                                return num;
+                            };
+
+                            function LoadProc() {
+                                var target = document.getElementById("DateTimeDisp");
+
+                                var Year = now.getFullYear();
+                                var Month = now.getMonth() + 1;
+                                var Date = now.getDate();
+                                var Hour = now.getHours();
+                                var Min = toDoubleDigits(now.getMinutes());
+                                var Sec = now.getSeconds();
+
+                                var time = (Hour + ":" + Min);
+                                return time;
+                            }
+
+                            LoadProc();
+
+                            function putZero(num) { // 引数が一桁の際'0'を追加する
+                                if (num < 10) {
+                                    num = '0' + num;
+                                }
+                                return num;
+                            }
+
+                            for (var j = 0; j < result.routes[0].legs.length; j++) {
+                                distance = result.routes[0].legs[j].distance.text;
+                                duration = result.routes[0].legs[j].duration.value;
+                                console.log(distance);
+                                total = total + Number(duration);
+                                console.log('{},{}', distance, duration);
+                                console.log(duration);
+                                points.push(Math.round(duration / 60));
+                                keika = keika + points[j];
+                                keika2.push(keika);
+
+                                totalDuration += duration; // 所要時間の合計(秒)
+                                totalDurMinutes = Math.round(totalDuration / 60);
+                                let arriveAt = new Date(); // 現在時刻
+                                arriveAt.setMinutes(arriveAt.getMinutes() + totalDurMinutes);
+                                arriveAt = putZero(arriveAt.getHours()) + ':' + putZero(arriveAt
+                                    .getMinutes());
+                                let content = `現在地から：${totalDurMinutes}分<br>到着時刻：${arriveAt}`
+                                console.log(content);
+                                zikoku.push(content);
+                            }
+
+                            var markerdirectionsstart = new google.maps.Marker({
+                                position: new google.maps.LatLng(result.routes[0].legs[
+                                        0]
+                                    .start_location
+                                    .lat(), result.routes[0].legs[0].start_location
+                                    .lng()),
+                                map: map,
+                                title: "スタート地点",
+                                // animation: google.maps.Animation.DROP,
+                                label: {
+                                    text: markernum[0],
+                                    color: "blueviolet",
+                                    fontSize: "20px",
+                                    fontWeight: "bold"
+                                }
+                            });
+                            var markerdirectionsstartinfo = new google.maps.InfoWindow({
+                                content: 'スタート地点' + '<br>' + '現在時刻' +
+                                    LoadProc()
+                            }).open(map, markerdirectionsstart);
+
+                            google.maps.event.addListener(markerdirectionsstart, 'click', function (
+                                event) {
+                                if (markerdirectionsstartinfo) {
+                                    markerdirectionsstartinfo.close();
+                                }
+                                new google.maps.InfoWindow({
+                                    content: 'スタート地点' + '<br>' + '現在時刻' +
+                                        LoadProc()
+                                }).open(map, markerdirectionsstart);
+                            });
+
+                            setTimeout(function () {
+                                markerdirectionsstart.setMap(null);
+                            }, 60000);
+
+                            var markerdirectionsend = new google.maps.Marker({
+                                position: new google.maps.LatLng(result.routes[0].legs[
+                                        addresses
+                                        .length - 1]
+                                    .end_location.lat(),
+                                    result.routes[0].legs[addresses.length - 1]
+                                    .end_location
+                                    .lng()),
+                                map: map,
+                                title: "最終地点",
+                                // animation: google.maps.Animation.DROP,
+                                label: {
+                                    text: markernum[addresses.length],
+                                    color: "blueviolet",
+                                    fontSize: "20px",
+                                    fontWeight: "bold"
+                                }
+                            });
+                            var markerdirectionsendinfo = new google.maps.InfoWindow({
+                                content: markernum[addresses.length -1] +
+                                    'から：' +
+                                    points[points
+                                        .length - 1] + '分' + '<br>' +
+
+                                    zikoku[zikoku.length - 1]
+                            }).open(map, markerdirectionsend);
+
+
+                            google.maps.event.addListener(markerdirectionsend, 'click', function (
+                                event) {
+                                if (markerdirectionsendinfo) {
+                                    markerdirectionsendinfo.close();
+                                }
+                                // markerdirectionsendinfo.open(map, markerdirectionsend)
+                                markerdirectionsendinfo = new google.maps.InfoWindow({
+                                    content: markernum[addresses.length] +
+                                        'から：' +
+                                        points[points
+                                            .length - 1] + '分' + '<br>' +
+
+                                        zikoku[zikoku.length - 1]
+                                }).open(map, markerdirectionsend);
+                            });
+
+                            setTimeout(function () {
+                                markerdirectionsend.
+                                setMap(null);
+                            }, 60000);
+                            var markers = [];
+
+                            for (var b = 0; b < addresses.length - 1; b++) {
+                                markerdirections[b] = new google.maps.Marker({
+                                    position: new google.maps.LatLng(result.routes[0].legs[
+                                            b + 1].start_location
+                                        .lat(),
+                                        result.routes[0].legs[b + 1].start_location
+                                        .lng()),
+                                    map: map,
+                                    title: "経由地点",
+                                    // animation: google.maps.Animation.DROP,
+                                    label: {
+                                        text: markernum[b + 1],
+                                        color: "blueviolet",
+                                        fontSize: "20px",
+                                        fontWeight: "bold"
+                                    }
+                                });
+                                directionsinfo[b] = new google.maps.InfoWindow({
+                                    content: markernum[b] + 'から：' + points[
+                                            b] +
+                                        '分' +
+                                        '<br>' +
+                                        '' +
+                                        zikoku[b]
+                                });
+                                directionsinfo[b].open(map, markerdirections[b]);
+
+                                markerdirectionsEvent(b);
+                            }
+
+                            function markerdirectionsEvent(b) {
+                                markerdirections[b].addListener('click',
+                                    function () {
+                                        directionsinfo[b].open(map, markerdirections[b]);
+                                    });
+
+                                setTimeout(function () {
+                                    markerdirections[b].setMap(null);
+                                }, 60000);
+                            }
+
+                        }
+                    }); {
+                        enableHighAccuracy: true;
+                    }
+                }
+            }
+        }
+    </script> -->
+    <!-- <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcsINkAyvdjRitURQN7IubL8z5umBDmuo&callback=initMap&v=weekly"
+        async></script> -->
+
+</body>
+
+</html>
