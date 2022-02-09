@@ -8,8 +8,8 @@ GENDER_CHOICES = GENDER_CHOICES + [('', '---------')]
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('name', 'age' , 'gender' , 'email' , 'address' , 'carry_address','is_carryed','facility_id','map_id','img_name')
-        widgets = {'is_carryed': forms.HiddenInput(),'facility_id': forms.HiddenInput(),'map_id': forms.HiddenInput(),'img_name': forms.HiddenInput()}
+        fields = ('name', 'age' , 'gender' , 'email' , 'address' , 'carry_address','is_carryed','facility_id','map_id','img_name','password')
+        widgets = {'is_carryed': forms.HiddenInput(),'facility_id': forms.HiddenInput(),'map_id': forms.HiddenInput(),'img_name': forms.HiddenInput(),'password': forms.HiddenInput()}
         labels = {
             'name': '名前',
             'age': '年齢',
@@ -20,7 +20,9 @@ class UserForm(forms.ModelForm):
             'is_carryed' : '送迎中判定',
             'facility_id': '施設_id',
             'map_id': '送迎ID',
-            'img_name': 'QRFileName'
+            'img_name': 'QRコードネーム',
+            'password': 'パスワード'
+
         }
 
 

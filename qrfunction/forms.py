@@ -25,4 +25,4 @@ class QrFuncForm(forms.Form):
         #     'email': 'メールアドレス',
         # }
         input_name = forms.CharField()
-        input_email = forms.CharField()
+        input_password = forms.CharField()

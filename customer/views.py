@@ -5,7 +5,7 @@ from django.core.handlers.wsgi import WSGIRequest
 from django.http.response import JsonResponse
 from django.shortcuts import render, redirect
 from .models import User
-# from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password, check_password
 from .forms import UserForm,SubUserForm
 from django.shortcuts import render
 from django.views.decorators.http import require_POST
@@ -36,20 +36,21 @@ def new(request):
         if form.is_valid():
 
             input_name = request.POST.get('name')
-            input_email = request.POST.get('email')
+            input_password = request.POST.get('email')
 
             params = {
                 'message': '',
                 'input_name': input_name,
-                'input_email': input_email
+                'input_password': input_password
             }
 
-            url = 'http://127.0.0.1:8000/qrfunction/index?name='+input_name+'&email='+input_email
+            url = 'http://127.0.0.1:8000/qrfunction/index?name='+input_name+'&email='+input_password
             img = qrcode.make(url)  # QRコードを生成
 
 
             new = form.save(commit=False)
             new.facility_id = request.user.id
+            new.password = make_password(input_password,input_name)
 
             """保存するファイル名を作る"""
                         

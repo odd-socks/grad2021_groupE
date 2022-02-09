@@ -8,7 +8,7 @@
             <form method="POST" action="{% url 'qrfunction:registration' %}">
                 {% csrf_token %}
                 <input type="hidden" name="name" value="{{d.name}}">
-                <input type="hidden" name="email" value="{{d.email}}">
+                <input type="hidden" name="password" value="{{d.email}}">
                 <button type="submit">完了登録</button>
             </form>
         {% endfor%}

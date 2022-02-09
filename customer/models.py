@@ -24,6 +24,7 @@ class User(models.Model):
     facility_id = models.IntegerField(null=True, blank=True)
     map_id = models.IntegerField(null=True,blank=True)
     img_name = models.CharField(null=True,blank=True,max_length=1000)
+    password = models.CharField(null=True, blank=True, verbose_name="パスワード", max_length=100)
 
     def __str__(self):
         return self.name
