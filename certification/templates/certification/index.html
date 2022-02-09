@@ -17,7 +17,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto my-2 my-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">引受人ページ</a>
+                        <a class="nav-link" href="{% url 'certification:underwriter' %}">引受人ページ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'certification:facility' %}">施設ページ</a>
@@ -61,7 +61,7 @@
                         <div class="container px-5">
                             <div class="row gx-5 align-items-center">
                                 <div class="col-lg-6 order-lg-2">
-                                    <div class="p-5">
+                                    <div class="img-top">
                                         <a href="#services"><img class="img-fluid rounded-circle" src="/static/assets/img/bus-g084b3cd12_1280.jpg" alt="..." /></a>
                                     </div>
                                 </div>
@@ -83,7 +83,7 @@
                         <div class="container px-5">
                             <div class="row gx-5 align-items-center">
                                 <div class="col-lg-6">
-                                    <div class="p-5">
+                                    <div class="img-top">
                                         <a href="#services"><img class="img-fluid rounded-circle" src="/static/assets/img/car-g1738d9fc6_1280.jpg" alt="..." /></a>
                                     </div>
                                 </div>
@@ -119,7 +119,7 @@
                             <a href="#"><i class="bi-gem fs-1 text-primary"></i></a>
                         </div>
                             <h3 class="h4 mb-2">
-                                <a href="#">引受人</a>
+                                <a href="{% url 'certification:underwriter' %}">引受人</a>
                             </h3>
                             <p class="text-muted mb-0">到着時間とドライバーの位置がリアルタイムでわかります</p>
                     </div>

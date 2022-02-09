@@ -17,3 +17,12 @@ class CustomSignupForm(SignupForm):
         user.address = self.cleaned_data['address']
         user.save()
         return user
+
+    # def __init__(self, *args, **kwargs):
+    #         super().__init__(*args,**kwargs)
+
+    #         self.fields['username'].widget.attrs['class']='form-control'
+    #         self.fields['username'].widget.attrs['placeholder']='施設名'
+
+    #         self.fields['email'].widget.attrs['class']='form-control'
+    #         self.fields['email'].widget.attrs['placeholder']='メールアドレス'
