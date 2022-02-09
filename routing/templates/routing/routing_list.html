@@ -82,8 +82,9 @@
                             </a>
                         </td>
                         <td>
-                            <a class="btn btn--orange btn--radius" href="{% url 'routing:delete' routing.pk %}">削除</a>
-                            <!-- <button class="btn btn--orange btn--radius" href="{% url 'routing:delete' routing.pk %}">削除</button> -->
+                            <a href="{% url 'routing:delete' routing.pk %}">
+                                <button class="btn btn--orange btn--radius">削除</button>
+                            </a>
                         </td>
                     </tr>
                 {% endfor %}

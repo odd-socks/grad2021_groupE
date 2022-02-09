@@ -11,11 +11,11 @@
         <div class="my-div-style w-100">
             <form method="POST">
                 {% csrf_token %}
-                <p>{{ routing.name }}を削除しますか？</p>
-                <!-- <button class="btn btn-primary mt-5" type="submit">削除</button> -->
-                <!-- <a class="btn btn-secondary mt-5 ml-2">削除</a> -->
-                <input type="submit" value="削除">
-                <a class="btn btn-secondary mt-5 ml-2" href="{% url 'routing:routing_list' %}">キャンセル</a>
+                    {% for routing in routing_list %}
+                        <p>{{ routing.name }}を削除しますか？</p>
+                        <input type="submit" value="削除">
+                        <a class="btn btn-secondary mt-5 ml-2" href="{% url 'routing:routing_list' %}">キャンセル</a>
+                {% endfor %}
             </form>
         </div>
     </div>
