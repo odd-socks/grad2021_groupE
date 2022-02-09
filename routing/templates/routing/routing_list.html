@@ -68,23 +68,22 @@
                 <table>
                     <tr>
                         <th class="root_name">ルート名</th>
-                        <th class="root">ルート</th>
-                        <th class="waypoints">経由地点</th>
-                        <th class="destination">目的地</th>
                         <th class="url">ナビ</th>
+                        <th class="delete">削除</th>
                     </tr>
             
                 {% for routing in routing_list %}
                 
                     <tr>
                         <td class="root_name">{{ routing.name }}</td>
-                        <td class="root">{{ routing.route }}</td>
-                        <td class="waypoints">{{ routing.waypoints }}</td>
-                        <td class="destination">{{ routing.destination }}</td>
                         <td>
                             <a href="{{ waypoints|add:routing.waypoints|add:destination|add:routing.destination }}">
                                 <button class="btn btn--orange btn--radius">開始</button>
                             </a>
+                        </td>
+                        <td>
+                            <a class="btn btn--orange btn--radius" href="{% url 'routing:delete' routing.pk %}">削除</a>
+                            <!-- <button class="btn btn--orange btn--radius" href="{% url 'routing:delete' routing.pk %}">削除</button> -->
                         </td>
                     </tr>
                 {% endfor %}

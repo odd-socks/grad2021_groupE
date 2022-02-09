@@ -2,7 +2,8 @@ from django.http.response import JsonResponse
 from django.http import JsonResponse, request
 from django.shortcuts import redirect, render
 from django.views import generic
-from django.urls import reverse
+from django.views.generic import DeleteView
+from django.urls import reverse, reverse_lazy
 from customer.models import User
 from .models import Routing
 from django.contrib.auth.decorators import login_required
@@ -111,3 +112,8 @@ def create(request):
         record = Routing(name=input_name,route=pointsString,waypoints=waypoints,destination=destination,facility_id=request.user.id)
         record.save()
         return render(request, 'routing/create.html', {'message': '送迎ルートを登録しました。'})
+
+# @login_required
+class delete(DeleteView):
+    model = Routing
+    success_url = reverse_lazy('routing:routing_list')
