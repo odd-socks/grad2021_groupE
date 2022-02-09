@@ -98,5 +98,5 @@ def detail(request, customer_id):
     customer_id = get_object_or_404(User, pk=customer_id)
     return render(request, 'qrfunction/detail.html', {'data': customer_id})
 
-def newpass(request, customer_id):
+def newpass(request):
     pass
