@@ -7,6 +7,7 @@
 </head>
 
 <body>
+    <h1>初回パスワード変更</h1>
     {{error}}
     <div>
         <!-- <br> -->
@@ -15,7 +16,7 @@
         <form method="POST" action="{% url 'qrfunction:index' %}">
             {% csrf_token %}
             名前 : <input type="text" name="name"><br>
-            メールアドレス : <input type="text" name="email"><br>
+            メールアドレス : <input type="text" name="password"><br>
             <button type="submit">検索</button>
         </form>
     </div>

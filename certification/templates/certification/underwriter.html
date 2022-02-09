@@ -1,10 +1,11 @@
+<!-- 引受人トップページ -->
 <!-- トップ画面 -->
 
 {% extends 'certification/base.html' %}
 
 {% load static %}
 
-{% block title %}施設用トップページ{% endblock %}
+{% block title %}引受人トップページ{% endblock %}
 
 
 
@@ -47,27 +48,61 @@
     <!--施設サービス紹介-->
     <section class="page-section" id="services">
         <div class="container px-4 px-lg-5">
-            <h2 class="text-center mt-0">送迎引受確認画面</h2>
-            <hr class="divider" />
-            <!-- QRコード -->
-            <div style="text-align: center;">
-              <h1>{{user.username}}</h1>
-                <!-- <h2>受け取り登録</h2> -->
-                <img src="data:image/png;base64,{{ qr }}"/>
-                <br>
-                <!-- 印刷・施設トップ遷移ボタン -->
-                <div class="new_page">
-                    <!-- 印刷 -->
-                    <button class="btn btn--orange btn--radius"  onclick="window.print();">印刷</button>
-                    <!-- 施設トップ -->
-                    <button class="btn btn--orange btn--radius">
-                        <a class="text-white" href="{% url 'certification:facility' %}">戻る</a>
-                    </button>
-                </div>
+            <!-- フラッシュメッセージ -->
+            <!-- {% if message %}
+            <div id=“message” class=“message”>
+                {{message}}
             </div>
+            {% endif %}
+            <div class=“header-blank”></div> -->
+
+            <h2 class="text-center mt-0">引受人サービス一覧</h2>
+            <hr class="divider" />
+
+            <!-- 下記に施設ページのコンテンツが入ります -->
+            <section class="content-section" id="portfolio">
+                <div class="container px-4 px-lg-5">
+                    <div class="row gx-0">
+                        <!-- QRコード -->
+                        <div class="col-lg-6">
+                            <a class="portfolio-item" href="#">
+                                <div class="caption">
+                                    <div class="caption-content">
+                                        <div class="h2">QRコード</div>
+                                        <p class="mb-0">送迎引受確認はこちら</p>
+                                    </div>
+                                </div>
+                                <img class="img-facility" src="/static/assets/img/digital-vaccination-record-g55c938560_1920.jpg" alt="..." />
+                            </a>
+                        </div>
+                        <!-- ルート選択 -->
+                        <div class="col-lg-6">
+                            <a class="portfolio-item" href="#">
+                                <div class="caption">
+                                    <div class="caption-content">
+                                        <div class="h2">マップ</div>
+                                        <p class="mb-0">リアルタイムのマッピングを提供します</p>
+                                    </div>
+                                </div>
+                                <img class="img-facility" src="/static/assets/img/travel-gdf9991bab_1920.jpg" alt="..." />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </section>
 {% endblock %}
+
+<!-- Footer-->
+{% block footer %}
+    <footer class="bg-light py-5">
+        <div class="container px-4 px-lg-5">
+            <div class="small text-center text-muted">Copyright &copy; 2022 - CarryNow</div>
+        </div>
+    </footer>
+{% endblock %}
+
 
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -84,7 +119,7 @@
 
 
 
-        <!-- 下記にjsの処理を記述 -->
+<!-- 下記にjsの処理を記述 -->
 <script>
     window.addEventListener('DOMContentLoaded', event => {
 
@@ -136,6 +171,17 @@ new SimpleLightbox({
 });
 
 });
-        </script>
+
+
+// ---------------------------------------------------
+// フラッシュメッセージ
+"use strict";
+setTimeout(() => {
+  let flash = document.getElementById("message");
+  if (flash != null) {
+    flash.classList.add("none");
+  }
+}, 3.5 * 1000);
+</script>
     </body>
 </html>

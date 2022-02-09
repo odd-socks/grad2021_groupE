@@ -1,15 +1,19 @@
+from fileinput import filename
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.handlers.wsgi import WSGIRequest
 from django.http.response import JsonResponse
 from django.shortcuts import render, redirect
 from .models import User
-# from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password, check_password
 from .forms import UserForm,SubUserForm
 from django.shortcuts import render
 from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
+from io import BytesIO
+import base64
+import qrcode
 # Create your views here.
 
 @login_required
@@ -30,10 +34,54 @@ def new(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
+
+            input_name = request.POST.get('name')
+            input_password = request.POST.get('email')
+
+            params = {
+                'message': '',
+                'input_name': input_name,
+                'input_password': input_password
+            }
+
+            url = 'http://127.0.0.1:8000/qrfunction/index?name='+input_name+'&email='+input_password
+            img = qrcode.make(url)  # QRコードを生成
+
+
             new = form.save(commit=False)
             new.facility_id = request.user.id
-            new.save()
-            return redirect('customer:list')
+            new.password = make_password(input_password,input_name)
+
+            """保存するファイル名を作る"""
+                        
+            if User.objects.filter().exists():
+                """ユーザーが一人でもいる場合の処理"""
+                new_customer_id = User.objects.last().id
+                new_customer_id = new_customer_id + 1
+
+                """QRコードをフォルダに保存"""
+                file_name = 'static/assets/img/qr_images/qr_img' + str(new_customer_id) + '.png'
+                img.save(file_name)
+
+                new.img_name = file_name
+                new.save()
+
+
+            else:
+                """ユーザーがいなかった時の処理"""
+                new.save()
+                new_customer_id = User.objects.last().id
+
+                """QRコードをフォルダに保存"""
+                file_name = 'static/assets/img/qr_images/qr_img' + str(new_customer_id) + '.png'
+                img.save(file_name)
+
+                new.img_name = file_name
+                new.save()
+
+            """利用者一覧に遷移"""
+            return redirect('customer:list') 
+
         else:
             params['message'] = '再入力して下さい'
             params['form'] = form

@@ -1,8 +1,10 @@
 # Create your views here.
 
 from distutils.core import run_setup
+from operator import truediv
 from tkinter.messagebox import NO
 from unittest import result
+from django.contrib.auth.hashers import make_password, check_password
 from django.shortcuts import render, get_object_or_404, redirect
 from customer.models import User
 from .models import CarryLog
@@ -22,21 +24,25 @@ def search(request):
 def registration(request):
     """送迎完了"""
     input_name = request.POST.get('name')
-    input_email= request.POST.get('email')
-
+    input_password = request.POST.get('password')
+    print(input_name)
+    print(input_password)
+    try_pass = make_password(input_password,input_name)
+    print(try_pass)
+    # true_pass = check_password(try_pass)
 #----------------------------------------------------------------------------------------------------
     #送迎中判定欄の反転処理
-    results = User.objects.filter(name=input_name, email=input_email)  # Userテーブルから複数条件で検索
+    results = User.objects.filter(name=input_name, password=try_pass)  # Userテーブルから複数条件で検索
     for result in results:
         result.is_carryed = False
         result.save()
-        # print(result.is_carryed)
 #----------------------------------------------------------------------------------------------------
 
 #----------------------------------------------------------------------------------------------------
     #送迎ログの登録
-    log = CarryLog(email=input_email)
-    log.save()
+    for log_catch in results:
+        log = CarryLog(email=log_catch.email)
+        log.save()
 #----------------------------------------------------------------------------------------------------
     return render(request, 'qrfunction/registration.html')
 
@@ -44,21 +50,53 @@ def registration(request):
 def index(request):
     """ユーザー判定"""
     input_name = request.POST.get('name')
-    input_email= request.POST.get('email')
+    input_password = request.POST.get('password')
 
-    results = User.objects.filter(name=input_name, email=input_email)  # Userテーブルから複数条件で検索
-    # print(results)  # ターミナルに結果を出力
-    if not results:
-        return render(request,'qrfunction/search.html',{'error':'名前もしくはメールアドレスが間違っています'})
+    # print(input_name)
+    # print(input_password)
+    fill= User.objects.filter(name=input_name)
+    # print(fill)
+    # results = User.objects.filter(name=input_name, password=input_password)  # Userテーブルから複数条件で検索
+    # print(results)
+
+    try_pass = make_password(input_password,input_name)
+    # print(try_pass)
+    
+    if not fill:
+        return render(request,'qrfunction/search.html',{'error':'名前が間違っています。'})
+
     else:
-        for result in results:
-            if result.is_carryed == False:
-                return render(request,'qrfunction/search.html', {'error':'送迎中ではありません'})
+
+        for result in fill:
+
+            if check_password(input_password,result.password) == False:
+                return render(request,'qrfunction/search.html',{'error':'パスワードが間違っています。'})
+
+            # elif result.is_carryed == False:
+            #     return render(request,'qrfunction/search.html', {'error':'送迎中ではありません'})
+
             elif result.is_carryed == True:
-                return render(request, 'qrfunction/index.html', {'data':results})
+                return render(request,'qrfunction/index.html', {'data':fill})
+    
+    return render(request,'qrfunction/search.html')
+
+    # results = User.objects.filter(name=input_name, email=input_password)  # Userテーブルから複数条件で検索
+
+
+    # if not results:
+    #     return render(request,'qrfunction/search.html',{'error':'名前もしくはメールアドレスが間違っています'})
+    # else:
+    #     for result in results:
+    #         if result.is_carryed == False:
+    #             return render(request,'qrfunction/search.html', {'error':'送迎中ではありません'})
+    #         elif result.is_carryed == True:
+    #             return render(request, 'qrfunction/index.html', {'data':results})
 
 
 def detail(request, customer_id):
     """ ユーザー詳細 """
     customer_id = get_object_or_404(User, pk=customer_id)
     return render(request, 'qrfunction/detail.html', {'data': customer_id})
+
+def newpass(request):
+    pass

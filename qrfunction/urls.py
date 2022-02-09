@@ -9,5 +9,4 @@ urlpatterns = [
     path('index/', views.index, name='index'),
     path('registration/', views.registration, name='registration'),
     path('detail/<int:customer_id>/', views.detail, name='detail'),
-
 ]
