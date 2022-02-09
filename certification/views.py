@@ -25,6 +25,10 @@ class IndexView(generic.TemplateView):
 class FacilityView(generic.TemplateView):
      template_name = 'certification/facility.html'
 
+#引受人トップページ
+class UnderwriterView(generic.TemplateView):
+     template_name = 'certification/underwriter.html'
+
 
 #QRコード
 @login_required
