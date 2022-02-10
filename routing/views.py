@@ -2,7 +2,7 @@ from django.http.response import JsonResponse
 from django.http import JsonResponse, request
 from django.shortcuts import redirect, render
 from django.views import generic
-from django.views.generic import DeleteView
+from django.shortcuts import get_object_or_404
 from django.urls import reverse, reverse_lazy
 from customer.models import User
 from .models import Routing
@@ -113,7 +113,9 @@ def create(request):
         record.save()
         return render(request, 'routing/create.html', {'message': '送迎ルートを登録しました。'})
 
-# @login_required
-class delete(DeleteView):
-    model = Routing
-    success_url = reverse_lazy('routing:routing_list')
+@login_required
+def delete(request, route_id):
+    """ ユーザーを削除 """
+    route_id = get_object_or_404(Routing, id=route_id)
+    route_id.delete()
+    return redirect('routing:routing_list')

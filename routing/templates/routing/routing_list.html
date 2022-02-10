@@ -83,7 +83,7 @@
                         </td>
                         <td>
                             <a href="{% url 'routing:delete' routing.pk %}">
-                                <button class="btn btn--orange btn--radius">削除</button>
+                                <button form="delete-form" class="btn btn--orange btn--radius" type="submit" onclick='return confirm("本当に消去しますか？");'>削除</button>
                             </a>
                         </td>
                     </tr>

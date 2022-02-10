@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+# from .views import delete
 
 app_name = 'routing'
 urlpatterns = [
@@ -9,5 +10,5 @@ urlpatterns = [
     path('user_search/', views.user_search, name="user_search"),
     path('confirm/', views.confirm, name="confirm"),
     path('create/', views.create, name="create"),
-    path('delete/<int:pk>/', views.delete.as_view(), name="delete"),
+    path('delete/<int:route_id>/', views.delete, name="delete"),
 ]
