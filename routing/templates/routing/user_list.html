@@ -150,12 +150,12 @@
             // showList();
         }
 
-        function deletePoint(data) {
-            points.splice(data, 1);
-            pointsStringScreen.value = points.join("|");
-            setData(data);
-            searchRoute();
-        }
+        // function deletePoint(data) {
+        //     points.splice(data, 1);
+        //     pointsStringScreen.value = points.join("|");
+        //     setData(data);
+        //     searchRoute();
+        // }
         
         // 目的地をリスト形式で表示する処理
         // function showList(){
@@ -332,8 +332,8 @@
                                 <td>${gender}</td>
                                 <td>${address}</td>
                                 <td>${carry_address}</td>
-                                <td><button class="btn btn--orange btn--radius" onclick='addPoint("[${name}, ${carry_address}]");'>追加</button></td>
-                                <td><button class="btn btn--orange btn--radius" onclick='deletePoint("${name}"); deletePoint("${carry_address}");'>削除</button></td>
+                                <td><button class="btn btn--orange btn--radius" onclick='addPoint("${carry_address}")'>追加</button></td>
+                                <td><button class="btn btn--orange btn--radius" onclick='deletePoint("${carry_address}");'>削除</button></td>
                             </tr>
                         `;
                     }
