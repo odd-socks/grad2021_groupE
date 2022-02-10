@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <title>引受人ログイン</title>
+</head>
+<body>
+    <h1>引受人ログイン</h1>
+    {{error}}
+    <div>
+        <form method="POST" action="{% url 'CustomerAccounts:CustomerLogin' %}">
+            {% csrf_token %}
+            名前 : <input type="text" name="name"><br>
+            パスワード : <input type="text" name="password"><br>
+            <button type="submit">検索</button>
+        </form>
+    </div>
+    
+</body>
+</html>

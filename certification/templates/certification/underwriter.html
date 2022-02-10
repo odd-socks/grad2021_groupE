@@ -6,9 +6,6 @@
 {% load static %}
 
 {% block title %}引受人トップページ{% endblock %}
-
-
-
 <!-- Header -->
 {% block header %}
     <!-- Navigation -->
@@ -27,7 +24,7 @@
                     <!-- ログイン・ログアウト判定 -->
                     {% if not user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">ログイン</a>
+                        <a class="nav-link" href="{% url 'CustomerAccounts:CustomerLogin' %}">ログイン</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'signup' %}">施設登録</a>
@@ -65,7 +62,7 @@
                     <div class="row gx-0">
                         <!-- QRコード -->
                         <div class="col-lg-6">
-                            <a class="portfolio-item" href="#">
+                            <a class="portfolio-item" href="{% url 'CustomerAccounts:CustomerQrcode' %}">
                                 <div class="caption">
                                     <div class="caption-content">
                                         <div class="h2">QRコード</div>

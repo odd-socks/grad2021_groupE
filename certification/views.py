@@ -1,6 +1,7 @@
 from re import template
 from django.shortcuts import render
 from django.views import generic
+from customer.models import User
 
 #from certification.models import CustomUser
 #from django.contrib.auth.models import CusotmUser
@@ -28,6 +29,11 @@ class FacilityView(generic.TemplateView):
 #引受人トップページ
 class UnderwriterView(generic.TemplateView):
      template_name = 'certification/underwriter.html'
+     def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["session_name"] = self.request.session['name']
+        context["session_pass"] = self.request.session['password']  # 他のモデルからデータを取得
+        return context
 
 
 #QRコード

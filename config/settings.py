@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',#for djnago-allauth
     'customer.apps.CustomerConfig',
     'qrfunction.apps.QrfunctionConfig',
+    'CustomerAccounts.apps.CustomeraccountsConfig', #利用者の認証一式
 
     'map.apps.MapConfig',
     'widget_tweaks',#django-form用
