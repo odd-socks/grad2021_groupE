@@ -31,9 +31,16 @@ class UnderwriterView(generic.TemplateView):
      template_name = 'certification/underwriter.html'
      def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["session_name"] = self.request.session['name']
-        context["session_pass"] = self.request.session['password']  # 他のモデルからデータを取得
-        return context
+        if 'name' in self.request.session:
+             context['session_name'] = self.request.session['name']
+             context['session_pass'] = self.request.session['password']
+          #    del self.request.session['name']
+          #    del self.request.session['password']
+
+             return context
+        else:
+             print('sessionの値がありません')
+             return context
 
 
 #QRコード

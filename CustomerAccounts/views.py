@@ -118,17 +118,26 @@ def CustomerLoginPass(request):
         request.session['name'] = input_name
         request.session['password'] = input_password
 
-        return redirect('Certification:underwriter')
+        redirect('certification:underwriter')
 
     """ここまで"""
     return render(request, 'Certification/underwriter.html')
 
 
 def CustomerQrcode(request):
-    request.session['name']
-    request.session['password']
+    session_name_qr = request.session['name']
+    session_pass_qr = request.session['password']
 
-    print(request.session['name'])
-    print(request.session['password'])
+    # print(request.session['name'])
+    # print(request.session['password'])
+    print(session_name_qr)
+    print(session_pass_qr)
+    dark_pass = make_password(session_pass_qr,session_name_qr)
+    url = 'http://127.0.0.1:8000/qrfunction/index?name='+session_name_qr+'&password='+dark_pass
+    print(url)
+    session_qr_img = qrcode.make(url)  # QRコードを生成
+    buffer = BytesIO()
+    session_qr_img.save(buffer, format="PNG")
+    session_qr_img = base64.b64encode(buffer.getvalue()).decode().replace("'", "")
 
-    return render(request, 'CustomerAccounts/customer_qrcode.html',{'session': request.session})
+    return render(request, 'CustomerAccounts/customer_qrcode.html',{'session': request.session,'session_qr':session_qr_img})

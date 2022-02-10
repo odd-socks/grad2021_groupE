@@ -4,6 +4,7 @@ from distutils.core import run_setup
 from operator import truediv
 from tkinter.messagebox import NO
 from unittest import result
+from unittest import result
 from django.contrib.auth.hashers import make_password, check_password
 from django.shortcuts import render, get_object_or_404, redirect
 from customer.models import User
@@ -49,27 +50,29 @@ def registration(request):
 
 def index(request):
     """ユーザー判定"""
-    input_name = request.POST.get('name')
-    input_password = request.POST.get('password')
+    input_name = request.GET.get('name')
+    input_password = request.GET.get('password')
 
     # print(input_name)
     # print(input_password)
     fill= User.objects.filter(name=input_name)
+    # fill= User.objects.filter(name='小泉')
     # print(fill)
     # results = User.objects.filter(name=input_name, password=input_password)  # Userテーブルから複数条件で検索
-    # print(results)
-
-    try_pass = make_password(input_password,input_name)
+    # print(results)    
     # print(try_pass)
     
     if not fill:
         return render(request,'qrfunction/search.html',{'error':'名前が間違っています。'})
-
+        
     else:
 
         for result in fill:
 
-            if check_password(input_password,result.password) == False:
+            if request.GET.get('password') != result.password:
+                print(request.GET.get('password'))
+                print(result.password)
+            # if check_password(result.password,result.name) != check_password(input_password,input_name) :
                 return render(request,'qrfunction/search.html',{'error':'パスワードが間違っています。'})
 
             # elif result.is_carryed == False:
