@@ -98,6 +98,7 @@
     <div id="map_canvas" style="width:80%;height:400px;margin-bottom:10px;"></div>
         <input type="text" id="pointsString"  value="{{pointsString}}">
         <button class="btn btn--orange btn--radius" onclick="submit()">確定</button>
+        <button class="btn btn--orange btn--radius" onclick="deletePoint()">削除</button>
     <div style="height: 50px;"></div>
         </div>
     </section>
@@ -106,7 +107,7 @@
 
 <!-- 下記にjavaScriptの記述 -->
 {% block extrajs %}
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNMXB2mTXfoOmmJTm1rIqCUgR_FnLjpmU"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDM6kAjlr0CY-eFifybdS8aRpSHPZrGo8Q"></script>
     <script>
         //マップの初期化
         var opts = {
@@ -150,12 +151,12 @@
             // showList();
         }
 
-        // function deletePoint(data) {
-        //     points.splice(data, 1);
-        //     pointsStringScreen.value = points.join("|");
-        //     setData(data);
-        //     searchRoute();
-        // }
+        function deletePoint(data) {
+            points.pop();
+            pointsStringScreen.value = points.join("|");
+            setData(data);
+            searchRoute();
+        }
         
         // 目的地をリスト形式で表示する処理
         // function showList(){
@@ -315,7 +316,6 @@
                             <th>住所</th>
                             <th>送迎先住所</th>
                             <th>追加ボタン</th>
-                            <th>削除ボタン</th>
                         </tr>
                     `;
 
@@ -332,8 +332,7 @@
                                 <td>${gender}</td>
                                 <td>${address}</td>
                                 <td>${carry_address}</td>
-                                <td><button class="btn btn--orange btn--radius" onclick='addPoint("${carry_address}")'>追加</button></td>
-                                <td><button class="btn btn--orange btn--radius" onclick='deletePoint("${carry_address}");'>削除</button></td>
+                                <td><button class="btn btn--orange btn--radius" onclick='addPoint("[${name}, ${carry_address}]");'>追加</button></td>
                             </tr>
                         `;
                     }

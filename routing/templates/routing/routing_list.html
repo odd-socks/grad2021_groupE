@@ -67,7 +67,7 @@
             <div class="root_list">
                 <table>
                     <tr>
-                        <th class="root_name">ルート名</th>
+                        <th class="route_name">ルート名</th>
                         <th class="url">ナビ</th>
                         <th class="delete">削除</th>
                     </tr>
@@ -75,7 +75,7 @@
                 {% for routing in routing_list %}
                 
                     <tr>
-                        <td class="root_name">{{ routing.name }}</td>
+                        <td class="route_name">{{ routing.name }}</td>
                         <td>
                             <a href="{{ waypoints|add:routing.waypoints|add:destination|add:routing.destination }}">
                                 <button class="btn btn--orange btn--radius">開始</button>
@@ -83,7 +83,7 @@
                         </td>
                         <td>
                             <a href="{% url 'routing:delete' routing.pk %}">
-                                <button form="delete-form" class="btn btn--orange btn--radius" type="submit" onclick='return confirm("本当に消去しますか？");'>削除</button>
+                                <button class="btn btn--orange btn--radius" form="delete-form" onclick='return confirm("本当に消去しますか？");'>削除</button>
                             </a>
                         </td>
                     </tr>
