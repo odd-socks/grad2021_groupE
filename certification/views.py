@@ -32,8 +32,8 @@ class UnderwriterView(generic.TemplateView):
      def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if 'name' in self.request.session:
-             context['session_name'] = self.request.session['name']
-             context['session_pass'] = self.request.session['password']
+             context['name'] = self.request.session['name']
+             context['password'] = self.request.session['password']
           #    del self.request.session['name']
           #    del self.request.session['password']
 

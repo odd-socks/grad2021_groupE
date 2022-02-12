@@ -33,7 +33,7 @@ def registration(request):
     # true_pass = check_password(try_pass)
 #----------------------------------------------------------------------------------------------------
     #送迎中判定欄の反転処理
-    results = User.objects.filter(name=input_name, password=try_pass)  # Userテーブルから複数条件で検索
+    results = User.objects.filter(name=input_name)  # Userテーブルから複数条件で検索
     for result in results:
         result.is_carryed = False
         result.save()
@@ -69,14 +69,13 @@ def index(request):
 
         for result in fill:
 
-            if request.GET.get('password') != result.password:
-                print(request.GET.get('password'))
-                print(result.password)
+            if check_password(input_password,result.password) == False:
+                """DB内の暗号化パスワードと、セッションの中の複合化パスワードを判定"""
             # if check_password(result.password,result.name) != check_password(input_password,input_name) :
                 return render(request,'qrfunction/search.html',{'error':'パスワードが間違っています。'})
 
-            # elif result.is_carryed == False:
-            #     return render(request,'qrfunction/search.html', {'error':'送迎中ではありません'})
+            elif result.is_carryed == False:
+                return render(request,'qrfunction/search.html', {'error':'送迎中ではありません'})
 
             elif result.is_carryed == True:
                 return render(request,'qrfunction/index.html', {'data':fill})

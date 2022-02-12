@@ -13,8 +13,8 @@ def CustomerLogin(request):
     request.session['name'] = input_name
     request.session['password'] = input_password
 
-    print(request.session['name'])
-    print(request.session['password'])
+    # print(request.session['name'])
+    # print(request.session['password'])
     # if request.session['name']['password'] == True:
     #     print(request.settion['name'])
 
@@ -123,17 +123,54 @@ def CustomerLoginPass(request):
     """ここまで"""
     return render(request, 'Certification/underwriter.html')
 
-
-def CustomerQrcode(request):
+def CustomerLogOut(request):
     session_name_qr = request.session['name']
     session_pass_qr = request.session['password']
 
+    # if  not session_name_qr and not session_pass_qr:
+    del request.session['name']
+    del request.session['password']
+
+    request.session['name'] = None
+    request.session['password'] = None
+        
+    return redirect('certification:underwriter')
+    # else:
+    #     return render(request, 'Certification/underwriter.html' ,{'msg':'ログインしていません。'})
+
+
+def CustomerQrcode(request):
+    # print(request.session["name"])
+    # if 'name' in request.session:
+    #     # request.session["name"] = None
+    #     # request.session["password"] = None
+    #     print(request.session["name"])
+    #     pass
+
+    # if request.session["name"] == None:
+
+
+    #     request.session['name']
+    #     request.session['password']
+
+
+    #     del request.session['name']
+    #     del request.session['password']
+    #     return render(request,'CustomerAccounts/customer_login.html',{'error' : 'ログインしていません。'})
+    # # elif (request.session['name'] is None):
+    # #     return render(request,'CustomerAccounts/customer_login.html',{'error' : 'ログインしていません。'})
+    # else:
+    #     pass
+
+    session_name_qr = request.session['name']
+    session_pass_qr = request.session['password']
+        
     # print(request.session['name'])
     # print(request.session['password'])
-    print(session_name_qr)
-    print(session_pass_qr)
-    dark_pass = make_password(session_pass_qr,session_name_qr)
-    url = 'http://127.0.0.1:8000/qrfunction/index?name='+session_name_qr+'&password='+dark_pass
+    # print(session_name_qr)
+    # print(session_pass_qr)
+    # dark_pass = make_password(session_pass_qr,session_name_qr)
+    url = 'http://127.0.0.1:8000/qrfunction/index?name='+session_name_qr+'&password='+session_pass_qr
     print(url)
     session_qr_img = qrcode.make(url)  # QRコードを生成
     buffer = BytesIO()
