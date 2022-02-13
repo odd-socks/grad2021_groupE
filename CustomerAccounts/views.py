@@ -63,10 +63,10 @@ def CustomerLoginSertif(request):
 
         for result in fill:
 
-            if input_email == result.email:
+            if input_email != result.email:
                 return render(request,'CustomerAccounts/customer_login.html',{'error':'メールアドレスが間違っています。'})
 
-            elif check_password(input_email,result.password):
+            elif result.password != try_pass:
                 return render(request, 'CustomerAccounts/customer_login.html',{'error':'あなたは初回ログインではありません。'})
             
             else:

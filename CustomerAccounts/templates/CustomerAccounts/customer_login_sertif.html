@@ -3,17 +3,17 @@
 <html lang="ja">
 <head>
     <meta charset="utf-8" />
-    <title>引受人ログイン</title>
+    <title>引受人初回ログインページ</title>
 </head>
 <body>
-    <h1>引受人ログイン</h1>
-    {{msg}}
-    {{error}}
+    <h1>引受人初回ログインページ</h1>
+    {{msg}}{{error}}
+    <p>名前とメールアドレスを入力し、パスワードを作成してください。</p>
     <div>
         <form method="POST" action="{% url 'CustomerAccounts:CustomerLoginSertif'%}">
             {% csrf_token %}
             名前 : <input type="text" name="name"><br>
-            メールアドレス : <input type="text" name="メールアドレス"><br>
+            メールアドレス : <input type="text" name="email"><br>
             <button type="submit">検索</button>
         </form>
     </div>
