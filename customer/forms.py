@@ -9,6 +9,7 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('name', 'age' , 'gender' , 'email' , 'address' , 'carry_address','is_carryed','facility_id','map_id','img_name','password')
+        
         widgets = {'is_carryed': forms.HiddenInput(),'facility_id': forms.HiddenInput(),'map_id': forms.HiddenInput(),'img_name': forms.HiddenInput(),'password': forms.HiddenInput()}
         labels = {
             'name': '名前',
@@ -32,19 +33,19 @@ class UserForm(forms.ModelForm):
             super().__init__(*args,**kwargs)
 
             self.fields['name'].widget.attrs['class']='form-control'
-            self.fields['name'].widget.attrs['placeholder']='山田太郎'
+            self.fields['name'].widget.attrs['placeholder']='(例）山田太郎'
 
             self.fields['age'].widget.attrs['class']='form-control'
-            self.fields['age'].widget.attrs['placeholder']='80'
+            self.fields['age'].widget.attrs['placeholder']='(例)80'
 
             self.fields['email'].widget.attrs['class']='form-control'
-            self.fields['email'].widget.attrs['placeholder']='taro@taro.com'
+            self.fields['email'].widget.attrs['placeholder']='(例)taro@taro.com'
 
             self.fields['address'].widget.attrs['class']='form-control'
-            self.fields['address'].widget.attrs['placeholder']='草加駅'
+            self.fields['address'].widget.attrs['placeholder']='(例)草加駅'
 
             self.fields['carry_address'].widget.attrs['class']='form-control'
-            self.fields['carry_address'].widget.attrs['placeholder']='越谷駅'
+            self.fields['carry_address'].widget.attrs['placeholder']='(例)越谷駅'
 
 
 class SubUserForm(forms.ModelForm):

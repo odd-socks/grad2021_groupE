@@ -1,26 +1,162 @@
-<!DOCTYPE html>
+<!-- 引受人トップページ -->
+<!-- トップ画面 -->
+
+{% extends 'certification/base.html' %}
+
 {% load static %}
-<html lang="ja">
-<head>
-    <meta charset="utf-8" />
-    <title>初回パスワード変更</title>
-</head>
-<body>
-    <h1>任意のパスワードに変更してください。</h1><br>
-    <p>※パスワードは必ずメモしてください。</p>
-    <h2>{{msg}}</h2>
-    <div>
+
+{% block title %}初回パスワード変更{% endblock %}
+<!-- Header -->
+{% block header %}
+{{msg}}
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="{% url 'certification:index' %}">Carry Now</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'certification:underwriter' %}">引受人ページ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'certification:facility' %}">施設ページ</a>
+                    </li>
+                    <!-- ログイン・ログアウト判定 -->
+                    {% if not name and not password or name == None%}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'CustomerAccounts:CustomerLogin' %}">ログイン</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'CustomerAccounts:CustomerLogOut' %}">ログアウト</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>  
+{% endblock %}
+        
+<!-- Content -->
+{% block content %}
+<section class="page-section" id="services">
+    <div class="container px-4 px-lg-5">
+        <!-- <h2 class="text-center mt-0">{{msg}}</h2> -->
+        <h2 class="text-center mt-0">任意のパスワードに変更してください。</h2>
+        <hr class="divider" />
+        <p>※パスワードは必ずメモしてください。</p> 
+
+
+        <div class="form-control">
         {% for d in data %}
-        <form method="POST" action="{% url 'CustomerAccounts:CustomerLoginPass'%}">
+        <form id="underwriter-login-pass" method="POST" action="{% url 'CustomerAccounts:CustomerLoginPass'%}">
             {% csrf_token %}
-            <input type="hidden" name="name" value="{{d.name}}"><br>
-            <input type="hidden" name="email" value="{{d.email}}"><br>
-            パスワード : <input type="text" name="password"><br>
-            同じパスワードを入力 : <input type="text" name="password_again"><br>
-            <button type="submit" onclick='return confirm("この内容で変更してもよろしいですか？");'>変更</button>
+            <table class="user-table">
+                <tr>
+                    <input type="hidden" name="name" value="{{d.name}}"><br>
+                    <input type="hidden" name="email" value="{{d.email}}"><br>
+                    <th class="user-th">password</th>
+                    <td class="user-td"><input type="text" name="password"></td>
+                </tr>
+                <tr>
+                    <th class="user-th">again</th>
+                    <td class="user-td"><input type="text" name="password_again"></td>
+                </tr>
+            </table>
         </form>
         {% endfor %}
+            <!-- 利用者登録ボタン -->
+            <div form="underwriter-form" class="new_page">
+                <button form="underwriter-login-pass" class="btn btn--orange btn--radius" type="submit" onclick='return confirm("この内容で変更してもよろしいですか？");'>変更</button>
+            </div>
+        </div>
     </div>
-    
-</body>
+</section>
+
+{% endblock %}
+
+<!-- Footer-->
+
+
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- SimpleLightbox plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+
+
+
+<!-- 下記にjsの処理を記述 -->
+<script>
+    window.addEventListener('DOMContentLoaded', event => {
+
+// Navbar shrink function
+var navbarShrink = function () {
+    const navbarCollapsible = document.body.querySelector('#mainNav');
+    if (!navbarCollapsible) {
+        return;
+    }
+    if (window.scrollY === 0) {
+        navbarCollapsible.classList.remove('navbar-shrink')
+    } else {
+        navbarCollapsible.classList.add('navbar-shrink')
+    }
+
+};
+
+// Shrink the navbar 
+navbarShrink();
+
+// Shrink the navbar when page is scrolled
+document.addEventListener('scroll', navbarShrink);
+
+// Activate Bootstrap scrollspy on the main nav element
+const mainNav = document.body.querySelector('#mainNav');
+if (mainNav) {
+    new bootstrap.ScrollSpy(document.body, {
+        target: '#mainNav',
+        offset: 74,
+    });
+};
+
+// Collapse responsive navbar when toggler is visible
+const navbarToggler = document.body.querySelector('.navbar-toggler');
+const responsiveNavItems = [].slice.call(
+    document.querySelectorAll('#navbarResponsive .nav-link')
+);
+responsiveNavItems.map(function (responsiveNavItem) {
+    responsiveNavItem.addEventListener('click', () => {
+        if (window.getComputedStyle(navbarToggler).display !== 'none') {
+            navbarToggler.click();
+        }
+    });
+});
+
+// Activate SimpleLightbox plugin for portfolio items
+new SimpleLightbox({
+    elements: '#portfolio a.portfolio-box'
+});
+
+});
+
+
+// ---------------------------------------------------
+// フラッシュメッセージ
+"use strict";
+setTimeout(() => {
+  let flash = document.getElementById("message");
+  if (flash != null) {
+    flash.classList.add("none");
+  }
+}, 3.5 * 1000);
+</script>
+    </body>
 </html>
