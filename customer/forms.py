@@ -9,6 +9,7 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('name', 'age' , 'gender' , 'email' , 'address' , 'carry_address','is_carryed','facility_id','map_id','img_name','password')
+        
         widgets = {'is_carryed': forms.HiddenInput(),'facility_id': forms.HiddenInput(),'map_id': forms.HiddenInput(),'img_name': forms.HiddenInput(),'password': forms.HiddenInput()}
         labels = {
             'name': '名前',

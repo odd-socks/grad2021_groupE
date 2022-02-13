@@ -101,6 +101,16 @@
                         <th class="user-th">{{form.map_id.label_tag}}</th>
                         <td class="user-td">{{form.map_id}}</td>
                     </tr>
+                    <!-- QRコード画像 -->
+                    <tr id="hoge">
+                        <th class="user-th">{{form.img_name.label_tag}}</th>
+                        <td class="user-td">{{form.img_name}}{{form.img_name.errors}}</td>
+                    </tr>
+                    <!-- 送迎時必要なパスワード -->
+                    <tr id="hoge">
+                        <th class="user-th">{{form.password.label_tag}}</th>
+                        <td class="user-td">{{form.password}}{{form.password.errors}}</td>
+                    </tr>
                 </table>
             </form>
 
