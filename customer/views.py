@@ -82,6 +82,8 @@ def new(request):
                 new.save()
 
             """利用者一覧に遷移"""
+            # フラッシュメッセージ
+            messages.success(request, '利用者登録が成功しました。')
             return redirect('customer:list') 
 
         else:
@@ -110,6 +112,7 @@ def delete(request, customer_id):
     """ ユーザーを削除 """
     customer_id = get_object_or_404(User, id=customer_id)
     customer_id.delete()
+    messages.success(request, '利用者を削除しました。')
     return redirect('customer:toppage')
 
 @login_required
@@ -120,6 +123,7 @@ def update(request, customer_id):
         form = SubUserForm(request.POST, instance=customer_id)
         if form.is_valid():
             form.save()
+            messages.success(request, '利用者情報を保存しました。')
             return redirect('customer:toppage')
     else:
         form = SubUserForm(instance=customer_id)
