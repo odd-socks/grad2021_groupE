@@ -1,4 +1,5 @@
 from fileinput import filename
+from itertools import count
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.handlers.wsgi import WSGIRequest
@@ -14,6 +15,7 @@ from django.contrib.auth.decorators import login_required
 from io import BytesIO
 import base64
 import qrcode
+from django.contrib import messages#メッセージフレームワーク
 # Create your views here.
 
 @login_required
