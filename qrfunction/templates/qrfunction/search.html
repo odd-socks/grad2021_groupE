@@ -7,13 +7,13 @@
 </head>
 
 <body>
-    <h1>初回パスワード変更</h1>
+    <h1>送迎完了フォーム</h1>
     {{error}}
     <div>
         <!-- <br> -->
         <input type="button" onclick="location.href='http://127.0.0.1:8000/'" value="TOP画面">
         <input type="button" onclick="location.href='http://127.0.0.1:8000/facility'" value="サービス一覧">
-        <form method="POST" action="{% url 'qrfunction:index' %}">
+        <form method="GET" action="{% url 'qrfunction:index' %}">
             {% csrf_token %}
             名前 : <input type="text" name="name"><br>
             メールアドレス : <input type="text" name="password"><br>
