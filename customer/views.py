@@ -81,6 +81,7 @@ def new(request):
             #     new.save()
 
             # """利用者一覧に遷移"""
+            messages.success(request, '利用者を登録しました。')
             return redirect('customer:list') 
 
         else:
