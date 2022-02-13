@@ -46,40 +46,39 @@ def new(request):
                 'input_password': input_password
             }
 
-            url = 'http://127.0.0.1:8000/qrfunction/index?name='+input_name+'&email='+input_password
-            img = qrcode.make(url)  # QRコードを生成
+            # url = 'http://127.0.0.1:8000/qrfunction/index?name='+input_name+'&email='+input_password
+            # img = qrcode.make(url)  # QRコードを生成
 
 
             new = form.save(commit=False)
             new.facility_id = request.user.id
             new.password = make_password(input_password,input_name)
+            new.save()
 
-            """保存するファイル名を作る"""
-                        
-            if User.objects.filter().exists():
-                """ユーザーが一人でもいる場合の処理"""
-                new_customer_id = User.objects.last().id
-                new_customer_id = new_customer_id + 1
+            # """保存するファイル名を作る"""
+            # if User.objects.filter().exists():
+            #     """ユーザーが一人でもいる場合の処理"""
+            #     new_customer_id = User.objects.last().id
+            #     new_customer_id = new_customer_id + 1
 
-                """QRコードをフォルダに保存"""
-                file_name = 'static/assets/img/qr_images/qr_img' + str(new_customer_id) + '.png'
-                img.save(file_name)
+            #     """QRコードをフォルダに保存"""
+            #     file_name = 'static/assets/img/qr_images/qr_img' + str(new_customer_id) + '.png'
+            #     img.save(file_name)
 
-                new.img_name = file_name
-                new.save()
+            #     new.img_name = file_name
 
 
-            else:
-                """ユーザーがいなかった時の処理"""
-                new.save()
-                new_customer_id = User.objects.last().id
+            # else:
+            #     """ユーザーがいなかった時の処理"""
+            #     new.save()
+            #     new_customer_id = User.objects.last().id
 
-                """QRコードをフォルダに保存"""
-                file_name = 'static/assets/img/qr_images/qr_img' + str(new_customer_id) + '.png'
-                img.save(file_name)
+            #     """QRコードをフォルダに保存"""
+            #     file_name = 'static/assets/img/qr_images/qr_img' + str(new_customer_id) + '.png'
+            #     img.save(file_name)
 
-                new.img_name = file_name
-                new.save()
+            #     new.img_name = file_name
+            #     new.save()
 
             """利用者一覧に遷移"""
             # フラッシュメッセージ

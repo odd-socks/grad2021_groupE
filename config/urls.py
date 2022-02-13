@@ -15,6 +15,7 @@ urlpatterns = [
     # 水口設定
     path('customer/', include('customer.urls')),  #customer
     path('qrfunction/', include('qrfunction.urls')), #qrfunction
+    path('CustomerAccounts/',include('CustomerAccounts.urls')),#CustoemrAccounts
 
     #古川設定
     path('map/', include('map.urls')),

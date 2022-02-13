@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <title>初回パスワード変更</title>
+</head>
+<body>
+    <h1>現在のパスワードを任意のパスワードに変更してください。</h1><br>
+    <p>※パスワードは必ずメモしてください。</p><br>
+    <h2>{{msg}}</h2>
+    <div>
+        {% for d in data %}
+        <form method="POST" action="{% url 'CustomerAccounts:CustomerLoginPass'%}">
+            {% csrf_token %}
+            <input type="hidden" name="name" value="{{d.name}}"><br>
+            <input type="hidden" name="email" value="{{d.email}}"><br>
+            パスワード : <input type="text" name="password"><br>
+            同じパスワードを入力 : <input type="text" name="password_again"><br>
+            <button type="submit" onclick='return confirm("この内容で変更してもよろしいですか？");'>変更</button>
+        </form>
+        {% endfor %}
+    </div>
+    
+</body>
+</html>
