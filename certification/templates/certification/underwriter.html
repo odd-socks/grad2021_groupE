@@ -73,7 +73,11 @@
                         </div>
                         <!-- ルート選択 -->
                         <div class="col-lg-6">
-                            <a class="portfolio-item" href="#">
+                        {% if not name and not password or name == None%}
+                            <a class="portfolio-item" href="{% url 'CustomerAccounts:CustomerLogin' %}">
+                        {% else %}
+                            <a class="portfolio-item" href="{% url 'CustomerAccounts:CustomerQrcode' %}">
+                        {% endif %}
                                 <div class="caption">
                                     <div class="caption-content">
                                         <div class="h2">マップ</div>
