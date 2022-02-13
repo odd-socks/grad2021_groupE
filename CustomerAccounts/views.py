@@ -4,6 +4,8 @@ from django.contrib.auth.hashers import make_password, check_password
 from io import BytesIO
 import base64
 import qrcode
+from django.contrib import messages#メッセージフレームワーク
+
 # Create your views here.
 
 def CustomerLogin(request):
@@ -41,8 +43,9 @@ def CustomerLogin(request):
             elif check_password(input_password,result.email) == False:
                 request.session['name'] = input_name
                 request.session['password'] = input_password
+                messages.success(request, 'ログインしました。')
                 return redirect('certification:underwriter')
-    
+
     return render(request,'CustomerAccounts/customer_login.html')
 
 def CustomerLoginSertif(request):
@@ -134,6 +137,7 @@ def CustomerLogOut(request):
     request.session['name'] = None
     request.session['password'] = None
         
+    messages.success(request, 'ログアウトしました。')
     return redirect('certification:underwriter')
     # else:
     #     return render(request, 'Certification/underwriter.html' ,{'msg':'ログインしていません。'})
