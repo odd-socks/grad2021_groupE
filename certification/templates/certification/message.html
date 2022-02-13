@@ -1,0 +1,32 @@
+{% if messages %}
+{% for message in messages %}
+    {% if message.tags == 'success'%}
+        <div id="message" class="message">
+            <p>{{message}}</p>
+        </div>
+    {% elif message.tags == 'info'%}
+        <div id="message" class="message">
+            <p>{{message}}</p>
+        </div>
+    {% elif message.tags == 'warning'%}
+        <div id="message" class="message">
+            <p>{{message}}</p>
+        </div>
+    {% elif message.tags == 'error'%}
+        <div id="message" class="message">
+            <p>{{message}}</p>
+        </div>
+    {% endif %}
+{% endfor %}
+{% endif %}
+<div class=“header-blank”></div>
+
+<script>
+"use strict";
+setTimeout(() => {
+  let flash = document.getElementById("message");
+  if (flash != null) {
+    flash.classList.add("none");
+  }
+}, 3.5 * 1000);
+</script>

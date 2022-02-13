@@ -11842,3 +11842,26 @@ table tr:last-child td:last-child {
 #hoge{
   display: none;
 }
+
+/* フラッシュメッセージ */
+
+.message{
+  position: fixed;
+  z-index: 10;
+  top: 70px;
+  left: 0;
+  right: 0;
+  height: 35px;
+  padding-top: 7px;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  background-color: orange;;
+  /* margin-bottom: 10px; */
+}
+.none{
+  display: none;
+}
+.header-blank {
+  height: 70px;
+}
