@@ -92,7 +92,8 @@ def create(request):
     pointsString = request.POST.get('pointsString')
     input_name   = request.POST.get('input_name')
     waypoints    = request.POST.get('waypoints')
-    destination    = request.POST.get('destination')
+    destination  = request.POST.get('destination')
+    user_id      = request.POST.get('user_id')
     
     # data = {
     #     'pointsString': pointsString,
@@ -105,11 +106,12 @@ def create(request):
             'input_name'  : input_name,
             'pointsString': pointsString,
             'waypoints'   : waypoints,
-            'destination' : destination
+            'destination' : destination,
+            'user_id'     : user_id
         }
         return render(request, 'routing/user_list.html', context)
     else:
-        record = Routing(name=input_name,route=pointsString,waypoints=waypoints,destination=destination,facility_id=request.user.id)
+        record = Routing(name=input_name,route=pointsString,waypoints=waypoints,destination=destination,facility_id=request.user.id,user_id=user_id)
         record.save()
         return render(request, 'routing/create.html', {'message': '送迎ルートを登録しました。'})
 

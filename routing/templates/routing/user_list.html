@@ -124,10 +124,11 @@
         
         
 
-        let points       = [];
-        let waypoints    = [];
-        let destination  = [];
-        let pointsString = [];
+        let points          = [];
+        let waypoints       = [];
+        let destination     = [];
+        let user_id         = [];
+        let pointsString    = [];
         let infowindowArr   = [];
         let waypointsString = [];
         let facilityAddress = '大原簿記法律専門学校柏校'
@@ -151,8 +152,15 @@
             // showList();
         }
 
+        function addId(data) {
+            user_id.push(data)
+
+            setData(data);
+        }
+
         function deletePoint(data) {
             points.pop();
+            user_id.pop();
             pointsStringScreen.value = points.join("|");
             setData(data);
             searchRoute();
@@ -332,7 +340,7 @@
                                 <td>${gender}</td>
                                 <td>${address}</td>
                                 <td>${carry_address}</td>
-                                <td><button class="btn btn--orange btn--radius" onclick='addPoint("[${name}, ${carry_address}]");'>追加</button></td>
+                                <td><button class="btn btn--orange btn--radius" onclick='addPoint("${carry_address}"); addId("${user_id}")'>追加</button></td>
                             </tr>
                         `;
                     }
