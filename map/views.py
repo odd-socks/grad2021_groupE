@@ -7,6 +7,7 @@ from customer.models import User
 from .models import Map
 from django.contrib.auth.decorators import login_required
 from accounts.models import CustomUser
+from django.contrib import messages#メッセージフレームワーク
 
 
 
@@ -81,7 +82,6 @@ def map_confirm(request):
         'waypoints': waypoints,
         'destination': destination
     }
-
     return render(request, 'map/map_confirm.html', data)
 
 
@@ -110,4 +110,5 @@ def map_create(request):
     else:
         record = Map(name=input_name,route=pointsString,waypoints=waypoints,destination=destination,facility_id=request.user.id)
         record.save()
-        return render(request, 'map/map_create.html', {'message': '送迎ルートを登録しました。'})
+        messages.success(request, 'ルートを作成しました。')
+        return render(request, 'certification/facility.html')
