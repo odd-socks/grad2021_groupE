@@ -19,6 +19,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'certification:underwriter' %}">引受人ページ</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'certification:facility' %}">施設ページ</a>
+                    </li>
                     <!-- ログイン・ログアウト判定 -->
                     {% if not name and not password or name == None%}
                     <li class="nav-item">
@@ -50,7 +53,7 @@
                 {% csrf_token %}
                 <table class="user-table">
                     <tr>
-                        <th class="user-th">名前</th>
+                        <th class="user-th">利用者名</th>
                         <td class="user-td"><input type="text" name="name"></td>
                     </tr>
                     <tr>
@@ -61,7 +64,7 @@
             </form>
             <!-- 利用者登録ボタン -->
             <div form="underwriter-login-form" class="new_page">
-                <button form="underwriter-login-form" class="btn btn--orange btn--radius" type="submit">検索</button>
+                <button form="underwriter-login-form" class="btn btn--orange btn--radius" type="submit">確定</button>
             </div>
         </div>
     </div>

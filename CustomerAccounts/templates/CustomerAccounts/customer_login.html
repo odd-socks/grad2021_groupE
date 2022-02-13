@@ -19,6 +19,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'certification:underwriter' %}">引受人ページ</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'certification:facility' %}">施設ページ</a>
+                    </li>
                     <!-- ログイン・ログアウト判定 -->
                     {% if not name and not password or name == None%}
                     <li class="nav-item">
@@ -58,9 +61,9 @@
             </form>
             <!-- 利用者登録ボタン -->
             <div form="underwriter-form" class="new_page">
-                <button form="underwriter-form" class="btn btn--orange btn--radius" type="submit">検索</button>
+                <button form="underwriter-form" class="btn btn--orange btn--radius" type="submit">ログイン</button>
                 <button form="underwriter-form" class="btn btn--orange btn--radius" type="submit">
-                    <a class="text-white" href="{% url 'CustomerAccounts:CustomerLoginSertif' %}">初回</a>
+                    <a class="text-white" href="{% url 'CustomerAccounts:CustomerLoginSertif' %}">初回登録</a>
                 </button>
             </div>
         </div>
