@@ -55,22 +55,30 @@
                 <table  class="user-table">
                     <!-- usernameフィールド -->
                     <tr>
-                        <th class="user-th">{{form.username.label_tag}}</th>
+                        <th class="user-th">
+                            <label for="id_username">施設名</label>
+                        </th>
                         <td class="user-td">{{form.username}}{{form.username.errors}}</td>
                     </tr>
                     <!-- emailフィールド -->
                     <tr>
-                        <th class="user-th">{{form.email.label_tag}}</th>
+                        <th class="user-th">
+                            <label for="id_email">メール</label>
+                        </th>
                         <td class="user-td">{{form.email}}{{form.email.errors}}</td>
                     </tr>
                     <!-- addressフィールド -->
                     <tr>
-                        <th class="user-th">{{form.address.label_tag}}</th>
+                        <th class="user-th">
+                            <label for="id_address">施設住所</label>
+                        </th>
                         <td class="user-td">{{form.address}}{{form.address.errors}}</td>
                     </tr>
                     <!-- password1フィールド -->
                     <tr>
-                        <th class="user-th">{{form.password1.label_tag}}</th>
+                        <th class="user-th">
+                            <label for="id_password1">パスワード</label>
+                        </th>
                         <td class="user-td">{{form.password1}}{{form.password1.errors}}</td>
                     </tr>
                 </table>

@@ -43,7 +43,7 @@
 {% block content %}
 <section class="page-section" id="services">
   <div class="container px-4 px-lg-5">
-      <h2 class="text-center mt-0">LogIn</h2>
+      <h2 class="text-center mt-0">ログイン</h2>
       <hr class="divider" />
 
       <div class="form-control">
@@ -55,12 +55,16 @@
               <table  class="user-table">
                   <!-- usernameフィールド -->
                   <tr>
-                      <th class="user-th">{{form.login.label_tag}}</th>
+                      <th class="user-th">
+                        <label for="id_login">施設名</label>
+                      </th>
                       <td class="user-td">{{form.login}}{{form.login.errors}}</td>
                   </tr>
                   <!-- passwordフィールド -->
                   <tr>
-                      <th class="user-th">{{form.password.label_tag}}</th>
+                      <th class="user-th">
+                        <label for="id_password">パスワード</label>
+                      </th>
                       <td class="user-td">{{form.password}}{{form.password.errors}}</td>
                   </tr>
               </table>
