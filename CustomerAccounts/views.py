@@ -206,6 +206,10 @@ def CustomerRoutingMaps(request):
 
 
     for result in CustomerSearch:
+        if result.is_carryed == False:
+            messages.success(request,"送迎中ではありません。")
+            return render(request, 'Certification/underwriter.html')
+        
         CustomerMapId = result.map_id
 
     CustomerRoutingSearch = Routing.objects.filter(id = CustomerMapId)
