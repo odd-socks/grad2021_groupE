@@ -2,7 +2,6 @@
 # from re import T
 from tabnanny import verbose
 from django.core.validators import MaxValueValidator, MinValueValidator
-from routing.models import *
 from django.db import models
 
 GENDER_CHOICES = [
@@ -21,13 +20,14 @@ class User(models.Model):
     email = models.EmailField(verbose_name="メールアドレス")
     address = models.CharField(verbose_name="住所", max_length=150)
     carry_address = models.CharField(verbose_name="送り先住所", max_length=150)
-    is_carryed = models.BooleanField(verbose_name="送迎中判定",default=False,)
+    is_carryed = models.BooleanField(verbose_name="送迎中判定",default=False)
     facility_id = models.IntegerField(null=True, blank=True)
-    map_id = models.ForeignKey("routing.Routing", on_delete=models.CASCADE, null=True,blank=True)
+    map_id = models.IntegerField(null=True,blank=True)
+    img_name = models.CharField(null=True,blank=True,max_length=1000)
+    password = models.CharField(null=True, blank=True, verbose_name="パスワード", max_length=100)
 
     def __str__(self):
         return self.name
     
     class Meta:
         verbose_name = ('利用者')
-

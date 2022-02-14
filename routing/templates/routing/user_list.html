@@ -127,7 +127,7 @@
         let points          = [];
         let waypoints       = [];
         let destination     = [];
-        let user_id         = [];
+        let person_ids      = [];
         let pointsString    = [];
         let infowindowArr   = [];
         let waypointsString = [];
@@ -139,28 +139,33 @@
         let pointsStringScreen = document.getElementById('pointsString'); // 送迎ルートの住所の順番表示エリア
 
 
-        function addPoint(data) {
+        function addPoint(arr) {
+            arr = arr.split(',');
             if (pointsStringScreen.value != '') {
                 points = pointsStringScreen.value.split('|');
             }
-            points.push(data);
+            points.push(arr[0]);
+            person_ids.push(arr[1]);
+
+            // console.log(points);
+            console.log(person_ids);
             pointsStringScreen.value = points.join("|");
             // console.log(pointsStringScreen.value);
 
-            setData(data);
+            setData(arr[0]);
             searchRoute();
-            // showList();
+            showList();
         }
 
-        function addId(data) {
-            user_id.push(data)
+        // function addId(data) {
+        //     user_id.push(data)
 
-            setData(data);
-        }
+        //     setData(data);
+        // }
 
         function deletePoint(data) {
             points.pop();
-            user_id.pop();
+            person_ids.pop();
             pointsStringScreen.value = points.join("|");
             setData(data);
             searchRoute();
@@ -187,7 +192,8 @@
             waypointsString = pointsStringScreen.value.split('|');
             destination = waypointsString.pop();
             
-            let url = '/routing/confirm?pointsString=' + pointsStringScreen.value + '&input_name=' + inputNameScreen.value + '&waypoints=' + waypointsString.join('|') + '&destination=' + destination;
+            let url = '/routing/confirm?pointsString=' + pointsStringScreen.value + '&input_name=' + inputNameScreen.value + '&waypoints=' + waypointsString.join('|') + '&destination=' + destination + '&person_ids=' + person_ids;
+            // console.log(typeof person_ids.join());
             location.href = url;  // リダイレクト
         }
         
@@ -306,7 +312,7 @@
                 'url': '{% url "routing:user_search" %}',
                 'type': 'GET',
                 'data': {
-                    'user': $('#user_name').val(),
+                'user': $('#user_name').val(),
                 },
                 'dataType': 'json'
             }).done(response => {
@@ -333,6 +339,8 @@
                         let gender   = record[2];
                         let address  = record[3];
                         let carry_address = record[4]; // 送迎先住所
+                        let user_id  = record[5]; // 送迎先住所
+                        let arr = [carry_address, user_id];
                         content += `
                             <tr>
                                 <td>${name}</td>
@@ -340,7 +348,7 @@
                                 <td>${gender}</td>
                                 <td>${address}</td>
                                 <td>${carry_address}</td>
-                                <td><button class="btn btn--orange btn--radius" onclick='addPoint("${carry_address}"); addId("${user_id}")'>追加</button></td>
+                                <td><button class="btn btn--orange btn--radius" onclick='addPoint("${arr}")'>追加</button></td>
                             </tr>
                         `;
                     }
@@ -354,7 +362,6 @@
 
 
 
-        // }
     </script>
 
 <!-- 下記にデザイン用のjsの処理を記述 -->

@@ -45,7 +45,7 @@ def user_search(request):
     keyword = request.GET.get('user')
 
     if keyword:
-        name_list = [[column.name, column.age, column.gender, column.address, column.carry_address] for column in User.objects.filter(name__icontains=keyword)]  # nameにキーワードを含む。大文字小文字の区別なし
+        name_list = [[column.name, column.age, column.gender, column.address, column.carry_address, column.id] for column in User.objects.filter(name__icontains=keyword)]  # nameにキーワードを含む。大文字小文字の区別なし
         d = {'name_list': name_list}
     else:
         error = "名前を入力してください"
@@ -74,13 +74,16 @@ def confirm(request):
     pointsString = request.GET.get('pointsString')
     input_name   = request.GET.get('input_name')
     waypoints    = request.GET.get('waypoints')
-    destination    = request.GET.get('destination')
+    destination  = request.GET.get('destination')
+    person_ids   = request.GET.get('person_ids')
+
     
     data = {
         'pointsString': pointsString,
-        'input_name': input_name,
-        'waypoints': waypoints,
-        'destination': destination
+        'input_name'  : input_name,
+        'waypoints'   : waypoints,
+        'destination' : destination,
+        'person_ids'  : person_ids,
     }
 
     return render(request, 'routing/confirm.html', data)
@@ -93,8 +96,8 @@ def create(request):
     input_name   = request.POST.get('input_name')
     waypoints    = request.POST.get('waypoints')
     destination  = request.POST.get('destination')
-    user_id      = request.POST.get('user_id')
-    
+    person_ids   = request.POST.get('person_ids').split(',')
+    # print(person_ids)
     # data = {
     #     'pointsString': pointsString,
     #     'input_name'  : input_name
@@ -107,13 +110,22 @@ def create(request):
             'pointsString': pointsString,
             'waypoints'   : waypoints,
             'destination' : destination,
-            'user_id'     : user_id
         }
         return render(request, 'routing/user_list.html', context)
     else:
-        record = Routing(name=input_name,route=pointsString,waypoints=waypoints,destination=destination,facility_id=request.user.id,user_id=user_id)
+        record = Routing(name=input_name,route=pointsString,waypoints=waypoints,destination=destination,facility_id=request.user.id)
         record.save()
-        return render(request, 'routing/create.html', {'message': '送迎ルートを登録しました。'})
+        # person = User.objects.filter(id=person_ids)
+        # d = {'person_ids':person_ids}
+        for person_id in person_ids:
+            person_id = int(person_id)
+            result = User.objects.filter(id=person_id)
+            for person in result:
+                person.map_id = Routing.objects.last().id
+                person.save()
+        # print(person.name)
+        # person = routing_id
+    return render(request, 'routing/create.html', {'message': '送迎ルートを登録しました。'})
 
 @login_required
 def delete(request, route_id):
