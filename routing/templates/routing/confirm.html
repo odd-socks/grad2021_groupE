@@ -64,18 +64,7 @@
         <div class="container px-4 px-lg-5">
             <h2 class="text-center mt-0">ルート確認</h2>
             <hr class="divider">
-
-            <!-- ルート名：送迎ルートが表示されます -->
-            <!-- <div class="confirm_container">
-                <div class="confirm">
-                    <p>ルート名　：{{input_name}}</p>
-                </div>
-                <div class="confirm">
-                    <p>送迎ルート：{{pointsString}}</p>
-                </div>
-            </div> -->
-
-            <div class="new_page">
+            <div class="form-control">
                 <form id="confirm-form" action="{% url 'routing:create' %}" method="POST">
                     {%csrf_token%}
                     <table class="user-table">

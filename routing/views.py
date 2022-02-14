@@ -86,7 +86,6 @@ def confirm(request):
         'destination' : destination,
         'person_ids'  : person_ids,
     }
-
     return render(request, 'routing/confirm.html', data)
 
 
@@ -126,11 +125,13 @@ def create(request):
                 person.save()
         # print(person.name)
         # person = routing_id
-    return render(request, 'routing/create.html', {'message': '送迎ルートを登録しました。'})
+    messages.success(request, 'ルートを登録しました')
+    return render(request, 'certification/facility.html')
 
 @login_required
 def delete(request, route_id):
     """ ユーザーを削除 """
     route_id = get_object_or_404(Routing, id=route_id)
     route_id.delete()
+    messages.success(request, 'ルートを削除しました')
     return redirect('routing:routing_list')

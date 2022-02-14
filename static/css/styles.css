@@ -11654,9 +11654,9 @@ table td{
   width: 15%;
 }
 /* ナビ開始ボタン */
-.url{
+/* .url{
   width: 5%;
-}
+} */
 
 table td:last-child{
   border-right: 1px solid #a8b7c5;
