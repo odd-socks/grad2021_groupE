@@ -34,25 +34,6 @@
     <!--引受人QRコードページ-->
     <section class="page-section" id="services">
         <div class="container px-4 px-lg-5">
-<<<<<<< HEAD:CustomerAccounts/templates/CustomerAccounts/customer_qrcode.html
-            <h2 class="text-center mt-0">送迎引受確認画面</h2>
-            <hr class="divider" />
-            <!-- QRコード -->
-            <div style="text-align: center;">
-              <h1>{{session.name}} </h1>
-                <img src="data:image/png;base64,{{ session_qr }}"/>
-                <br>
-                <!-- 印刷・施設トップ遷移ボタン -->
-                <div class="new_page">
-                    <!-- 印刷 -->
-                    <button class="btn btn--orange btn--radius"  onclick="window.print();">印刷</button>
-                    <!-- 引受人トップ -->
-                    <button class="btn btn--orange btn--radius">
-                        <a class="text-white" href="{% url 'certification:underwriter' %}">戻る</a>
-                    </button>
-                </div>
-            </div>
-=======
             <h2 class="text-center mt-0">{{message}}</h2>
             <hr class="divider">
             <!-- <a href="{% url 'routing:routing_list'%}">送迎ルート一覧へ</a> -->
@@ -64,7 +45,6 @@
             <button class="btn btn--orange btn--radius">
                 <a class="text-white" href="{% url 'certification:facility'%}">施設サービス</a>
             </button>
->>>>>>> furukawa:routing/templates/routing/create.html
         </div>
     </section>
 
