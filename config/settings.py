@@ -167,6 +167,7 @@ ACCOUNT_LOGOUT_ON_GET = True
 #signupformを指定
 ACCOUNT_FORMS = {
     'signup' : 'accounts.forms.CustomSignupForm',
+    'login' : 'accounts.forms.CustomLoginForm',
 }
 #signupformからの情報をcustomusermodelに保存するのに必要
 ACCOUNT_ADAPTER = 'accounts.adapter.AccountAdapter'

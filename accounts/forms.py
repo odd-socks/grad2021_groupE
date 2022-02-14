@@ -44,9 +44,8 @@ class CustomSignupForm(SignupForm):
         return user
 
 
-#ログイン
+#ログインフォーム
 class CustomLoginForm(LoginForm):
-    # address = forms.CharField(label='施設住所',max_length=150)
 
     class Meta:
         model = CustomUser
@@ -64,9 +63,3 @@ class CustomLoginForm(LoginForm):
 
             self.fields['password'].widget.attrs['class']='form-control'
             self.fields['password'].widget.attrs['placeholder']='(例)パスワード'
-
-
-    def login(self, request, user):
-        # user.address = self.cleaned_data['address']
-        user.save()
-        return user
