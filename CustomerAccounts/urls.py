@@ -11,5 +11,5 @@ urlpatterns = [
     path('customer_login_pass/', views.CustomerLoginPass, name='CustomerLoginPass'),
     path('customer_login_sertif/', views.CustomerLoginSertif, name='CustomerLoginSertif'),
     path('customer_qrcode/', views.CustomerQrcode, name='CustomerQrcode'),
-    path('sutomer_routing_maps/', views.CustomerRoutingMaps, name='CustomerRoutingMaps'),
+    path('customer_routing_maps/', views.CustomerRoutingMaps, name='CustomerRoutingMaps'),
 ]
