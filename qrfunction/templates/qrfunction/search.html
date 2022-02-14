@@ -11,8 +11,6 @@
     {{error}}
     <div>
         <!-- <br> -->
-        <input type="button" onclick="location.href='http://127.0.0.1:8000/'" value="TOP画面">
-        <input type="button" onclick="location.href='http://127.0.0.1:8000/facility'" value="サービス一覧">
         <form method="GET" action="{% url 'qrfunction:index' %}">
             {% csrf_token %}
             名前 : <input type="text" name="name"><br>

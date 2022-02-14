@@ -4,7 +4,7 @@
 
     <h1>送迎完了登録ページ</h1>
         {% for d in data %}
-            ようこそ、{{d.name}}さん<br>
+            <p>ようこそ、{{d.name}}さん</p><br>
             <form method="POST" action="{% url 'qrfunction:registration' %}">
                 {% csrf_token %}
                 <input type="hidden" name="name" value="{{d.name}}">

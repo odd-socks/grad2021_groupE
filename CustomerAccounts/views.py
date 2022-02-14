@@ -25,20 +25,22 @@ def CustomerLogin(request):
     try_pass = make_password(input_password,input_name)
     
     if (not input_name )and(not input_password):
+        messages.success(request,'フォームが空欄です。')
         return render(request,'CustomerAccounts/customer_login.html')
 
     if not fill:
-        return render(request,'CustomerAccounts/customer_login.html',{'error':'名前が間違っています。'})
+        messages.error(request,'名前が間違っています。')
+        return render(request,'CustomerAccounts/customer_login.html',{'messages':'名前が間違っています。'})
 
     else:
 
         for result in fill:
 
             if check_password(input_password,result.password) == False:
-                return render(request,'CustomerAccounts/customer_login.html',{'error':'パスワードが間違っています。'})
+                return render(request,'CustomerAccounts/customer_login.html',{'messages':'パスワードが間違っています。'})
 
             elif input_password == result.email:
-                return render(request,'CustomerAccounts/customer_login_sertif.html',{'msg':'初回パスワード変更を行うため、もう一度ログインしてください。'})
+                return render(request,'CustomerAccounts/customer_login_sertif.html',{'messages':'初回パスワード変更を行うため、もう一度ログインしてください。'})
                 
             elif check_password(input_password,result.email) == False:
                 request.session['name'] = input_name
@@ -60,19 +62,23 @@ def CustomerLoginSertif(request):
         return render(request,'CustomerAccounts/customer_login_sertif.html')
 
     if not fill:
-        return render(request,'CustomerAccounts/customer_login_sertif.html',{'error':'名前が間違っています。'})
+        messages.success(request,'名前が間違っています。')
+        return render(request,'CustomerAccounts/customer_login_sertif.html',{'messages':'名前が間違っています。'})
 
     else:
 
         for result in fill:
 
             if input_email != result.email:
-                return render(request,'CustomerAccounts/customer_login.html',{'error':'メールアドレスが間違っています。'})
+                messages.success(request,'メールアドレスが間違っています。')
+                return render(request,'CustomerAccounts/customer_login_sertif.html',{'messages':'メールアドレスが間違っています。'})
 
             elif result.password != try_pass:
-                return render(request, 'CustomerAccounts/customer_login.html',{'error':'あなたは初回ログインではありません。'})
+                messages.success(request,'あなたは初回ログインではありません。')
+                return render(request, 'CustomerAccounts/customer_login.html',{'messages':'あなたは初回ログインではありません。'})
             
             else:
+                messages.success(request,'ログインしました。')
                 return render(request,'CustomerAccounts/customer_login_pass.html',{'data':fill})
 
 def CustomerLoginPass(request):
@@ -91,16 +97,20 @@ def CustomerLoginPass(request):
         return render(request,'CustomerAccounts/customer_login_pass.html',{'data':fill})
 
     elif (not input_password):
-        return render(request,'CustomerAccounts/customer_login_pass.html',{'msg':'パスワードが空欄です。','data':fill})
+        messages.success(request, 'パスワードが空欄です。')
+        return render(request,'CustomerAccounts/customer_login_pass.html',{'messages':'パスワードが空欄です。','data':fill})
 
     elif (not input_password_try):
-        return render(request, 'CustomerAccounts/customer_login_pass.html',{'msg':'パスワード確認を入力してください。','data':fill})
+        messages.success(request,'パスワード確認を入力してください。')
+        return render(request, 'CustomerAccounts/customer_login_pass.html',{'messages':'パスワード確認を入力してください。','data':fill})
 
 
     if input_password != input_password_try:
-        return render(request,'CustomerAccounts/customer_login_pass.html',{'msg':'入力されたパスワードが同じではありません。','data':fill})
+        messages.success(request,'入力されたパスワードが同じではありません')
+        return render(request,'CustomerAccounts/customer_login_pass.html',{'messages':'入力されたパスワードが同じではありません。','data':fill})
 
     if input_password == input_password_try:
+        messages.success(request,'パスワードを変更しました。')
         """入力されたパスワードと確認パスワードが合致した場合、入力パスワードを暗号化しDBへ保存、QRコード生成"""
         dark_pass = make_password(input_password,input_name)
         fill.password = dark_pass
@@ -140,7 +150,7 @@ def CustomerLogOut(request):
     messages.success(request, 'ログアウトしました。')
     return redirect('certification:underwriter')
     # else:
-    #     return render(request, 'Certification/underwriter.html' ,{'msg':'ログインしていません。'})
+    #     return render(request, 'Certification/underwriter.html' ,{'messages':'ログインしていません。'})
 
 
 def CustomerQrcode(request):
@@ -160,9 +170,9 @@ def CustomerQrcode(request):
 
     #     del request.session['name']
     #     del request.session['password']
-    #     return render(request,'CustomerAccounts/customer_login.html',{'error' : 'ログインしていません。'})
+    #     return render(request,'CustomerAccounts/customer_login.html',{'messages' : 'ログインしていません。'})
     # # elif (request.session['name'] is None):
-    # #     return render(request,'CustomerAccounts/customer_login.html',{'error' : 'ログインしていません。'})
+    # #     return render(request,'CustomerAccounts/customer_login.html',{'messages' : 'ログインしていません。'})
     # else:
     #     pass
 
@@ -182,3 +192,11 @@ def CustomerQrcode(request):
     session_qr_img = base64.b64encode(buffer.getvalue()).decode().replace("'", "")
 
     return render(request, 'CustomerAccounts/customer_qrcode.html',{'session': request.session,'session_qr':session_qr_img})
+
+
+def CustomerRoutingMaps(request):
+
+    session_name_qr = request.session['name']
+    session_pass_qr = request.session['password']
+
+    return render(request, 'CustomerAccounts/customer_routing_maps.html')
