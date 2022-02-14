@@ -60,32 +60,44 @@
                 <table  class="user-table">
                     <!-- nameフィールド -->
                     <tr>
-                        <th class="user-th">{{form.name.label_tag}}</th>
+                        <th class="user-th">
+                            <label for="name">施設名</label>
+                        </th>
                         <td class="user-td">{{form.name}}{{form.name.errors}}</td>
                     </tr>
                     <!-- ageフィールド -->
                     <tr>
-                        <th class="user-th">{{form.age.label_tag}}</th>
+                        <th class="user-th">
+                            <label for="age">年齢</label>
+                        </th>
                         <td class="user-td">{{form.age}}{{form.age.errors}}</td>
                     </tr>
                     <!-- 性別フィールド -->
                     <tr>
-                        <th class="user-th">{{form.gender.label_tag}}</th>
+                        <th class="user-th">
+                            <label for="gender">性別</label>
+                        </th>
                         <td class="user-td">{{form.gender}}{{form.gender.errors}}</td>
                     </tr>
                     <!-- メールフィールド -->
                     <tr>
-                        <th class="user-th">{{form.email.label_tag}}</th>
+                        <th class="user-th">
+                            <label for="email">メール</label>
+                        </th>
                         <td class="user-td">{{form.email}}{{form.email.errors}}</td>
                     </tr>
                     <!-- 住所フィールド -->
                     <tr>
-                        <th class="user-th">{{form.address.label_tag}}</th>
+                        <th class="user-th">
+                            <label for="address">住所</label>
+                        </th>
                         <td class="user-td">{{form.address}}{{form.address.errors}}</td>
                     </tr>
                     <!-- 引受住所フィールド -->
                     <tr>
-                        <th class="user-th">{{form.carry_address.label_tag}}</th>
+                        <th class="user-th">
+                            <label for="carry_address">引き受け住所</label>
+                        </th>
                         <td class="user-td">{{form.carry_address}}{{form.carry_address.errors}}</td>
                     </tr>
                     <!-- 下記が隠しフィールド -->

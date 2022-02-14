@@ -11869,3 +11869,16 @@ table tr:last-child td:last-child {
 .qrfunction_p{
   text-align: center;
 }
+
+.underwriter_p{
+  text-align: left;
+}
+
+.underwriter_text_p{
+  text-align: center;
+}
+
+.underwriter_p a{
+  color: red;
+  border-bottom: 1px solid gray;
+}
