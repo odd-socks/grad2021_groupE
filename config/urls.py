@@ -18,5 +18,5 @@ urlpatterns = [
     path('CustomerAccounts/',include('CustomerAccounts.urls')),#CustoemrAccounts
 
     #古川設定
-    path('map/', include('map.urls')),
+    path('routing/', include('routing.urls')), #routing
 ]
