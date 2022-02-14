@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}ルート選択{% endblock %}
+{% block title %}ルート確認{% endblock %}
 
 <!--ルート選択画面 -->
 <script>
@@ -51,55 +51,57 @@
 {% endblock %}
 
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
 <!-- Content -->
 {% block content %}
     <section class="page-section">
         <div class="container px-4 px-lg-5">
-            <h2 class="text-center mt-0">ルート選択</h2>
+            <h2 class="text-center mt-0">ルート確認</h2>
             <hr class="divider">
-            <!-- ルート選択リストが入ります -->
-            <div class="root_list">
-                <table>
-                    <tr>
-                        <th class="root_name">ルート名</th>
-                        <th class="root">ルート</th>
-                        <!-- <th class="waypoints">経由地点</th> -->
-                        <!-- <th class="destination">目的地</th> -->
-                        <th class="url">ナビ</th>
-                    </tr>
-            
-                {% for map in map_list %}
-                
-                    <tr>
-                        <td class="root_name">{{ map.name }}</td>
-                        <td class="root">{{ map.route }}</td>
-                        <!-- <td class="waypoints">{{ map.waypoints }}</td> -->
-                        <!-- <td class="destination">{{ map.destination }}</td> -->
-                        <td>
-                            <a href="{{ waypoints|add:map.waypoints|add:destination|add:map.destination }}">
-                                <button class="btn btn--orange btn--radius">開始</button>
-                            </a>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </table>
-            </div>
-            
-            <hr>
-            <!-- 新規作成画面遷移ボタン -->
+
+            <!-- ルート名：送迎ルートが表示されます -->
+            <!-- <div class="confirm_container">
+                <div class="confirm">
+                    <p>ルート名　：{{input_name}}</p>
+                </div>
+                <div class="confirm">
+                    <p>送迎ルート：{{pointsString}}</p>
+                </div>
+            </div> -->
+
             <div class="new_page">
-                <button class="btn btn--orange btn--radius">
-                    <a class="text-white" href="{% url 'map:user_list'%}">作成</a>
-                </button>
-                <button class="btn btn--orange btn--radius">
-                    <a class="text-white" href="{% url 'certification:facility' %}">戻る</a>
-                </button>
+                <form id="confirm-form" action="{% url 'routing:create' %}" method="POST">
+                    {%csrf_token%}
+                    <table class="user-table">
+                        <tr>
+                            <th class="user-th">ルート名</th>
+                            <td class="user-td">{{input_name}}</td>
+                        </tr>
+                        <tr>
+                            <th class="user-th">送迎ルート</th>
+                            <td class="user-td">{{pointsString}}</td>
+                        </tr>
+                    </table>
+                    <input type="hidden" name="pointsString" value="{{pointsString}}">
+                    <input type="hidden" name="input_name" value="{{input_name}}">
+                    <input type="hidden" name="waypoints" value="{{waypoints}}">
+                    <input type="hidden" name="destination" value="{{destination}}">
+                    <input type="hidden" name="person_ids" value="{{person_ids}}">
+                </form>
+                <!-- 確定・修正ボタン -->
+                <div form="confirm-form" class="new_page">
+                    <button form="confirm-form" class="btn btn--orange btn--radius" type="submit">作成</button>
+                    <button class="btn btn--orange btn--radius" type="submit">
+                        <a class="text-white" href="{% url 'routing:user_list' %}">修正</a>
+                    </button>
+                </div>
+
             </div>
         </div>
     </section>
@@ -158,5 +160,5 @@ new SimpleLightbox({
 });
 
 });
-        </script>
+</script>
 {% endblock %}

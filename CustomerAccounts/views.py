@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from customer.models import User
+from routing.models import Routing
 from django.contrib.auth.hashers import make_password, check_password
 from io import BytesIO
 import base64
@@ -199,4 +200,26 @@ def CustomerRoutingMaps(request):
     session_name_qr = request.session['name']
     session_pass_qr = request.session['password']
 
-    return render(request, 'CustomerAccounts/customer_routing_maps.html')
+    dark_pass = make_password(session_pass_qr,session_name_qr)
+    CustomerSearch = User.objects.filter(name = session_name_qr,password = dark_pass)
+
+
+
+    for result in CustomerSearch:
+        CustomerMapId = result.map_id
+
+    CustomerRoutingSearch = Routing.objects.filter(id = CustomerMapId)
+
+    print(CustomerRoutingSearch)
+
+    # print(CustomerRoutingSearch)
+
+
+    for CustomerRouting in CustomerRoutingSearch:
+        CustomerRoutingId = CustomerRouting.route
+        print(CustomerRoutingId)
+
+    # for CustomerRoute in CustomerRoutingId:
+    #     OnlyCustomerRoute = CustomerRoute.route
+
+    return render(request, 'CustomerAccounts/customer_routing_maps.html',{'context' : CustomerRoutingId,'name':session_name_qr , 'password':session_pass_qr})

@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'qrfunction.apps.QrfunctionConfig',
     'CustomerAccounts.apps.CustomeraccountsConfig', #利用者の認証一式
 
-    'map.apps.MapConfig',
+    'routing.apps.RoutingConfig',
     'widget_tweaks',#django-form用
 
 ]

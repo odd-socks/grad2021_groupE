@@ -28,11 +28,17 @@
     <div id="result"></div>
 
     <script>
+        sock = new WebSocket('wss://3.231.231.189:8765');
+                    // 接続
+        sock.addEventListener('open', function (e) {console.log('接続成功')});
+
+        
         var addresses = [];
-        var furukawa = '北柏駅/我孫子駅/アリオ柏/三協フロンテア柏スタジアム';
+        var furukawa = "{{ context }}";
+        console.log(furukawa)
         // var furukawa = '榎本歯科/ファミリーマート マツマル柏店/大原簿記法律専門学校柏校';
         var furukawa2;
-        furukawa2 = furukawa.split('/');
+        furukawa2 = furukawa.split('|');
         addresses = addresses.concat(furukawa2);
         // var addressesnum = 2;
         // for (i = 0; i < addressesnum; i++) {
@@ -41,7 +47,7 @@
         var sock = 0;
         if (sock === 0){
             document.getElementById('map').innerHTML = ('位置情報を取得できません');
-            console.log('Aaa');
+            // console.log('Aaa');
         }
         function initMap() {
             var data2;
@@ -51,9 +57,9 @@
             function dataGet() {
                 return new Promise((resolve, reject) => {
                     // websocketサーバとの通信設定
-                    sock = new WebSocket('wss://34.225.68.130:8765');
+                    sock = new WebSocket('wss://3.231.231.189:8765');
                     // 接続
-                    sock.addEventListener('open', function (e) {});
+                    sock.addEventListener('open', function (e) {console.log('接続成功')});
                     // サーバーからデータを受け取る
                     sock.addEventListener('message', function (message) {
                         let data = message.data;
@@ -69,7 +75,7 @@
                                 // animation: google.maps.Animation.DROP,
                                 // icon: "https://maps.google.com/mapfiles/ms/micons/blue-dot.png"
                                 icon: {
-                                    url: "./icon1.png",
+                                    url: "../../../static/assets/img/car.png",
                                     scaledSize: new google.maps.Size(50, 50),
                                 }
                             });
@@ -381,8 +387,8 @@
         }
     </script>
     <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDM6kAjlr0CY-eFifybdS8aRpSHPZrGo8Q"
-        async></script>
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDM6kAjlr0CY-eFifybdS8aRpSHPZrGo8Q&callback=initMap&v=weekly"
+    async></script>
 
 </body>
 
