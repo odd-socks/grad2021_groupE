@@ -134,4 +134,4 @@ def delete(request, route_id):
     route_id = get_object_or_404(Routing, id=route_id)
     route_id.delete()
     messages.success(request, 'ルートを削除しました')
-    return redirect('routing:routing_list')
+    return redirect('certification:facility')

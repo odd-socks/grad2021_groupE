@@ -50,18 +50,24 @@
                 {% csrf_token %}
                 <table class="user-table">
                     <tr>
-                        <th class="user-th">名前</th>
-                        <td class="user-td"><input type="text" name="name"></td>
+                        <th class="user-th">
+                            <label for="name">名前</label>
+                        </th>
+                        <td class="user-td">
+                            <input type="text" name="name">
+                        </td>
                     </tr>
                     <tr>
-                        <th>パスワード</th>
+                        <th>
+                            <label for="password">パスワード</label>
+                        </th>
                         <td><input type="text" name="password"></td>
                     </tr>
                 </table>
             </form>
             <!-- 利用者登録ボタン -->
             <div form="underwriter-form" class="new_page">
-                <p>
+                <p class="underwriter_p">
                     <a href="{% url 'CustomerAccounts:CustomerLoginSertif' %}">パスワードを設定してない方はこちら</a>
                 </p>
                 <button form="underwriter-form" class="btn btn--orange btn--radius" type="submit">ログイン</button>
