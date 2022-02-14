@@ -23,9 +23,7 @@ class UserForm(forms.ModelForm):
             'map_id': '送迎ID',
             'img_name': 'QRコードネーム',
             'password': 'パスワード'
-
         }
-
 
     def __init__(self, *args, **kwargs):
             # for field in self.fields.values():
