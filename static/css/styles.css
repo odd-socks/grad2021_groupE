@@ -11865,3 +11865,7 @@ table tr:last-child td:last-child {
 .header-blank {
   height: 70px;
 }
+
+.qrfunction_p{
+  text-align: center;
+}

@@ -1,15 +1,136 @@
-{% extends 'qrfunction/base.html' %}
+{% extends 'certification/base.html' %}
 
-{% block content %}
+{% load static %}
 
-    <h1>送迎完了登録ページ</h1>
-        {% for d in data %}
-            <p>ようこそ、{{d.name}}さん</p><br>
-            <form method="POST" action="{% url 'qrfunction:registration' %}">
-                {% csrf_token %}
-                <input type="hidden" name="name" value="{{d.name}}">
-                <input type="hidden" name="password" value="{{d.email}}">
-                <button type="submit">完了登録</button>
-            </form>
-        {% endfor%}
+{% block title %}送迎完了登録ページ{% endblock %}
+<!-- Header -->
+{% block header %}
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="{% url 'certification:index' %}">Carry Now</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'certification:facility' %}">施設ページ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'CustomerAccounts:CustomerLogOut' %}">ログアウト</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>  
 {% endblock %}
+        
+<!-- Content -->
+{% block content %}
+    <!--引受人登録完了フォーム-->
+    <section class="page-section" id="services">
+        <div class="container px-4 px-lg-5">
+            <h2 class="text-center mt-0">送迎完了登録</h2>
+            <hr class="divider" />
+
+            <!-- 下記に引受人登録完了のコンテンツが入ります -->
+            <div class="form-control">
+                {% for d in data %}
+                    <p class="qrfunction_p">ようこそ、{{d.name}}さん</p><br>
+                <form id="qrfunction-index" method="POST" action="{% url 'qrfunction:registration' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="name" value="{{d.name}}">
+                    <input type="hidden" name="password" value="{{d.email}}">
+                    <!-- <button type="submit">完了登録</button> -->
+                 </form>
+                {% endfor%}
+
+                <div form="qrfunction-index" class="new_page">
+                    <button form="qrfunction-index" class="btn btn--orange btn--radius" type="submit">完了登録</button>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- SimpleLightbox plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+
+
+
+<!-- 下記にjsの処理を記述 -->
+<script>
+    window.addEventListener('DOMContentLoaded', event => {
+
+// Navbar shrink function
+var navbarShrink = function () {
+    const navbarCollapsible = document.body.querySelector('#mainNav');
+    if (!navbarCollapsible) {
+        return;
+    }
+    if (window.scrollY === 0) {
+        navbarCollapsible.classList.remove('navbar-shrink')
+    } else {
+        navbarCollapsible.classList.add('navbar-shrink')
+    }
+
+};
+
+// Shrink the navbar 
+navbarShrink();
+
+// Shrink the navbar when page is scrolled
+document.addEventListener('scroll', navbarShrink);
+
+// Activate Bootstrap scrollspy on the main nav element
+const mainNav = document.body.querySelector('#mainNav');
+if (mainNav) {
+    new bootstrap.ScrollSpy(document.body, {
+        target: '#mainNav',
+        offset: 74,
+    });
+};
+
+// Collapse responsive navbar when toggler is visible
+const navbarToggler = document.body.querySelector('.navbar-toggler');
+const responsiveNavItems = [].slice.call(
+    document.querySelectorAll('#navbarResponsive .nav-link')
+);
+responsiveNavItems.map(function (responsiveNavItem) {
+    responsiveNavItem.addEventListener('click', () => {
+        if (window.getComputedStyle(navbarToggler).display !== 'none') {
+            navbarToggler.click();
+        }
+    });
+});
+
+// Activate SimpleLightbox plugin for portfolio items
+new SimpleLightbox({
+    elements: '#portfolio a.portfolio-box'
+});
+
+});
+
+
+// ---------------------------------------------------
+// フラッシュメッセージ
+"use strict";
+setTimeout(() => {
+  let flash = document.getElementById("message");
+  if (flash != null) {
+    flash.classList.add("none");
+  }
+}, 3.5 * 1000);
+</script>
+    </body>
+</html>
