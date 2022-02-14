@@ -41,14 +41,47 @@
 
 <!-- コンテンツ -->
 {% block content %}
-<div class="container">
+<section class="page-section" id="services">
+  <div class="container px-4 px-lg-5">
+      <h2 class="text-center mt-0">ログイン</h2>
+      <hr class="divider" />
+
+      <div class="form-control">
+          <!-- <div class="form-content"> -->
+          <!-- 下記に利用者登録のコンテンツが入ります -->
+          <form id="login-form" method="POST" novalidate>
+              {% csrf_token %}
+              <!-- 各フィールドの取り出し -->
+              <table  class="user-table">
+                  <!-- usernameフィールド -->
+                  <tr>
+                      <th class="user-th">
+                        <label for="id_login">施設名</label>
+                      </th>
+                      <td class="user-td">{{form.login}}{{form.login.errors}}</td>
+                  </tr>
+                  <!-- passwordフィールド -->
+                  <tr>
+                      <th class="user-th">
+                        <label for="id_password">パスワード</label>
+                      </th>
+                      <td class="user-td">{{form.password}}{{form.password.errors}}</td>
+                  </tr>
+              </table>
+          </form>
+
+          <!-- 利用者登録ボタン -->
+          <div form="login-form" id="new-form" class="new_page">
+              <button form="login-form" class="btn btn--orange btn--radius" type="submit">ログイン</button>
+          </div>
+      </div>
+</section>
+<!-- <div class="container">
     <div  class="sign col-md-6 offset-md-3">
       <div class="card mt-3 mb-3 bg-light">
-        <!-- カードヘッダー -->
         <div class="card-header bg-primary text-light">
           <h2>Log in</h2>
         </div>
-        <!-- カードボディー -->
         <div class="card-body">
             <form method="post">
                 {% csrf_token %}
@@ -58,7 +91,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 {% endblock %}
 
 <!-- 下記にjsの処理を記述 -->
