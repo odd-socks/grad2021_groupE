@@ -8,6 +8,20 @@
 {% block title %}送迎完了ページ{% endblock %}
 <!-- Header -->
 {% block header %}
+<script>
+    // websocket接続処理
+    console.log('1')
+    let sock = new WebSocket('wss://3.231.231.189:8765');
+  
+    // 接続時に呼ばれる
+    sock.addEventListener('open', function (e) {
+      console.log('remove signal 接続成功');
+      let data = 'remove';
+      sock.send(JSON.stringify(data));
+    });
+    console.log('2')
+  
+  </script>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
         <div class="container px-4 px-lg-5">
@@ -120,5 +134,17 @@ setTimeout(() => {
   }
 }, 3.5 * 1000);
 </script>
+<script>
+    // websocket接続処理
+    let sock = new WebSocket('wss://3.231.231.189:8765');
+  
+    // 接続時に呼ばれる
+    sock.addEventListener('open', function (e) {
+      console.log('remove signal 接続成功');
+      let data = 'remove';
+      sock.send(JSON.stringify(data));
+    });
+  
+  </script>
     </body>
 </html>
